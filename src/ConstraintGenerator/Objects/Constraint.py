@@ -6,6 +6,10 @@ class Constraint:
 	"""
 	def __init__(self):
 		self.isConstraintClass = True
+	#
+	@staticmethod
+	def applyConstraint(instruction: llvmIR.Instruction):
+		pass
 
 class FunctionConstraint(Constraint):
 	pass
