@@ -18,21 +18,21 @@ def readModule(filePath):
 			pass
 	finally:
 		if(ll_file):
-			return ir.Module(llvm.parse_assembly(ll_file.read()))
+			return llvm.parse_assembly(ll_file.read())
 		elif(bc_file):
-			return ir.Module(llvm.parse_bitcode(bc_file.read()))
+			return llvm.parse_bitcode(bc_file.read())
 		else:
 			return print("CAN'T READ FILE!!")
 
-def giveName(module: ir.Module):
+def giveName(module: llvm.ModuleRef):
 	try:
-		module.get_named_metadata('SMC_ANALYSIS_NAMED')
+		ir.Module(module).get_named_metadata('SMC_ANALYSIS_NAMED')
 		raise Exception("ALREAD HAVE NAMED")
 	except KeyError:
-		module.add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
+		ir.Module(module).add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
 	# give namespace to globals
 	namespace_global = 'global!'
-	for global_var in module.global_values:
+	for global_var in module.global_variables:
 		global_var.name = namespace_global + global_var.name
 
 	# give names to things of function.

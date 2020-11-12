@@ -26,9 +26,9 @@ def main():
     constraint_generator.addConstraint(LoadConstraint)
     constraint_generator.addConstraint(GetElementPtrConstraint)
     constraint_generator.addConstraint(CallConstraint)
-
     constraint_generator.run()
-    print(constraint_generator.MODULE)
+
+    # print(constraint_generator.MODULE)
     # Print Constraints result
     
 
