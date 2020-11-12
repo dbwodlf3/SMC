@@ -9,6 +9,8 @@ class AllocaConstraint(Constraint):
 	def applyConstraint(instruction: llvm.ValueRef):
 		if instruction.opcode == 'alloca':
 			# Todo something.
+			# print(instruction.name)
+			# print(instruction)
 			pass
 
 # Type 1

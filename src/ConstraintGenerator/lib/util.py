@@ -1,4 +1,5 @@
 import llvmlite.binding as llvm
+import llvmlite.ir as ir
 import os
 
 def readModule(filePath):
@@ -7,7 +8,7 @@ def readModule(filePath):
 	Args:
 		filePath (string): ll or bc file.
 	"""
-	
+	#
 	try:
 		ll_file = open(filePath, "r")
 	except:
@@ -17,8 +18,44 @@ def readModule(filePath):
 			pass
 	finally:
 		if(ll_file):
-			return llvm.parse_assembly(ll_file.read())
+			return ir.Module(llvm.parse_assembly(ll_file.read()))
 		elif(bc_file):
-			return llvm.parse_bitcode(bc_file.read())
+			return ir.Module(llvm.parse_bitcode(bc_file.read()))
 		else:
 			return print("CAN'T READ FILE!!")
+
+def giveName(module: ir.Module):
+	try:
+		module.get_named_metadata('SMC_ANALYSIS_NAMED')
+		raise Exception("ALREAD HAVE NAMED")
+	except KeyError:
+		module.add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
+	# give namespace to globals
+	namespace_global = 'global!'
+	for global_var in module.global_values:
+		global_var.name = namespace_global + global_var.name
+
+	# give names to things of function.
+	for function in module.functions:
+		namespace_local = function.name +'!'
+		name_index = 1
+		for parameter in function.arguments:
+			if parameter.name:
+				parameter.name = namespace_local + parameter.name
+			else:
+				parameter.name = namespace_local + str(name_index)
+				name_index += 1
+		for block in function.blocks:
+			if block.name:
+				block.name = namespace_local + block.name
+			else:
+				block.name = namespace_local + str(name_index)
+				name_index += 1
+			for instruction in block.instructions:
+				if(instruction.type.__str__()=='void'):
+					continue
+				if instruction.name:
+					instruction.name = namespace_local + instruction.name
+				else:
+					instruction.name = namespace_local + str(name_index)
+					name_index +=1
