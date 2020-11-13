@@ -1,5 +1,5 @@
 from Objects.Constraint import *
-import llvmlite.ir as llvmIR
+import llvmlite.ir as ir
 import llvmlite.binding as llvm
 
 # Type 0
@@ -8,8 +8,8 @@ class AllocaConstraint(Constraint):
 	@staticmethod
 	def applyConstraint(instruction: llvm.ValueRef):
 		if instruction.opcode == 'alloca':
-			for i in instruction.operands:
-				pass
+			for operand in instruction.operands:
+				operand
 
 # Type 1
 # Six.

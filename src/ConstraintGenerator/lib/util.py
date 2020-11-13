@@ -25,11 +25,12 @@ def readModule(filePath):
 			return print("CAN'T READ FILE!!")
 
 def giveName(module: llvm.ModuleRef):
+	ir_module = ir.Module(module)
 	try:
-		ir.Module(module).get_named_metadata('SMC_ANALYSIS_NAMED')
+		ir_module.get_named_metadata('SMC_ANALYSIS_NAMED')
 		raise Exception("ALREAD HAVE NAMED")
 	except KeyError:
-		ir.Module(module).add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
+		ir_module.add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
 	# give namespace to globals
 	namespace_global = 'global!'
 	for global_var in module.global_variables:
@@ -59,3 +60,4 @@ def giveName(module: llvm.ModuleRef):
 				else:
 					instruction.name = namespace_local + str(name_index)
 					name_index +=1
+	return ir_module

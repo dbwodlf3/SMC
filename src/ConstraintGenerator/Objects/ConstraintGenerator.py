@@ -11,8 +11,9 @@ class ConstraintGenerator():
         "Result":[]
     }
     #
-    def __init__(self, module: llvm.ModuleRef):
+    def __init__(self, module: llvm.ModuleRef, irModule: ir.Module):
         self.MODULE = module
+        self.IR_MODULE = irModule
     #
     # addConstraint it is not perfect loginc for applying constraints.
     # but it is very simple and easy way.

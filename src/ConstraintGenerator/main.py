@@ -13,8 +13,8 @@ args = parser.parse_args()
 def main():
     # Read LL File and init
     module = readModule(args.LLVM_IR)
-    giveName(module)
-    constraint_generator = ConstraintGenerator(module)
+    ir_module = giveName(module)
+    constraint_generator = ConstraintGenerator(module, ir_module)
     # Add Constraint
     constraint_generator.addConstraint(AllocaConstraint)
     constraint_generator.addConstraint(IntToPtrConstraint)
@@ -27,11 +27,14 @@ def main():
     constraint_generator.addConstraint(GetElementPtrConstraint)
     constraint_generator.addConstraint(CallConstraint)
     constraint_generator.run()
-
-    # print(constraint_generator.MODULE)
     # Print Constraints result
+    # print(constraint_generator.IR_MODULE)
     
-
+    for function in constraint_generator.MODULE.functions:
+        for block in function.blocks:
+            for instruction in block.instructions:
+                for operand in instruction.operands:
+                    print(operand.name)
 
 
 
