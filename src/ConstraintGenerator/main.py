@@ -27,14 +27,8 @@ def main():
     constraint_generator.addConstraint(GetElementPtrConstraint)
     constraint_generator.addConstraint(CallConstraint)
     constraint_generator.run()
-    # Print Constraints result
-    # print(constraint_generator.IR_MODULE)
-    
-    for function in constraint_generator.MODULE.functions:
-        for block in function.blocks:
-            for instruction in block.instructions:
-                for operand in instruction.operands:
-                    print(operand.name)
+    # print RESULT
+    print(constraint_generator.CONSTRAINTS)
 
 
 

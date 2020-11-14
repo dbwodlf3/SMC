@@ -4,21 +4,17 @@ import llvmlite.ir as ir
 from Objects.Constraint import Constraint
 
 class ConstraintGenerator():
-    
-    constraints: List[Constraint] = []
-    answer = {
-        "Constraints":[],
-        "Result":[]
-    }
     #
     def __init__(self, module: llvm.ModuleRef, irModule: ir.Module):
         self.MODULE = module
         self.IR_MODULE = irModule
+        self.CONSTRAINTS: list = []
+        self.constraintRules: List[Constraint] = []
     #
     # addConstraint it is not perfect loginc for applying constraints.
     # but it is very simple and easy way.
     def addConstraint(self, constraint: Constraint):
-        self.constraints.append(constraint)
+        self.constraintRules.append(constraint)
     #
     # run it is not perefct at performance. but it is very simple.
     # and anyway works.
@@ -26,6 +22,9 @@ class ConstraintGenerator():
         for func in self.MODULE.functions:
             for block in func.blocks:
                 for instruction in block.instructions:
-                    for constraint in self.constraints:
+                    for constraint in self.constraintRules:
                         constraint.applyConstraint(instruction)
+        for constraintRule in self.constraintRules:
+            constraints = constraintRule.dumpConstraint()
+            self.CONSTRAINTS.append(constraints)
         return;
