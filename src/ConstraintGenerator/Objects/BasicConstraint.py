@@ -2,54 +2,66 @@ from Objects.Constraint import *
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
 
-# Type 0
-# One.
+# @Todo
+# ConstraintExpr (Nested Value)
+# Constant Value (Noname Value)
+
 class AllocaConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = alloca \<type> \n
 	`Constraint Result`: result ∈ [[ result ]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'alloca':
-			print(instruction.name)
-			for operand in instruction.operands:
-				print(operand)
+			result = instruction.name
+			if result:
+				cls.CONSTRAINTS.append([0, result])
 
-# Type 1
-# Six.
 class IntToPtrConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = inttoptr \<ty> \<value> to \<ty2> \n
 	`Constraint Result`: [[value]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'inttoptr':
-			# Todo something.
-			pass
+			result = instruction.name
+			value = next(instruction.operands).name
+			if value and result:
+				cls.CONSTRAINTS.append([2, value, result])
 
 class BitCastConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = bitcast \<ty> \<value> to \<ty2> \n
 	`Constraint Result`: [[value]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'bitcast':
 			# Todo something.
-			pass
+			result = instruction.name
+			value = next(instruction.operands).name
+			if result and value:
+				cls.CONSTRAINTS.append([2, value, result])
 
 class PHIConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = phi \<ty> [\<val0>, \<label0>]*, ... \n
 	`Constraint Result`: \<val0> ⊆ [[result]], \<val1> ⊆ [[result]], ...
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'phi':
-			# Todo something.
-			pass
+			result = instruction.name
+			for operand in instruction.operands:
+				val = operand.name
+				if result and val:
+					cls.CONSTRAINTS.append([2, val, result])
 
 class SelectConstraint(Constraint):
 	"""
@@ -57,11 +69,15 @@ class SelectConstraint(Constraint):
 		\<ty> \<val2> \n
 	`Constraint Result`: [[val1]] ⊆ [[result]], [[val2]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'select':
-			# Todo something.
-			pass
+			result = instruction.name
+			for operand in instruction.operands:
+				val = operand.name
+				if result and val:
+					cls.CONSTRAINTS.append([2, val, result])
 
 class ExtractvalueConstraint(Constraint):
 	"""
@@ -69,38 +85,29 @@ class ExtractvalueConstraint(Constraint):
 		\<idx>{, \<idx>}* \n
 	`Constraint Result`: [[val1]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'extractvalue':
-			# Todo something.
-			pass
+			result = instruction.name
+			val = next(instruction.operands).name
+			if result and val:
+				cls.CONSTRAINTS.append([2, val, result])
 
-# Type 2
-# One.
-class StoreConstraint(Constraint):
-	"""
-	`Instruction Syntax`: store [volatile] \<ty> \<value>, \<ty>* \<pointer> \n
-	`Constraint Result`: ∀t ∈ [[pointer]] ⟶ [[value]] ⊆ [[t]]
-	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
-		if instruction.opcode == 'store':
-			# Todo something.
-			pass
-
-# Type 3
-# Two.
 class LoadConstraint(Constraint):
 	"""
 	`Instruction Syntax`:  \<result> = load [volatile] \<ty>,
 		\<ty>* \<pointer>\n
 	`Constraint Result`: ∀t ∈ [[pointer]] ⟶ [[t]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'load':
-			# Todo something.
-			pass
+			result = instruction.name
+			pointer = next(instruction.operands).name
+			if result and pointer:
+				cls.CONSTRAINTS.append([3, pointer, result])
 
 class GetElementPtrConstraint(Constraint):
 	"""
@@ -108,15 +115,34 @@ class GetElementPtrConstraint(Constraint):
 		{, \<ty> idx}* \n
 	`Constraint Result`: ∀t ∈ [[ptrval]] ⟶ [[t]] ⊆ [[result]]
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'getelementptr':
-			# Todo something.
-			pass
+			result = instruction.name
+			ptrval = next(instruction.operands).name
+			if result and ptrval:
+				cls.CONSTRAINTS.append([3, ptrval, result])
 
-# Type 4
-# Procedure Constraint.
-# One.
+# @Todo
+# next function doesn't work properly for instruction.operands.
+class StoreConstraint(Constraint):
+	"""
+	`Instruction Syntax`: store [volatile] \<ty> \<value>, \<ty>* \<pointer> \n
+	`Constraint Result`: ∀t ∈ [[pointer]] ⟶ [[value]] ⊆ [[t]]
+	"""
+	CONSTRAINTS = []
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
+		if instruction.opcode == 'store':
+			for idx, operand in enumerate(instruction.operands):
+				if(idx == 0):
+					value = operand.name
+				if(idx == 1):
+					pointer = operand.name
+			if value and pointer:
+				cls.CONSTRAINTS.append([4, pointer, value])
+
 class CallConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = call \<ty> \<fnty> \<fnptrval>
@@ -130,4 +156,7 @@ class CallConstraint(Constraint):
 	@staticmethod
 	def applyConstraint(instruction: llvm.ValueRef):
 		if instruction.opcode == 'call':
-			pass
+			result = instruction.name
+			print(result)
+			for i in instruction.operands:
+				print(i.name)

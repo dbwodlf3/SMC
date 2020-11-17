@@ -25,6 +25,7 @@ class ConstraintGenerator():
                     for constraint in self.constraintRules:
                         constraint.applyConstraint(instruction)
         for constraintRule in self.constraintRules:
-            constraints = constraintRule.dumpConstraint()
-            self.CONSTRAINTS.append(constraints)
+            constraint_results = constraintRule.dumpConstraint()
+            if(constraint_results):
+                self.CONSTRAINTS.append(constraint_results)
         return;

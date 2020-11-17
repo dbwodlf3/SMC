@@ -12,7 +12,7 @@ class Constraint:
     def applyConstraint(instruction: llvmIR.Instruction):
         pass
     @classmethod
-    def dumpConstraint(cls) -> list:
+    def dumpConstraint(cls):
         """Return Value is IMM. DON'T EDIT IT."""
         return cls.CONSTRAINTS
 

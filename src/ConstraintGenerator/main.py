@@ -1,6 +1,7 @@
 #!/usr/bin/python3.8
 import argparse
 import llvmlite.ir as ir
+from pprint import pprint
 from lib.util import readModule, giveName
 from Objects.ConstraintGenerator import ConstraintGenerator
 from Objects.BasicConstraint import *
@@ -25,10 +26,10 @@ def main():
     constraint_generator.addConstraint(StoreConstraint)
     constraint_generator.addConstraint(LoadConstraint)
     constraint_generator.addConstraint(GetElementPtrConstraint)
-    constraint_generator.addConstraint(CallConstraint)
+    # constraint_generator.addConstraint(CallConstraint)
     constraint_generator.run()
     # print RESULT
-    print(constraint_generator.CONSTRAINTS)
+    pprint(constraint_generator.CONSTRAINTS)
 
 
 
