@@ -4,7 +4,6 @@ import os
 
 def readModule(filePath):
 	"""Return LLVM IR Module Object.
-	
 	Args:
 		filePath (string): ll or bc file.
 	"""

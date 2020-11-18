@@ -1,9 +1,11 @@
 from typing import List
+import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
 from Objects.Constraint import Constraint
 
-class ConstraintGenerator():
+class ConstraintGenerator:
+    DATA = {"ConstraintResult": []}
     #
     def __init__(self, module: llvm.ModuleRef, irModule: ir.Module):
         self.MODULE = module
@@ -27,5 +29,10 @@ class ConstraintGenerator():
         for constraintRule in self.constraintRules:
             constraint_results = constraintRule.dumpConstraint()
             if(constraint_results):
-                self.CONSTRAINTS.append(constraint_results)
+                self.DATA['ConstraintResult'].append(constraint_results)
         return;
+    def dumpJson(self):
+        return json.dumps(self.DATA)
+    def saveJson(self, filename: str):
+        with open(filename, 'w') as json_file:
+            json.dump(self.DATA, json_file)

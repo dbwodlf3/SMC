@@ -1,4 +1,6 @@
 #!/usr/bin/python3.8
+import sys
+print(sys.path)
 import argparse
 import llvmlite.ir as ir
 from pprint import pprint
@@ -9,6 +11,7 @@ from Objects.BasicConstraint import *
 # Init
 parser = argparse.ArgumentParser()
 parser.add_argument('LLVM_IR', help='''LLVM IR File. bc or ll file.''')
+parser.add_argument('RESULT_FILE', help='''filename to get result.''')
 args = parser.parse_args()
 
 def main():
@@ -16,6 +19,7 @@ def main():
     module = readModule(args.LLVM_IR)
     ir_module = giveName(module)
     constraint_generator = ConstraintGenerator(module, ir_module)
+
     # Add Constraint
     constraint_generator.addConstraint(AllocaConstraint)
     constraint_generator.addConstraint(IntToPtrConstraint)
@@ -27,13 +31,12 @@ def main():
     constraint_generator.addConstraint(LoadConstraint)
     constraint_generator.addConstraint(GetElementPtrConstraint)
     # constraint_generator.addConstraint(CallConstraint)
+
+    # Run
     constraint_generator.run()
-    # print RESULT
-    pprint(constraint_generator.CONSTRAINTS)
 
-
-
-
+    # Save result
+    constraint_generator.saveJson('./save.json')
 
 
 
