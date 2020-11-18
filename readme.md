@@ -12,6 +12,7 @@ LLVM IR(Lifted) AND Variable Map ⟶ "Detector" ⇒ ANSWER(JSON)
 
 - ### LLVM 10.0.x
 - ### llvmlite 0.34.0
+- ### bitarray
 
 ## Lifter
 - ### Mcsema

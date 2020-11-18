@@ -1,6 +1,5 @@
 #!/usr/bin/python3.8
 import sys
-print(sys.path)
 import argparse
 import llvmlite.ir as ir
 from pprint import pprint
