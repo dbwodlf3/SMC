@@ -157,6 +157,6 @@ class CallConstraint(Constraint):
 	def applyConstraint(instruction: llvm.ValueRef):
 		if instruction.opcode == 'call':
 			result = instruction.name
-			print(result)
-			for i in instruction.operands:
-				print(i.name)
+			# print(result)
+			# for i in instruction.operands:
+			# 	print(i.name)
