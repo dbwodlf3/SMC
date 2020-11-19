@@ -4,6 +4,7 @@ import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from lib.util import readModule, giveName, readJson
 from Objects.Detector import Detector
+# from Objects.CriticalDetector import CriticalDetector
 
 # Init
 parser = argparse.ArgumentParser()
@@ -17,8 +18,10 @@ def main():
 	ir_module = giveName(module)
 	variables = readJson(args.VARIABLES)
 	detector = Detector(module, ir_module, variables)
-	for var_name in detector.variables :
-		print(detector.variables[var_name])
+	detector.run()
+	print(detector.criticalInstructions)
+	# for var_name in detector.variables :
+	# 	print(detector.variables[var_name])
 
 if __name__ == '__main__':
 	main()
