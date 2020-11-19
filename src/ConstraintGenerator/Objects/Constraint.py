@@ -15,6 +15,9 @@ class Constraint:
     def dumpConstraint(cls):
         """Return Value is IMM. DON'T EDIT IT."""
         return cls.CONSTRAINTS
+    @staticmethod
+    def resolveConstantExpr(operand):
+        print(operand)
 
 class FunctionConstraint(Constraint):
     pass

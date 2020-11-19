@@ -44,7 +44,7 @@ def giveName(module: llvm.ModuleRef):
 	# give names to things of function.
 	for function in module.functions:
 		namespace_local = function.name +'!'
-		name_index = 1
+		name_index = 0
 		for parameter in function.arguments:
 			if parameter.name:
 				parameter.name = namespace_local + parameter.name

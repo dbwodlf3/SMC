@@ -138,6 +138,7 @@ class StoreConstraint(Constraint):
 			for idx, operand in enumerate(instruction.operands):
 				if(idx == 0):
 					value = operand.name
+					print(value)
 				if(idx == 1):
 					pointer = operand.name
 			if value and pointer:
