@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 import json
 from typing import List
-from Objects.Node import Node
+from CubicSolver.lib import util
+from CubicSolver.Objects.Node import Node
 
 class CubicSolver:
 	result = {
 		'variables':{}
 	}
-	def __init__(self, data: json):
+	def __init__(self, filename: str):
+		data = util.readJson(filename)
 		#
 		self.constraints = []
 		self.values = []
@@ -109,9 +111,12 @@ class CubicSolver:
 		else:
 			self._continueCondition -= 1
 			return True
-	def saveJson(self, filename:str):
+
+	def saveJson(self, filename:str, time: float = 0):
+		self.result['time'] = time
 		with open(filename, 'w') as json_file:
 			json.dump(self.result, json_file)
+
 	def updateResult(self):
 		for node in self.nodes:
 			var = {node.key : []}

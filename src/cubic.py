@@ -2,7 +2,6 @@
 import argparse
 import time
 from bitarray import bitarray
-from lib import util
 from Objects.CubicSolver import CubicSolver
 
 # @Todo eliminate cycle cycle.
@@ -17,10 +16,10 @@ parser.add_argument('RESULT_FILE', help='''filename to get result. json file.'''
 args = parser.parse_args()
 
 def main():
-	data = util.readJson(args.CONS)
-	cubic_solver = CubicSolver(data)
+	cubic_solver = CubicSolver(args.CONS)
 	cubic_solver.run()
-	cubic_solver.saveJson(args.RESULT_FILE)
+	end = time.time()
+	cubic_solver.saveJson(args.RESULT_FILE, end-start)
 
 
 
