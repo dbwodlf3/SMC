@@ -35,7 +35,7 @@ def main():
     constraint_generator.run()
 
     # Save result
-    constraint_generator.saveJson('./save.json')
+    constraint_generator.saveJson(args.RESULT_FILE)
 
 
 

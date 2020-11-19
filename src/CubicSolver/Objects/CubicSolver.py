@@ -4,6 +4,9 @@ from typing import List
 from Objects.Node import Node
 
 class CubicSolver:
+	result = {
+		'variables':{}
+	}
 	def __init__(self, data: json):
 		#
 		self.constraints = []
@@ -73,6 +76,8 @@ class CubicSolver:
 			self.updateEdge()
 			# check condition
 			self.checkCondition()
+		# update result
+		self.updateResult()
 	def updateEdge(self):
 		for node in self.nodes:
 			for destNodeIdx in node.edges:
@@ -104,6 +109,16 @@ class CubicSolver:
 		else:
 			self._continueCondition -= 1
 			return True
+	def saveJson(self, filename:str):
+		with open(filename, 'w') as json_file:
+			json.dump(self.result, json_file)
+	def updateResult(self):
+		for node in self.nodes:
+			var = {node.key : []}
+			for idx, condition in enumerate(node.tokens):
+				if condition:
+					var[node.key].append(self.nodes[idx].key)
+			CubicSolver.result['variables'].update(var)
 	def __str__(self):
 		name = f'''
 cubicSolver: {repr(self)}
