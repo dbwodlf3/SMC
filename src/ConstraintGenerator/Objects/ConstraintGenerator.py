@@ -2,9 +2,9 @@ from typing import List
 import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
-from lib.util import readModule, giveName
-from Objects.Constraint import Constraint
-from Objects.BasicConstraint import *
+from ConstraintGenerator.lib.util import readModule, giveName
+from ConstraintGenerator.Objects.Constraint import Constraint
+from ConstraintGenerator.Objects.BasicConstraint import *
 
 class ConstraintGenerator:
     DATA = {"ConstraintResult": []}

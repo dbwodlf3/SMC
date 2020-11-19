@@ -2,8 +2,8 @@
 import argparse
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
-from lib.util import readModule, giveName, readJson
-from Objects.Detector import Detector
+from Detector.lib.util import readModule, giveName, readJson
+from Detector.Objects.Detector import Detector
 # from Objects.CriticalDetector import CriticalDetector
 
 # Init

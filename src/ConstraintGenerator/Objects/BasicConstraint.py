@@ -1,6 +1,6 @@
-from Objects.Constraint import *
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
+from ConstraintGenerator.Objects.Constraint import *
 
 # @Todo
 # ConstraintExpr (Nested Value)

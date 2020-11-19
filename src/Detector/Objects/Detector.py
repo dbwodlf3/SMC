@@ -1,7 +1,7 @@
 import json
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
-from Objects.Variable import Variable
+from Detector.Objects.Variable import Variable
 
 class Detector:
 	criticalTokens = []

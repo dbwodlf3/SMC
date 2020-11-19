@@ -3,7 +3,7 @@ import time
 import argparse
 import llvmlite.ir as ir
 from pprint import pprint
-from Objects.ConstraintGenerator import ConstraintGenerator
+from ConstraintGenerator.Objects.ConstraintGenerator import ConstraintGenerator
 
 # Init
 parser = argparse.ArgumentParser()

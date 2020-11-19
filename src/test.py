@@ -7,6 +7,8 @@ from CubicSolver.Objects.CubicSolver import CubicSolver
 
 src_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(src_dir)
+dest_dir = os.path.join(project_dir, 'dest')
+os.makedirs(dest_dir, exist_ok=True)
 
 def constraintGeneratorTest():
     test_file_dir = os.path.join(project_dir, 'test', 'llvmIR')
@@ -51,7 +53,7 @@ def cubicSolverRun(srcFile: str, destFile: str):
     cubic_solver.saveJson(destFile, end-start)
 
 def main():
-    # constraintGeneratorTest()
+    constraintGeneratorTest()
     cubicSolverTest()
 
 
