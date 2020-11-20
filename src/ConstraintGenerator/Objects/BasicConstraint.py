@@ -1,6 +1,8 @@
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from ConstraintGenerator.Objects.Constraint import *
+from ConstraintGenerator.lib.util import getOperands
+
 
 # @Todo
 # ConstraintExpr (Nested Value)
@@ -137,12 +139,13 @@ class StoreConstraint(Constraint):
 		if instruction.opcode == 'store':
 			for idx, operand in enumerate(instruction.operands):
 				if(idx == 0):
-					value = operand.name
-					print(value)
+					values = getOperands(operand)
 				if(idx == 1):
-					pointer = operand.name
-			if value and pointer:
-				cls.CONSTRAINTS.append([4, pointer, value])
+					pointers = getOperands(operand)
+			if values and pointers:
+				for pointer in pointers:
+					for value in values:
+						cls.CONSTRAINTS.append([4, pointer, value])
 
 class CallConstraint(Constraint):
 	"""

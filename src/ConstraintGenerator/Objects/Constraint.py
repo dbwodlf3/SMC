@@ -17,7 +17,7 @@ class Constraint:
         return cls.CONSTRAINTS
     @staticmethod
     def resolveConstantExpr(operand):
-        print(operand)
+        print(operand.name)
 
 class FunctionConstraint(Constraint):
     pass

@@ -1,6 +1,7 @@
+import os
+import re
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
-import os
 
 def readModule(filePath):
 	"""Return LLVM IR Module Object.
@@ -60,3 +61,18 @@ def giveName(module: llvm.ModuleRef):
 					instruction.name = namespace_local + str(name_index)
 					name_index +=1
 	return ir_module
+
+# VERY STRANGE WAY
+# but... it works. then. and okay. haha...
+var = re.compile(r'\b%s\b' % '@.*')
+def getOperands(operand:llvm.ValueRef):
+	operand_str = str(operand).replace('"','')
+	print(operand_str)
+	global_namespace = 'global!'
+	local_namespace = operand.function.name + '!'
+	glboal_var_operands = \
+		[(global_namespace + i).replace('@', '') for i in re.findall(r'@[a-zA-Z0-9_!]*', operand_str)]
+	local_var_operands = \
+		[ i.replace('%','') for i in re.findall(r'%[a-zA-Z0-9_!]*', operand_str)]
+	
+	return glboal_var_operands + local_var_operands
