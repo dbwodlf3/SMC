@@ -40,6 +40,11 @@ class ConstraintGenerator:
         return json.dumps(self.DATA)
     def saveJson(self, filename: str, time: float = 0):
         self.DATA['time'] = time
+        counts = 0
+        for i in self.DATA['ConstraintResult']:
+            counts += len(i)
+        self.DATA['counts'] = counts
+        
         with open(filename, 'w') as json_file:
             json.dump(self.DATA, json_file, indent=4)
     def initConstraint(self):
