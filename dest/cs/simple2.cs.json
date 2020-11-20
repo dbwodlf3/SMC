@@ -1,0 +1,104 @@
+{
+    "variables": {
+        "functionTest!alloca_ins1": [
+            "functionTest!alloca_ins1"
+        ],
+        "functionTest!alloca_ins2": [
+            "functionTest!alloca_ins2"
+        ],
+        "functionTestSecond!alloca_ins1": [
+            "functionTestSecond!alloca_ins1"
+        ],
+        "functionTestSecond!foo": [],
+        "functionTestSecond!load_ins1": [
+            "functionTestSecond!alloca_ins1"
+        ],
+        "main!GEP_ins1": [
+            "main!alloca_struct1"
+        ],
+        "main!GEP_ins2": [
+            "main!alloca_struct2"
+        ],
+        "main!GEP_ins3": [
+            "main!alloca_struct3"
+        ],
+        "main!GEP_ins4": [
+            "main!alloca_struct4"
+        ],
+        "main!ITP_ins2": [],
+        "main!ITP_ins3": [
+            "main!alloca_ins3"
+        ],
+        "main!ITP_ins4": [
+            "main!alloca_ins4"
+        ],
+        "main!alloca_ins1": [
+            "main!alloca_ins1"
+        ],
+        "main!alloca_ins2": [
+            "main!alloca_ins2"
+        ],
+        "main!alloca_ins3": [
+            "main!alloca_ins3"
+        ],
+        "main!alloca_ins4": [
+            "main!alloca_ins4"
+        ],
+        "main!alloca_ins5": [
+            "main!alloca_ins5"
+        ],
+        "main!alloca_struct1": [
+            "main!alloca_struct1"
+        ],
+        "main!alloca_struct2": [
+            "main!alloca_struct2"
+        ],
+        "main!alloca_struct3": [
+            "main!alloca_struct3"
+        ],
+        "main!alloca_struct4": [
+            "main!alloca_struct4"
+        ],
+        "main!bitcast_ins2": [],
+        "main!bitcast_ins3": [
+            "main!alloca_ins3"
+        ],
+        "main!bitcast_ins4": [
+            "main!alloca_ins3"
+        ],
+        "main!extractvalue_ins1": [
+            "main!alloca_struct1"
+        ],
+        "main!extractvalue_ins2": [
+            "main!alloca_struct2"
+        ],
+        "main!indvar": [],
+        "main!load_ins1": [
+            "main!alloca_ins1"
+        ],
+        "main!load_ins2": [
+            "main!alloca_ins2"
+        ],
+        "main!load_ins3": [
+            "main!alloca_ins3"
+        ],
+        "main!load_ins4": [
+            "main!alloca_ins4"
+        ],
+        "main!load_ins5": [
+            "main!alloca_struct1"
+        ],
+        "main!load_ins6": [
+            "main!alloca_struct2"
+        ],
+        "main!nextindvar": [],
+        "main!ret_alloca": [
+            "main!ret_alloca"
+        ],
+        "main!select_ins1": [
+            "main!alloca_ins4",
+            "main!alloca_ins5"
+        ]
+    },
+    "time": 0.0011746883392333984
+}
