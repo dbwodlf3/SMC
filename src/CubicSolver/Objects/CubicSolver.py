@@ -114,6 +114,7 @@ class CubicSolver:
 	#
 	def saveJson(self, filename:str, time: float = 0):
 		self.result['time'] = time
+		self.result['counts'] = len(self.result['variables'])
 		with open(filename, 'w') as json_file:
 			json.dump(self.result, json_file, indent=4)
 	#
