@@ -111,12 +111,12 @@ class CubicSolver:
 		else:
 			self._continueCondition -= 1
 			return True
-
+	#
 	def saveJson(self, filename:str, time: float = 0):
 		self.result['time'] = time
 		with open(filename, 'w') as json_file:
-			json.dump(self.result, json_file)
-
+			json.dump(self.result, json_file, indent=4)
+	#
 	def updateResult(self):
 		for node in self.nodes:
 			var = {node.key : []}
@@ -124,6 +124,7 @@ class CubicSolver:
 				if condition:
 					var[node.key].append(self.nodes[idx].key)
 			CubicSolver.result['variables'].update(var)
+	#
 	def __str__(self):
 		name = f'''
 cubicSolver: {repr(self)}

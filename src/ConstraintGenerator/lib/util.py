@@ -64,10 +64,8 @@ def giveName(module: llvm.ModuleRef):
 
 # VERY STRANGE WAY
 # but... it works. then. and okay. haha...
-var = re.compile(r'\b%s\b' % '@.*')
 def getOperands(operand:llvm.ValueRef):
 	operand_str = str(operand).replace('"','')
-	print(operand_str)
 	global_namespace = 'global!'
 	local_namespace = operand.function.name + '!'
 	glboal_var_operands = \
