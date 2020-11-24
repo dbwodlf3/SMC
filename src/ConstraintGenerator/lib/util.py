@@ -81,7 +81,7 @@ def getOperands(operand:llvm.ValueRef):
     
     local_var_operands = \
         [ i.split()[-1].replace('%','')
-            for i in re.findall(r'%[a-zA-Z0-9_!]*![a-zA-Z0-9_!]*', operand_str)]
+            for i in re.findall(r'%[a-zA-Z0-9_!.]*![a-zA-Z0-9_.]*', operand_str)]
 
     return glboal_var_operands + local_var_operands
 
