@@ -178,7 +178,8 @@ class CallConstraint(Constraint):
 			call_function_name = args[-1][0]
 			call_function_ref = getFunctionByName(call_function_name,
 				cls.MODULE)
-			# call_function_ref.
+			if not call_function_ref:
+				return
 			for idx, parameter in enumerate(call_function_ref.arguments):
 				if args[idx] and parameter.name:
 					for arg in args[idx]:

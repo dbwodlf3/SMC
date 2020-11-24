@@ -68,7 +68,8 @@ def getFunctionByName(functionName:str, module:llvm.ModuleRef):
     for function in module.functions:
         if functionName == function.name:
             return function
-    raise Exception('''Can't find Function!''')
+    return None
+    # raise Exception(f'''Can't find Function! {functionName}''')
 
 def getOperands(operand:llvm.ValueRef):
     operand_str = str(operand).replace('"','')

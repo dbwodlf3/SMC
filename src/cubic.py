@@ -2,7 +2,7 @@
 import argparse
 import time
 from bitarray import bitarray
-from Objects.CubicSolver import CubicSolver
+from CubicSolver.Objects.CubicSolver import CubicSolver
 
 # @Todo eliminate cycle cycle.
 
