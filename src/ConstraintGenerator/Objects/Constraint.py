@@ -1,4 +1,5 @@
 import llvmlite.ir as llvmIR
+import llvmlite.binding as llvm
 
 class Constraint:
     """Constraint Class for adding Constraint to Constraint Generator.
@@ -15,16 +16,18 @@ class Constraint:
     def dumpConstraint(cls):
         """Return Value is IMM. DON'T EDIT IT."""
         return cls.CONSTRAINTS
-    @staticmethod
-    def resolveConstantExpr(operand):
-        print(operand.name)
 
 class FunctionConstraint(Constraint):
+    """FunctionConstraint Class is for constraint for function. like parameters
+        or ret instruction.
     """
-    """
-    @staticmethod
-    def applyConstraint(function: llvmIR.Function):
-        print('do something')
+    CONSTRAINTS = []
+    def __init__(self):
+        self.isConstraintClass = True
+    #
+    @classmethod
+    def applyConstraint(cls, function: llvm.ValueRef):
+        pass
 
 class GlobalVarConstraint(Constraint):
     pass

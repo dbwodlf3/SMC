@@ -3,7 +3,7 @@ import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
 from ConstraintGenerator.lib.util import readModule, giveName
-from ConstraintGenerator.Objects.Constraint import Constraint
+from ConstraintGenerator.Objects.Constraint import *
 from ConstraintGenerator.Objects.BasicConstraint import *
 
 class ConstraintGenerator:
@@ -27,14 +27,20 @@ class ConstraintGenerator:
 
     def run(self):
         self.initConstraint()
-        for func in self.MODULE.functions:
+        for function in self.MODULE.functions:
+            # apply 
             for constraint in self.functionConstraintRules:
-                constraint.applyConstraint(func)
-            for block in func.blocks:
+                constraint.applyConstraint(function)
+            # apply constraints    
+            for block in function.blocks:
                 for instruction in block.instructions:
                     for constraint in self.constraintRules:
                         constraint.applyConstraint(instruction)
 
+        for constraintRule in self.functionConstraintRules:
+            constraint_results = constraintRule.dumpConstraint()
+            if constraint_results:
+                self.DATA['ConstraintResult'].append(constraint_results)
         for constraintRule in self.constraintRules:
             constraint_results = constraintRule.dumpConstraint()
             if(constraint_results):
@@ -55,6 +61,8 @@ class ConstraintGenerator:
             json.dump(self.DATA, json_file, indent=4)
 
     def initConstraint(self):
+        self.addFunctionConstraint(RetConstraint)
+
         self.addConstraint(AllocaConstraint)
         self.addConstraint(IntToPtrConstraint)
         self.addConstraint(BitCastConstraint)

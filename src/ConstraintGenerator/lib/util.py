@@ -75,12 +75,20 @@ def getOperands(operand:llvm.ValueRef):
     operand_str = str(operand).replace('"','')
     global_namespace = 'global!'
     local_namespace = operand.function.name + '!'
+
     glboal_var_operands = \
         [(global_namespace + i).replace('@', '') for i in re.findall(r'@[a-zA-Z0-9_!]*', operand_str)]
-    local_var_operands = \
-        [ i.replace('%','') for i in re.findall(r'%[a-zA-Z0-9_!]*', operand_str)]
     
+    local_var_operands = \
+        [ i.split()[-1].replace('%','')
+            for i in re.findall(r'%[a-zA-Z0-9_!]*![a-zA-Z0-9_!]*', operand_str)]
+
     return glboal_var_operands + local_var_operands
+
+def checkCallAsm(instruction: llvm.ValueRef):
+    if instruction.name:
+        return False
+    return True
 
 constantExpressions = [
     'getelementptr',
