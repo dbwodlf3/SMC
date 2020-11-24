@@ -19,8 +19,11 @@ class RetConstraint(FunctionConstraint):
         for block in function.blocks:
             for instruction in block.instructions:
             	if instruction.opcode == 'ret':
-                    var = getOperands(instruction)
-                    print(var, instruction)
+                    variables = getOperands(instruction)
+                    for var in variables:
+                        cls.CONSTRAINTS.append([2, var,
+                            f'''{instruction.function.name}!ret'''])
+                    
 
 class AllocaConstraint(Constraint):
     """
