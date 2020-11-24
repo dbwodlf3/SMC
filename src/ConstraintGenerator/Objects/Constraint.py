@@ -8,8 +8,8 @@ class Constraint:
     def __init__(self):
         self.isConstraintClass = True
     #
-    @staticmethod
-    def applyConstraint(instruction: llvmIR.Instruction):
+    @classmethod
+    def applyConstraint(cls, instruction: llvmIR.Instruction):
         pass
     @classmethod
     def dumpConstraint(cls):
@@ -20,7 +20,11 @@ class Constraint:
         print(operand.name)
 
 class FunctionConstraint(Constraint):
-    pass
+    """
+    """
+    @staticmethod
+    def applyConstraint(function: llvmIR.Function):
+        print('do something')
 
 class GlobalVarConstraint(Constraint):
     pass

@@ -1,7 +1,7 @@
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from ConstraintGenerator.Objects.Constraint import *
-from ConstraintGenerator.lib.util import getOperands
+from ConstraintGenerator.lib.util import getOperands, getFunctionByName
 
 
 # @Todo
@@ -31,9 +31,10 @@ class IntToPtrConstraint(Constraint):
 	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'inttoptr':
 			result = instruction.name
-			value = next(instruction.operands).name
-			if value and result:
-				cls.CONSTRAINTS.append([2, value, result])
+			values = getOperands(next(instruction.operands))
+			if values and result:
+				for value in values:
+					cls.CONSTRAINTS.append([2, value, result])
 
 class BitCastConstraint(Constraint):
 	"""
@@ -46,9 +47,10 @@ class BitCastConstraint(Constraint):
 		if instruction.opcode == 'bitcast':
 			# Todo something.
 			result = instruction.name
-			value = next(instruction.operands).name
-			if result and value:
-				cls.CONSTRAINTS.append([2, value, result])
+			values = getOperands(next(instruction.operands))
+			if result and values:
+				for value in values:
+					cls.CONSTRAINTS.append([2, value, result])
 
 class PHIConstraint(Constraint):
 	"""
@@ -61,9 +63,10 @@ class PHIConstraint(Constraint):
 		if instruction.opcode == 'phi':
 			result = instruction.name
 			for operand in instruction.operands:
-				val = operand.name
-				if result and val:
-					cls.CONSTRAINTS.append([2, val, result])
+				vals = getOperands(operand)
+				if result and vals:
+					for val in vals:
+						cls.CONSTRAINTS.append([2, val, result])
 
 class SelectConstraint(Constraint):
 	"""
@@ -77,9 +80,10 @@ class SelectConstraint(Constraint):
 		if instruction.opcode == 'select':
 			result = instruction.name
 			for operand in instruction.operands:
-				val = operand.name
-				if result and val:
-					cls.CONSTRAINTS.append([2, val, result])
+				vals = getOperands(operand)
+				if result and vals:
+					for val in vals:
+						cls.CONSTRAINTS.append([2, val, result])
 
 class ExtractvalueConstraint(Constraint):
 	"""
@@ -92,9 +96,10 @@ class ExtractvalueConstraint(Constraint):
 	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'extractvalue':
 			result = instruction.name
-			val = next(instruction.operands).name
-			if result and val:
-				cls.CONSTRAINTS.append([2, val, result])
+			vals = getOperands(next(instruction.operands))
+			if result and vals:
+				for val in vals:
+					cls.CONSTRAINTS.append([2, val, result])
 
 class LoadConstraint(Constraint):
 	"""
@@ -107,9 +112,10 @@ class LoadConstraint(Constraint):
 	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'load':
 			result = instruction.name
-			pointer = next(instruction.operands).name
-			if result and pointer:
-				cls.CONSTRAINTS.append([3, pointer, result])
+			pointers = getOperands(next(instruction.operands))
+			if result and pointers:
+				for pointer in pointers:
+					cls.CONSTRAINTS.append([3, pointer, result])
 
 class GetElementPtrConstraint(Constraint):
 	"""
@@ -126,8 +132,6 @@ class GetElementPtrConstraint(Constraint):
 			if result and ptrval:
 				cls.CONSTRAINTS.append([3, ptrval, result])
 
-# @Todo
-# next function doesn't work properly for instruction.operands.
 class StoreConstraint(Constraint):
 	"""
 	`Instruction Syntax`: store [volatile] \<ty> \<value>, \<ty>* \<pointer> \n
@@ -147,6 +151,8 @@ class StoreConstraint(Constraint):
 					for value in values:
 						cls.CONSTRAINTS.append([4, pointer, value])
 
+# @TODO apply FUNCTION Constraint..
+
 class CallConstraint(Constraint):
 	"""
 	`Instruction Syntax`: \<result> = call \<ty> \<fnty> \<fnptrval>
@@ -157,10 +163,23 @@ class CallConstraint(Constraint):
 		are param, fnptrval's actual args are arg and fnptrval's
 		return token 'RETURN_VALUE'.
 	"""
-	@staticmethod
-	def applyConstraint(instruction: llvm.ValueRef):
+	@classmethod
+	def applyConstraint(cls, instruction: llvm.ValueRef):
 		if instruction.opcode == 'call':
 			result = instruction.name
-			# print(result)
-			# for i in instruction.operands:
-			# 	print(i.name)
+			args = []
+			for i in instruction.operands:
+				# variable
+				if i.name:
+					args.append([i.name])
+				#  constant
+				else :
+					args.append(getOperands(i))
+			call_function_name = args[-1][0]
+			call_function_ref = getFunctionByName(call_function_name,
+				cls.MODULE)
+			# call_function_ref.
+			for idx, parameter in enumerate(call_function_ref.arguments):
+				if args[idx] and parameter.name:
+					for arg in args[idx]:
+						cls.CONSTRAINTS.append([2, arg, parameter.name])
