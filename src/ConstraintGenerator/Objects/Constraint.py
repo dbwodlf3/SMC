@@ -6,6 +6,7 @@ class Constraint:
     Every Constraints applied ConstraintGenerator have to extend from this class.
     """
     CONSTRAINTS = []
+    SYMBOLS = set()
     def __init__(self):
         self.isConstraintClass = True
     #

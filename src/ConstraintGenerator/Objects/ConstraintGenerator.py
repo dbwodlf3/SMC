@@ -36,6 +36,8 @@ class ConstraintGenerator:
                 for instruction in block.instructions:
                     for constraint in self.constraintRules:
                         constraint.applyConstraint(instruction)
+            # INIT for Symbols..
+            TokenInitConstraint.applyConstraint()
 
         for constraintRule in self.functionConstraintRules:
             constraint_results = constraintRule.dumpConstraint()
@@ -45,6 +47,9 @@ class ConstraintGenerator:
             constraint_results = constraintRule.dumpConstraint()
             if(constraint_results):
                 self.DATA['ConstraintResult'].append(constraint_results)
+
+        constraint_results = TokenInitConstraint.dumpConstraint()
+        self.DATA['ConstraintResult'].append(constraint_results)
         return
 
     def dumpJson(self):

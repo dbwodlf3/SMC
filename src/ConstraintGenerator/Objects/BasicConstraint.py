@@ -23,7 +23,6 @@ class RetConstraint(FunctionConstraint):
                     for var in variables:
                         cls.CONSTRAINTS.append([2, var,
                             f'''{instruction.function.name}!ret'''])
-                    
 
 class AllocaConstraint(Constraint):
     """
@@ -37,6 +36,7 @@ class AllocaConstraint(Constraint):
             result = instruction.name
             if result:
                 cls.CONSTRAINTS.append([0, result])
+                cls.SYMBOLS.add(result)
 
 class IntToPtrConstraint(Constraint):
     """
@@ -52,6 +52,8 @@ class IntToPtrConstraint(Constraint):
             if values and result:
                 for value in values:
                     cls.CONSTRAINTS.append([2, value, result])
+                    cls.SYMBOLS.add(value)
+                    cls.SYMBOLS.add(result)
 
 class BitCastConstraint(Constraint):
     """
@@ -68,6 +70,8 @@ class BitCastConstraint(Constraint):
             if result and values:
                 for value in values:
                     cls.CONSTRAINTS.append([2, value, result])
+                    cls.SYMBOLS.add(value)
+                    cls.SYMBOLS.add(result)
 
 class PHIConstraint(Constraint):
     """
@@ -84,6 +88,8 @@ class PHIConstraint(Constraint):
                 if result and vals:
                     for val in vals:
                         cls.CONSTRAINTS.append([2, val, result])
+                        cls.SYMBOLS.add(val)
+                        cls.SYMBOLS.add(result)
 
 class SelectConstraint(Constraint):
     """
@@ -101,6 +107,8 @@ class SelectConstraint(Constraint):
                 if result and vals:
                     for val in vals:
                         cls.CONSTRAINTS.append([2, val, result])
+                        cls.SYMBOLS.add(val)
+                        cls.SYMBOLS.add(result)
 
 class ExtractvalueConstraint(Constraint):
     """
@@ -117,6 +125,8 @@ class ExtractvalueConstraint(Constraint):
             if result and vals:
                 for val in vals:
                     cls.CONSTRAINTS.append([2, val, result])
+                    cls.SYMBOLS.add(val)
+                    cls.SYMBOLS.add(result)
 
 class LoadConstraint(Constraint):
     """
@@ -133,6 +143,8 @@ class LoadConstraint(Constraint):
             if result and pointers:
                 for pointer in pointers:
                     cls.CONSTRAINTS.append([3, pointer, result])
+                    cls.SYMBOLS.add(pointer)
+                    cls.SYMBOLS.add(result)
 
 class GetElementPtrConstraint(Constraint):
     """
@@ -148,6 +160,8 @@ class GetElementPtrConstraint(Constraint):
             ptrval = next(instruction.operands).name
             if result and ptrval:
                 cls.CONSTRAINTS.append([3, ptrval, result])
+                cls.SYMBOLS.add(ptrval)
+                cls.SYMBOLS.add(result)
 
 class StoreConstraint(Constraint):
     """
@@ -167,6 +181,8 @@ class StoreConstraint(Constraint):
                 for pointer in pointers:
                     for value in values:
                         cls.CONSTRAINTS.append([4, pointer, value])
+                        cls.SYMBOLS.add(pointer)
+                        cls.SYMBOLS.add(value)
 
 # @TODO apply FUNCTION Constraint..
 
@@ -205,3 +221,12 @@ class CallConstraint(Constraint):
                 if args[idx] and parameter.name:
                     for arg in args[idx]:
                         cls.CONSTRAINTS.append([2, arg, parameter.name])
+                        cls.SYMBOLS.add(arg)
+                        cls.SYMBOLS.add(parameter.name)
+
+class TokenInitConstraint(Constraint):
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls):
+        for symbol in cls.SYMBOLS:
+            cls.CONSTRAINTS.append([0, symbol])
