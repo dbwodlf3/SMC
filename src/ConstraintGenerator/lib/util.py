@@ -33,8 +33,13 @@ def giveName(module: llvm.ModuleRef):
         ir_module.add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
     # give namespace to globals
     namespace_global = 'global!'
+    index = 0
     for global_var in module.global_variables:
-        global_var.name = namespace_global + global_var.name
+        if global_var.name:
+            global_var.name = namespace_global + global_var.name
+        else:
+            global_var.name = namespace_global + str(index)
+            index += 1
 
     # give names to things of function.
     for function in module.functions:
@@ -76,14 +81,14 @@ def getOperands(operand:llvm.ValueRef):
     global_namespace = 'global!'
     local_namespace = operand.function.name + '!'
 
-    glboal_var_operands = \
-        [(global_namespace + i).replace('@', '') for i in re.findall(r'@[a-zA-Z0-9_!]*', operand_str)]
-    
+    global_var_operands = \
+        [i.replace('@', '') for i in re.findall(r'@[a-zA-Z0-9_!]*', operand_str)]
+    # print(global_var_operands, operand_str)
     local_var_operands = \
         [ i.split()[-1].replace('%','')
             for i in re.findall(r'%[a-zA-Z0-9_!.]*![a-zA-Z0-9_.]*', operand_str)]
 
-    return glboal_var_operands + local_var_operands
+    return global_var_operands + local_var_operands
 
 def checkCallAsm(instruction: llvm.ValueRef):
     if instruction.name:
