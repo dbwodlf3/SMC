@@ -9,6 +9,7 @@ class Detector:
 	criticalInstructions = []
 	writeInstruction = ['store', 'call']
 	writeFunction = []
+	result = []
 
 	def __init__(self, module :llvm.ModuleRef, irModule: ir.Module,
 		variables = {} ):
@@ -32,14 +33,10 @@ class Detector:
 							if op in self.criticalTokens:
 								self.criticalInstruction.append(instruction)
 
-	# @Todo
-	# resolve ConstantExpr
-	# resolve GlobalVar
-	def getOperands(self, instruction: llvm.ValueRef):
-		operands = []
-		for operand in instruction.operands:
-			operands.append(operand)
-		return operands
+	def saveJson(self, filename:str, time: float = 0):
+		self.result['time'] = time
+		with open(filename, 'w') as json_file:
+			json.dump(self.result, json_file, indent=4)
 
 	def functionCritical(self):
 		for function in self.MODULE.functions:

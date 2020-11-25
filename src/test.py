@@ -4,6 +4,7 @@ import subprocess
 from multiprocessing import Process
 from ConstraintGenerator.Objects.ConstraintGenerator import ConstraintGenerator
 from CubicSolver.Objects.CubicSolver import CubicSolver
+from Detector.Objects.Detector import Detector
 
 src_dir = os.path.dirname(os.path.abspath(__file__))
 project_dir = os.path.dirname(src_dir)
@@ -36,13 +37,16 @@ def cubicSolverTest():
             args=(test_file_abs, save_file_abs, ))
         p.start()
 
+def detectorTest():
+    pass
+
 def constraintGeneratorRun(srcFile: str, destFile: str):
     start = time.time()
     constraint_generator = ConstraintGenerator(srcFile)
     constraint_generator.run()
 
     end = time.time()
-    constraint_generator.saveJson(destFile, end-start)
+    constraint_generator.saveJson(destFile, end - start)
 
 def cubicSolverRun(srcFile: str, destFile: str):
     start = time.time()
@@ -50,12 +54,20 @@ def cubicSolverRun(srcFile: str, destFile: str):
     cubic_solver.run()
 
     end = time.time()
-    cubic_solver.saveJson(destFile, end-start)
+    cubic_solver.saveJson(destFile, end - start)
+
+def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
+    start = time.time()
+    detector = Detector()
+
+    detector.run()
+    end = time.time()
+    detector.saveJson(resultFile, end - start)
 
 def main():
     constraintGeneratorTest()
     cubicSolverTest()
-
+    detectorTest()
 
 
 
