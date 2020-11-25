@@ -2,7 +2,7 @@ from typing import List
 import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
-from ConstraintGenerator.lib.util import readModule, giveName
+from lib.util import readModule, giveName
 from ConstraintGenerator.Objects.Constraint import *
 from ConstraintGenerator.Objects.BasicConstraint import *
 

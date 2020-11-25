@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json
 from typing import List
-from CubicSolver.lib import util
+from lib import util
 from CubicSolver.Objects.Node import Node
 
 class CubicSolver:

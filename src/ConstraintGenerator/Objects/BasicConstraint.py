@@ -1,7 +1,7 @@
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from ConstraintGenerator.Objects.Constraint import *
-from ConstraintGenerator.lib.util import *
+from lib.util import *
 
 
 # @Todo

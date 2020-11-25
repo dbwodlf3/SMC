@@ -1,5 +1,6 @@
 import os
 import re
+import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
 
@@ -23,6 +24,10 @@ def readModule(filePath):
             return llvm.parse_bitcode(bc_file.read())
         else:
             return print("CAN'T READ FILE!!")
+
+def readJson(filename: str):
+	with open(filename) as json_file:
+		return json.load(json_file)
 
 def giveName(module: llvm.ModuleRef):
     ir_module = ir.Module(module)
