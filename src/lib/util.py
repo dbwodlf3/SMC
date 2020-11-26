@@ -81,10 +81,20 @@ def getFunctionByName(functionName:str, module:llvm.ModuleRef):
     return None
     # raise Exception(f'''Can't find Function! {functionName}''')
 
-def getOperands(operand:llvm.ValueRef):
+def stripCallInstruction(instructionString: str):
+    reg_obj = re.match(r'.*call [^@]*@[^(]*', instructionString)
+    if reg_obj :
+        start = reg_obj.span()[1]
+        return instructionString[start: ]
+    raise Exception(f''' Can't Strip call Instruction! {instructionString}''')
+
+def getOperands(operand:llvm.ValueRef, localNamespace:str = ''):
     operand_str = str(operand).replace('"','')
     global_namespace = 'global!'
-    local_namespace = operand.function.name + '!'
+    if localNamespace:
+        pass
+    else:        
+        local_namespace = operand.function.name + '!'
 
     global_var_operands = \
         [i.replace('@', '') for i in re.findall(r'@[a-zA-Z0-9_!]*', operand_str)]

@@ -38,7 +38,23 @@ def cubicSolverTest():
         p.start()
 
 def detectorTest():
-    pass
+    llvm_ir_dir = os.path.join(project_dir, 'test', 'llvmIR')
+    cs_file_dir = os.path.join(project_dir, 'dest', 'cs')
+    result_save_dir = os.path.join(project_dir, 'dest', 'de')
+    os.makedirs(result_save_dir, exist_ok=True)
+    llvm_ir_files = [file for file in os.listdir(llvm_ir_dir)]
+    cs_files = [file for file in os.listdir(cs_file_dir)]
+    llvm_ir_files.sort()
+    cs_files.sort()
+
+    for llvm_ir_file, cs_file in zip(llvm_ir_files, cs_files):
+        llvm_ir_file_abs = os.path.join(llvm_ir_dir, llvm_ir_file)
+        cs_file_abs = os.path.join(cs_file_dir, cs_file)
+        save_file_abs = os.path.join(
+            result_save_dir, llvm_ir_file.replace('.ll', '.de.json'))
+        p = Process(target=detectorRun, args=(llvm_ir_file_abs,
+            cs_file_abs, save_file_abs ))
+        p.start()
 
 def constraintGeneratorRun(srcFile: str, destFile: str):
     start = time.time()
@@ -58,15 +74,15 @@ def cubicSolverRun(srcFile: str, destFile: str):
 
 def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     start = time.time()
-    detector = Detector()
+    detector = Detector(llvmFile, variableFile)
 
     detector.run()
     end = time.time()
     detector.saveJson(resultFile, end - start)
 
 def main():
-    constraintGeneratorTest()
-    cubicSolverTest()
+    # constraintGeneratorTest()
+    # cubicSolverTest()
     detectorTest()
 
 
