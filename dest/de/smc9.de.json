@@ -1,0 +1,50 @@
+{
+    "time": 0.05321860313415527,
+    "criticalTokens": [
+        "main",
+        "get_permission",
+        "malloc",
+        "llvm.memcpy.p0i8.p0i8.i64",
+        "foo",
+        "printf",
+        "change_page_permissions_of_address",
+        "write",
+        "strlen",
+        "exit",
+        "mprotect"
+    ],
+    "detect": [
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 6,
+            "instruction": "call",
+            "criticalOperand": "foo",
+            "str": "  call void @get_permission(i8* bitcast (void ()* @foo to i8*))"
+        },
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 10,
+            "instruction": "call",
+            "criticalOperand": "foo",
+            "str": "  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 1 %\"main!6\", i8* align 4 bitcast (void ()* @foo to i8*), i64 55, i1 false)"
+        },
+        {
+            "function": "main",
+            "block": "main!26",
+            "order": 2,
+            "instruction": "call",
+            "criticalOperand": "foo",
+            "str": "  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 4 bitcast (void ()* @foo to i8*), i8* align 1 %\"main!27\", i64 55, i1 false)"
+        },
+        {
+            "function": "main",
+            "block": "main!47",
+            "order": 2,
+            "instruction": "call",
+            "criticalOperand": "foo",
+            "str": "  call void @llvm.memcpy.p0i8.p0i8.i64(i8* align 4 bitcast (void ()* @foo to i8*), i8* align 1 %\"main!48\", i64 55, i1 false)"
+        }
+    ]
+}

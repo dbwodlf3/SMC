@@ -1,5 +1,7 @@
 {
-    "ConstraintResult": [],
-    "time": 0.005392313003540039,
+    "ConstraintResult": [
+        []
+    ],
+    "time": 0.007843732833862305,
     "counts": 0
 }

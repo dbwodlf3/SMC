@@ -1,146 +1,507 @@
 {
     "variables": {
-        "change_page_permissions_of_address!0": [],
-        "change_page_permissions_of_address!10": [
-            "change_page_permissions_of_address!3"
+        "change_page_permissions_of_address!0": [
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
-        "change_page_permissions_of_address!11": [],
+        "change_page_permissions_of_address!10": [
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
+        ],
+        "change_page_permissions_of_address!11": [
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
+        ],
         "change_page_permissions_of_address!12": [
-            "change_page_permissions_of_address!3"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
         "change_page_permissions_of_address!13": [
-            "change_page_permissions_of_address!3"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!13",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
         "change_page_permissions_of_address!14": [
+            "change_page_permissions_of_address!14",
             "change_page_permissions_of_address!4"
+        ],
+        "change_page_permissions_of_address!15": [
+            "change_page_permissions_of_address!15"
         ],
         "change_page_permissions_of_address!2": [
             "change_page_permissions_of_address!2"
         ],
         "change_page_permissions_of_address!21": [
-            "change_page_permissions_of_address!2"
+            "change_page_permissions_of_address!2",
+            "change_page_permissions_of_address!21"
         ],
         "change_page_permissions_of_address!3": [
-            "change_page_permissions_of_address!3"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
         "change_page_permissions_of_address!4": [
             "change_page_permissions_of_address!4"
         ],
         "change_page_permissions_of_address!5": [
-            "change_page_permissions_of_address!3"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "change_page_permissions_of_address!5",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
         "change_page_permissions_of_address!7": [
-            "change_page_permissions_of_address!4"
+            "change_page_permissions_of_address!4",
+            "change_page_permissions_of_address!7"
+        ],
+        "change_page_permissions_of_address!ret": [
+            "change_page_permissions_of_address!2",
+            "change_page_permissions_of_address!21"
         ],
         "foo!1": [
-            "foo!1"
+            "foo!1",
+            "foo!3",
+            "foo!4"
         ],
         "foo!3": [
-            "foo!1"
+            "foo!1",
+            "foo!3",
+            "foo!4"
         ],
-        "foo!4": [],
+        "foo!4": [
+            "foo!1",
+            "foo!3",
+            "foo!4"
+        ],
         "foo!5": [
-            "foo!1"
+            "foo!1",
+            "foo!3",
+            "foo!4",
+            "foo!5"
         ],
-        "get_permission!0": [],
+        "get_permission!0": [
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
+        ],
+        "get_permission!10": [
+            "get_permission!10"
+        ],
         "get_permission!2": [
-            "get_permission!2"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
         "get_permission!3": [
-            "get_permission!2"
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3"
         ],
-        "get_permission!7": [],
-        "get_permission!8": [],
-        "global!err_string": [],
-        "global!malloc": [],
+        "get_permission!7": [
+            "get_permission!7",
+            "global!",
+            "global!err_string"
+        ],
+        "get_permission!8": [
+            "get_permission!8",
+            "global!",
+            "global!err_string"
+        ],
+        "global!": [
+            "global!"
+        ],
+        "global!err_string": [
+            "global!err_string"
+        ],
         "main!1": [
             "main!1"
         ],
         "main!11": [
-            "main!2"
+            "main!11",
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!12": [
+            "main!12",
+            "main!24",
+            "main!25",
             "main!3"
+        ],
+        "main!13": [
+            "main!13"
         ],
         "main!14": [
-            "main!2"
+            "main!11",
+            "main!14",
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!15": [
-            "main!2"
+            "main!11",
+            "main!13",
+            "main!14",
+            "main!15",
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
-        "main!17": [],
-        "main!18": [],
+        "main!17": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
+        "main!18": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
         "main!19": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!19",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!2": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!20": [
+            "main!20",
+            "main!24",
+            "main!25",
             "main!3"
         ],
-        "main!21": [],
+        "main!21": [
+            "main!17",
+            "main!18",
+            "main!21",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
         "main!22": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!19",
+            "main!2",
+            "main!22",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!24": [
+            "main!24",
+            "main!25",
             "main!3"
         ],
-        "main!25": [],
+        "main!25": [
+            "main!24",
+            "main!25",
+            "main!3"
+        ],
         "main!27": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!27",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!29": [
-            "main!4"
+            "main!29",
+            "main!4",
+            "main!45",
+            "main!46"
         ],
         "main!3": [
+            "main!24",
+            "main!25",
             "main!3"
         ],
         "main!32": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!32",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!33": [
-            "main!4"
+            "main!33",
+            "main!4",
+            "main!45",
+            "main!46"
+        ],
+        "main!34": [
+            "main!34"
         ],
         "main!35": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!32",
+            "main!35",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
         "main!36": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!32",
+            "main!34",
+            "main!35",
+            "main!36",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
         ],
-        "main!38": [],
-        "main!39": [],
+        "main!38": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
+        "main!39": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
         "main!4": [
-            "main!4"
+            "main!4",
+            "main!45",
+            "main!46"
         ],
         "main!40": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!40",
+            "main!5",
+            "malloc"
         ],
         "main!41": [
-            "main!4"
+            "main!4",
+            "main!41",
+            "main!45",
+            "main!46"
         ],
-        "main!42": [],
+        "main!42": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!42",
+            "main!5",
+            "malloc"
+        ],
         "main!43": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!40",
+            "main!43",
+            "main!5",
+            "malloc"
         ],
         "main!45": [
-            "main!4"
+            "main!4",
+            "main!45",
+            "main!46"
         ],
-        "main!46": [],
+        "main!46": [
+            "main!4",
+            "main!45",
+            "main!46"
+        ],
         "main!48": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!48",
+            "main!5",
+            "malloc"
         ],
         "main!49": [
-            "main!1"
+            "main!1",
+            "main!49"
         ],
-        "main!5": [],
+        "main!5": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
         "main!6": [
-            "main!2"
+            "main!17",
+            "main!18",
+            "main!2",
+            "main!38",
+            "main!39",
+            "main!5",
+            "main!6",
+            "malloc"
         ],
         "main!8": [
-            "main!3"
+            "main!24",
+            "main!25",
+            "main!3",
+            "main!8"
+        ],
+        "main!ret": [
+            "main!1",
+            "main!49"
+        ],
+        "malloc": [
+            "main!17",
+            "main!18",
+            "main!38",
+            "main!39",
+            "main!5",
+            "malloc"
+        ],
+        "mprotect!0": [
+            "change_page_permissions_of_address!0",
+            "change_page_permissions_of_address!10",
+            "change_page_permissions_of_address!11",
+            "change_page_permissions_of_address!12",
+            "change_page_permissions_of_address!13",
+            "change_page_permissions_of_address!3",
+            "get_permission!0",
+            "get_permission!2",
+            "get_permission!3",
+            "mprotect!0"
+        ],
+        "mprotect!1": [
+            "change_page_permissions_of_address!15",
+            "mprotect!1"
+        ],
+        "printf!0": [
+            "global!",
+            "printf!0"
+        ],
+        "strlen!0": [
+            "get_permission!8",
+            "global!",
+            "global!err_string",
+            "strlen!0"
+        ],
+        "write!1": [
+            "get_permission!7",
+            "global!",
+            "global!err_string",
+            "write!1"
+        ],
+        "write!2": [
+            "get_permission!10",
+            "write!2"
         ]
     },
-    "time": 0.0029859542846679688,
-    "counts": 58
+    "time": 0.007468700408935547,
+    "counts": 71
 }

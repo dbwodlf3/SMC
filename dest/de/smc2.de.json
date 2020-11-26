@@ -1,0 +1,33 @@
+{
+    "time": 0.04175424575805664,
+    "criticalTokens": [
+        "f",
+        "printf",
+        "halt",
+        "exit",
+        "main",
+        "get_permission",
+        "change_page_permissions_of_address",
+        "write",
+        "strlen",
+        "mprotect"
+    ],
+    "detect": [
+        {
+            "function": "f",
+            "block": "f!56",
+            "order": 7,
+            "instruction": "call",
+            "criticalOperand": "main",
+            "str": "  %\"f!61\" = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([11 x i8], [11 x i8]* @\"global!.str.2\", i64 0, i64 0), i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 49))"
+        },
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 4,
+            "instruction": "store",
+            "criticalOperand": "main",
+            "str": "  store i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 44), i8** @\"global!ptr_jal_f\", align 8"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "time": 0.007819414138793945,
+    "criticalTokens": [
+        "main"
+    ],
+    "detect": [
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 3,
+            "instruction": "store",
+            "criticalOperand": "main",
+            "str": "  store i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 107), i8** %\"main!1\", align 8"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "time": 0.021182537078857422,
+    "criticalTokens": [
+        "functionTest",
+        "functionTestSecond",
+        "main"
+    ],
+    "detect": []
+}

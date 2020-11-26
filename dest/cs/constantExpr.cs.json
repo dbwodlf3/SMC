@@ -1,13 +1,16 @@
 {
     "variables": {
-        "global!main": [],
+        "main": [
+            "main"
+        ],
         "main!1": [
+            "main",
             "main!1"
         ],
         "main!2": [
             "main!2"
         ]
     },
-    "time": 0.0005691051483154297,
+    "time": 0.0007488727569580078,
     "counts": 3
 }

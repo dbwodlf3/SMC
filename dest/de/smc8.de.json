@@ -1,0 +1,30 @@
+{
+    "time": 0.06975317001342773,
+    "criticalTokens": [
+        "main",
+        "get_permission",
+        "change_page_permissions_of_address",
+        "write",
+        "strlen",
+        "exit",
+        "mprotect"
+    ],
+    "detect": [
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 9,
+            "instruction": "call",
+            "criticalOperand": "main",
+            "str": "  call void @get_permission(i8* bitcast (i32 ()* @main to i8*))"
+        },
+        {
+            "function": "main",
+            "block": "main!8",
+            "order": 1,
+            "instruction": "store",
+            "criticalOperand": "main",
+            "str": "  store i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 62), i8** %\"main!2\", align 8"
+        }
+    ]
+}

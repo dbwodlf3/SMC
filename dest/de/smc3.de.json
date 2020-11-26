@@ -1,0 +1,40 @@
+{
+    "time": 0.06711244583129883,
+    "criticalTokens": [
+        "main",
+        "llvm.memcpy.p0i8.p0i8.i64",
+        "get_permission",
+        "printf",
+        "change_page_permissions_of_address",
+        "write",
+        "strlen",
+        "exit",
+        "mprotect"
+    ],
+    "detect": [
+        {
+            "function": "main",
+            "block": "main!0",
+            "order": 21,
+            "instruction": "call",
+            "criticalOperand": "main",
+            "str": "  call void @get_permission(i8* bitcast (i32 ()* @main to i8*))"
+        },
+        {
+            "function": "main",
+            "block": "main!17",
+            "order": 3,
+            "instruction": "store",
+            "criticalOperand": "main",
+            "str": "  store i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 483), i8** %\"main!6\", align 8"
+        },
+        {
+            "function": "main",
+            "block": "main!17",
+            "order": 4,
+            "instruction": "store",
+            "criticalOperand": "main",
+            "str": "  store i8* getelementptr inbounds (i8, i8* bitcast (i32 ()* @main to i8*), i64 462), i8** %\"main!7\", align 8"
+        }
+    ]
+}
