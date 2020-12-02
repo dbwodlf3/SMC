@@ -64,6 +64,8 @@ def detectorTest():
     llvm_ir_files.sort()
     cs_files.sort()
 
+    i = 0
+
     for llvm_ir_file, cs_file in zip(llvm_ir_files, cs_files):
         llvm_ir_file_abs = os.path.join(llvm_ir_dir, llvm_ir_file)
         cs_file_abs = os.path.join(cs_file_dir, cs_file)
@@ -71,7 +73,11 @@ def detectorTest():
             result_save_dir, llvm_ir_file.replace('.ll', '.de.json'))
         p = Process(target=detectorRun, args=(llvm_ir_file_abs,
             cs_file_abs, save_file_abs ))
+        
+        # if(cs_file != 'smc1.c.cs.json'):
+        #     continue
 
+        print(cs_file)
         process_list.append(p)
         p.start()
 
@@ -103,8 +109,8 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    constraintGeneratorTest()
-    cubicSolverTest()
+    # constraintGeneratorTest()
+    # cubicSolverTest()
     detectorTest()
 
 

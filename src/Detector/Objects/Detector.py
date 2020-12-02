@@ -1,59 +1,70 @@
 import json
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
+
+from typing import List
+
 from Detector.Objects.Variable import Variable
+from Detector.Objects.CriticalDetector import CriticalDetector
+from Detector.Objects.BasicDetector import *
 from lib.util import readModule, giveName, readJson, getOperands, \
 	stripCallInstruction
 
 class Detector:
-	# for variables.
-	criticalTokens = []
-	# for constant values.
-	criticalValues = []
-	criticalInstructions = []
 	# instruction for checking smc
 	writeInstruction = ['store', 'call']
-	writeFunction = []
-	result = {}
 
 	def __init__(self, llvmFile : str, variableFile: str):
-
+		# for init
 		module = readModule(llvmFile)
 		ir_module = giveName(module)
-		variables = readJson(variableFile)
+		variables = readJson(variableFile)['variables']
 
+		#  for init
 		self.MODULE = module
 		self.IR_MODULE = ir_module
 		self.variables = {}
+		# for find smc
+		self.criticalTokens = []
+		self.criticalVariables: List[Variable] = []
+		self.criticalValues = []
+		self.criticalInstructions = []
+		self.result = {}
 
-		variables_raw = variables['variables']
-		if variables_raw:
-			for var_name in variables_raw:
-				var = Variable(var_name, variables_raw[var_name])
-				self.variables[var_name] = var
+		for var_name in variables:
+			var = Variable(var_name, variables[var_name])
+			self.variables[var_name] = var
+
+	def initCriticalToken(self):
+		for function in self.MODULE.functions:
+			self.criticalTokens.append(function.name)
+
+	def initCriticalVariable(self):
+		for var_name in self.variables :
+			for critical_token in self.criticalTokens:
+				if critical_token in self.variables[var_name].tokens:
+					self.criticalVariables.append(self.variables[var_name])
+		# print(self.criticalTokens)
+		# print(self.criticalVariables)
+		# for i in self.criticalVariables:
+		# 	print(i)
+		
+	def checkSMC(self, detector: CriticalDetector):
+		detector.init(self)
+		detector.run()
 
 	def run(self):
-		self.functionCritical()
-		for function in self.MODULE.functions:
-			for block in function.blocks:
-				for instruction in block.instructions:
-					if instruction.opcode in self.writeInstruction:
-						if instruction.opcode == 'call':
-							strip_str = stripCallInstruction(str(instruction))
-							namespace = instruction.function.name + '!'
-							ins_ops = getOperands(strip_str, namespace)
-						else:
-							ins_ops = getOperands(instruction)
-						for op in ins_ops:
-							if op in self.criticalTokens:
-								Detector.criticalInstructions.append(
-									[instruction, op])
+		self.initCriticalToken()
+		self.initCriticalVariable()
+		self.checkSMC(StoreDetector)
+		self.checkSMC(MemcpyDetector)
 
 	def saveJson(self, filename:str, time: float = 0):
 		self.result['time'] = time
 		self.result['criticalTokens'] = self.criticalTokens
+		# self.result['criticalVariables'] = self.criticalVariables
 		self.result['detect'] = []
-		for criticalInstruction in Detector.criticalInstructions:
+		for criticalInstruction in self.criticalInstructions:
 			count = 0
 			instruction = criticalInstruction[0]
 			for j in instruction.block.instructions:
@@ -72,8 +83,5 @@ class Detector:
 		with open(filename, 'w') as json_file:
 			json.dump(self.result, json_file, indent=4)
 
-	def functionCritical(self):
-		for function in self.MODULE.functions:
-			self.criticalTokens.append(function.name)
 	def __str__(self):
 		pass
