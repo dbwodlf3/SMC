@@ -1,4 +1,5 @@
 #include <memory>
+#include <string>
 
 #include <llvm-c/Core.h>
 #include <llvm/IR/Module.h>
@@ -88,19 +89,16 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
   return wrap(module);
 }
 
-LLVMModuleRef readFromLL_cpp(const char *filename) {
-  LLVMContext context;
-  SMDiagnostic error;
-  std::unique_ptr<llvm::Module> module = 
-                                  llvm::parseIRFile(filename, error, context);
-                                  
+void dumpModule_cpp(LLVMModuleRef moduleRef) {
+  Module *module = unwrap(moduleRef);
 
-  if(!module) {
-    errs() << "Can't read file!\n";
-    throw "Can't read file!\n";
-  }
-  
-  return wrap(module.get());
+  outs() << (string) module->begin()->getName();
+
+  module->dump();
+}
+
+void testPrint_cpp(){
+  outs() << "print test";
 }
 
 extern "C" {
@@ -108,7 +106,11 @@ extern "C" {
     return giveName_cpp(moduleRef);
   }
 
-  LLVMModuleRef readFromLL(const char *filename){
-    return readFromLL_cpp(filename);
+  void dumpModule(LLVMModuleRef moduleRef){
+    return dumpModule_cpp(moduleRef);
+  }
+
+  void testPrint(){
+    return testPrint_cpp();
   }
 }

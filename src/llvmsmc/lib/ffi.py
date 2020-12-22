@@ -1,5 +1,9 @@
+# -*- coding: <utf-8> -*-
+
 import ctypes
 import sys, os
+
+import llvmlite.binding as llvmlite
 
 lib_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'ffi')
 util_so = os.path.join(lib_path, 'libutil.so')
@@ -12,19 +16,17 @@ def make_opaque_ref(name):
 class CustomAPI(object):
     def giveName(self, LLVMModuleRef):
         return _libc.giveName(LLVMModuleRef)
-    def readFromLL(self, filename):
-        return _libc.readFromLL(filename.encode('utf-8'))
+    def dumpModule(self, LLVMModuleRef):
+        return _libc.dumpModule(LLVMModuleRef)
+    def testPrint(self):
+        return _libc.testPrint()
 
 # =============================================================================
 # Set function FFI
 
-LLVMModuleRef = make_opaque_ref('LLVMModule')
+_libc.giveName.restype = llvmlite.ffi.LLVMModuleRef
 
-_libc.restype = ctypes.c_double
-_libc.argtypes = [ctypes.c_char_p]
-
-_libc.readFromLL.argtypes = [LLVMModuleRef]
-_libc.readFromLL.argtypes = [ctypes.c_char_p]
+_libc.dumpModule.argtypes = [llvmlite.ffi.LLVMModuleRef]
 
 # =============================================================================
 # return libc
