@@ -1,5 +1,5 @@
 import ctypes
-import os
+import sys, os
 
 lib_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'ffi')
 util_so = os.path.join(lib_path, 'libutil.so')
@@ -19,6 +19,9 @@ class CustomAPI(object):
 # Set function FFI
 
 LLVMModuleRef = make_opaque_ref('LLVMModule')
+
+_libc.restype = ctypes.c_double
+_libc.argtypes = [ctypes.c_char_p]
 
 _libc.readFromLL.argtypes = [LLVMModuleRef]
 _libc.readFromLL.argtypes = [ctypes.c_char_p]

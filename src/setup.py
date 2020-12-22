@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-import os
+import sys, os
+import subprocess
 
 from setuptools import find_packages, setup, Command
 
@@ -23,7 +24,8 @@ class test(Command):
         if not self.script:
             return print('select test script file!')
         os.chdir(llvmsmc_dir)
-        os.system('python -m test.' + self.script)
+        subprocess.call(['python3', '-m', 'test.'+self.script],
+            stdout=sys.__stdout__)
 
 requires = []
 
@@ -34,5 +36,3 @@ setup(name='llvmsmc',
       packages=find_packages(),
       cmdclass={'test': test},
       )
-
-# NOT Yet...

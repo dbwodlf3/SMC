@@ -35,6 +35,11 @@ LLVM IR(Lifted) AND Variable Map ⟶ "Detector" ⇒ ANSWER(JSON)
 
 ## Bench Marks
 
+## execute test scripts
+```console
+./setup.py test --script ${test_script}
+```
+
 
 # References
 
