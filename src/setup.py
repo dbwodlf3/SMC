@@ -3,7 +3,10 @@ import os
 
 from setuptools import find_packages, setup, Command
 
-class entry(Command):
+src_dir = os.path.abspath(os.path.dirname(__file__))
+llvmsmc_dir = os.path.join(src_dir, 'llvmsmc')
+
+class test(Command):
     description = 'execute scripts with module path'
     user_options = [
         ('script=', None, 'script name'),
@@ -17,7 +20,10 @@ class entry(Command):
         return 0
 
     def run(self):
-        os.system('echo ' + os.getcwd())
+        if not self.script:
+            return print('select test script file!')
+        os.chdir(llvmsmc_dir)
+        os.system('python -m test.' + self.script)
 
 requires = []
 
@@ -26,7 +32,7 @@ setup(name='llvmsmc',
       description='smc solver',
       author='Ryu JaeIL',
       packages=find_packages(),
-      cmdclass={'entry': entry},
+      cmdclass={'test': test},
       )
 
 # NOT Yet...
