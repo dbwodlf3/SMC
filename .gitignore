@@ -5,3 +5,8 @@ src/**/*.ll
 src/**/*.json
 _test/
 dest/
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+libutil.so

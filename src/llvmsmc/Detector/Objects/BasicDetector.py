@@ -26,6 +26,7 @@ class StoreDetector(CriticalDetector):
 			if pointer.name:
 				pass
 			else:
+				print(pointer)
 				raise Exception('No Name Operand!!')
 
 			if pointer.name in cls.detector.criticalTokens:

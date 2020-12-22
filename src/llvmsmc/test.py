@@ -6,7 +6,7 @@ from CubicSolver.Objects.CubicSolver import CubicSolver
 from Detector.Objects.Detector import Detector
 
 src_dir = os.path.dirname(os.path.abspath(__file__))
-project_dir = os.path.dirname(src_dir)
+project_dir = os.path.dirname(os.path.dirname(src_dir))
 dest_dir = os.path.join(project_dir, 'dest')
 os.makedirs(dest_dir, exist_ok=True)
 
@@ -77,7 +77,7 @@ def detectorTest():
         # if(cs_file != 'smc1.c.cs.json'):
         #     continue
 
-        print(cs_file)
+        # print(cs_file)
         process_list.append(p)
         p.start()
 
@@ -109,8 +109,8 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    # constraintGeneratorTest()
-    # cubicSolverTest()
+    constraintGeneratorTest()
+    cubicSolverTest()
     detectorTest()
 
 

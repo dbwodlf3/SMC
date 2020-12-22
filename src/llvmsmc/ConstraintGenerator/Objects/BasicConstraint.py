@@ -184,7 +184,7 @@ class StoreConstraint(Constraint):
                         cls.SYMBOLS.add(pointer)
                         cls.SYMBOLS.add(value)
 
-# @TODO apply FUNCTION Constraint..
+# @Todo apply FUNCTION Constraint..
 
 class CallConstraint(Constraint):
     """
