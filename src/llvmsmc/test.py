@@ -109,8 +109,8 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    constraintGeneratorTest()
-    cubicSolverTest()
+    # constraintGeneratorTest()
+    # cubicSolverTest()
     detectorTest()
 
 

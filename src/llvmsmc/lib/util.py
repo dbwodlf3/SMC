@@ -3,8 +3,9 @@ import re
 import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
+from lib.ffi import *
 
-def readModule(filePath):
+def readModule(filePath) -> llvm.ModuleRef:
     """Return LLVM IR Module Object.
     Args:
         filePath (string): ll or bc file.
@@ -29,48 +30,8 @@ def readJson(filename: str):
 	with open(filename) as json_file:
 		return json.load(json_file)
 
-def giveName(module: llvm.ModuleRef):
-    ir_module = ir.Module(module)
-    try:
-        ir_module.get_named_metadata('SMC_ANALYSIS_NAMED')
-        raise Exception("ALREAD HAVE NAMED")
-    except KeyError:
-        ir_module.add_named_metadata('SMC_ANALYSIS_NAMED', ['True'])
-    # give namespace to globals
-    namespace_global = 'global!'
-    index = 0
-    for global_var in module.global_variables:
-        if global_var.name:
-            global_var.name = namespace_global + global_var.name
-        else:
-            global_var.name = namespace_global + str(index)
-            index += 1
-
-    # give names to things of function.
-    for function in module.functions:
-        namespace_local = function.name +'!'
-        name_index = 0
-        for parameter in function.arguments:
-            if parameter.name:
-                parameter.name = namespace_local + parameter.name
-            else:
-                parameter.name = namespace_local + str(name_index)
-                name_index += 1
-        for block in function.blocks:
-            if block.name:
-                block.name = namespace_local + block.name
-            else:
-                block.name = namespace_local + str(name_index)
-                name_index += 1
-            for instruction in block.instructions:
-                if(instruction.type.__str__()=='void'):
-                    continue
-                if instruction.name:
-                    instruction.name = namespace_local + instruction.name
-                else:
-                    instruction.name = namespace_local + str(name_index)
-                    name_index +=1
-    return ir_module
+def giveName(module: llvm.ModuleRef) -> llvm.ModuleRef:
+    return libc.giveName(module)
 
 # VERY STRANGE WAY
 # but... it works. then. and okay. haha...

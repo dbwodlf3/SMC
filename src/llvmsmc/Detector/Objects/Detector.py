@@ -16,27 +16,24 @@ class Detector:
 
 	def __init__(self, llvmFile : str, variableFile: str):
 		# for init
-		module = readModule(llvmFile)
-		ir_module = giveName(module)
-		variables = readJson(variableFile)['variables']
-
-		#  for init
-		self.MODULE = module
-		self.IR_MODULE = ir_module
+		self.MODULE_REF = readModule(llvmFile)
+		self.MODULE_IR = ir.Module()
 		self.variables = {}
-		# for find smc
 		self.criticalTokens = []
 		self.criticalVariables: List[Variable] = []
 		self.criticalValues = []
 		self.criticalInstructions = []
 		self.result = {}
 
+		variables = readJson(variableFile)['variables']
 		for var_name in variables:
 			var = Variable(var_name, variables[var_name])
 			self.variables[var_name] = var
 
+		giveName(self.MODULE_REF)
+
 	def initCriticalToken(self):
-		for function in self.MODULE.functions:
+		for function in self.MODULE_IR.functions:
 			self.criticalTokens.append(function.name)
 
 	def initCriticalVariable(self):

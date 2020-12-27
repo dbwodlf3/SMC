@@ -7,6 +7,20 @@ from setuptools import find_packages, setup, Command
 src_dir = os.path.abspath(os.path.dirname(__file__))
 llvmsmc_dir = os.path.join(src_dir, 'llvmsmc')
 
+class run(Command):
+    description = 'execute main test'
+    user_options = []
+
+    def initialize_options(self):
+        return 0
+    
+    def finalize_options(self):
+        return 0
+    
+    def run(self):
+        os.chdir(llvmsmc_dir)
+        subprocess.call(['python3', 'test.py'], stdout=sys.__stdout__)
+
 class test(Command):
     description = 'execute scripts with module path'
     user_options = [
@@ -34,5 +48,5 @@ setup(name='llvmsmc',
       description='smc solver',
       author='Ryu JaeIL',
       packages=find_packages(),
-      cmdclass={'test': test},
+      cmdclass={'run': run, 'test': test},
       )

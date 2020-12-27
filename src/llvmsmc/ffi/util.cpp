@@ -4,6 +4,8 @@
 #include <llvm-c/Core.h>
 #include <llvm/IR/Module.h>
 #include <llvm/IR/LLVMContext.h>
+#include <llvm/IR/ValueSymbolTable.h>
+#include <llvm/IR/Constants.h>
 #include <llvm/IRReader/IRReader.h>
 #include <llvm/Support/SourceMgr.h>
 #include <llvm/Support/raw_ostream.h>
@@ -67,7 +69,7 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
     }
 
     // set local variable names
-    for(auto bb = function->begin(); bb != function->end(); bb++){
+    for(auto bb = function->begin(); bb != function->end(); bb++) {
       for(auto instruction = bb->begin(); instruction != bb->end();
           instruction++){
         if(instruction->getType()->isVoidTy())continue;
@@ -84,6 +86,27 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
         }
       }
     }
+
+    // ConstantExpr names
+    for(auto bb = function->begin(); bb != function->end(); bb++) {
+      string function_namespace = (string)function->getName() + "!";
+      string constant_exp_namespace = "ConstantExpr!";
+      int constant_exp_index = 0;
+
+      for(auto ins = bb->begin(); ins != bb->end(); ins++) {
+        for(auto user = ins->op_begin(); user != ins->op_end(); user++){
+          auto exp = dyn_cast<ConstantExpr>(user->get());
+          if(exp) {
+            outs() << exp->hasName() << "\n";
+            if(!exp->hasName()){
+              exp->setName(function_namespace + constant_exp_namespace +
+                            to_string(constant_exp_index));
+              constant_exp_index++;
+            }
+          }
+        }
+      }
+    }
   }
 
   return wrap(module);
@@ -95,6 +118,38 @@ void dumpModule_cpp(LLVMModuleRef moduleRef) {
   outs() << (string) module->begin()->getName();
 
   module->dump();
+}
+
+void dumpNameValues_cpp(LLVMModuleRef moduleRef) {
+  Module *module = unwrap(moduleRef);
+
+  for(auto fun = module->begin(); fun != module->end(); fun++){
+    auto sym_table = fun->getValueSymbolTable();
+    
+    outs() << "function: "<< fun->getName() << "\n";
+    for(auto sym = sym_table->begin(); sym != sym_table->end(); sym++){
+      outs() << sym->getKey() << " => " << sym->getValue() << "\n";
+    }
+
+  }
+
+  for(auto fun = module->begin(); fun != module->end(); fun++) {
+    for(auto bb = fun->begin(); bb != fun->end(); bb++) {
+      for(auto ins = bb->begin(); ins != bb->end(); ins++) {
+        for(auto op = ins->op_begin(); op != ins->op_end(); op++) {
+          auto exp = dyn_cast<ConstantExpr>(op->get());
+          if(exp){
+            op->get()->print(outs());
+            outs() << (op->get()->getName() == "") ;
+            outs() << "\n 이름: " << op->get()->getName() << "\n";
+            outs() << "타입: " << op->get()->getValueName() << "\n";
+          }
+        }
+      }
+    }
+  }
+
+
 }
 
 void testPrint_cpp(){
@@ -112,5 +167,27 @@ extern "C" {
 
   void testPrint(){
     return testPrint_cpp();
+  }
+
+  void dumpNameValues(LLVMModuleRef moduleRef){
+    return dumpNameValues_cpp(moduleRef);
+  }
+
+  bool isConstant(LLVMValueRef value){
+    if(dyn_cast<Constant>(unwrap(value))) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  bool isConstantExpr(LLVMValueRef value){
+    if(dyn_cast<ConstantExpr>(unwrap(value))) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
   }
 }
