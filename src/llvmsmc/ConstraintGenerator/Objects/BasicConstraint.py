@@ -2,6 +2,7 @@ import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from ConstraintGenerator.Objects.Constraint import *
 from lib.util import *
+from lib.ffi import *
 
 
 # @Todo
@@ -230,3 +231,14 @@ class TokenInitConstraint(Constraint):
     def applyConstraint(cls):
         for symbol in cls.SYMBOLS:
             cls.CONSTRAINTS.append([0, symbol])
+
+class ConstantConstraint(Constraint):
+    CONSTRAINTS = []
+
+    @classmethod
+    def applyConstraint(cls, instruction: llvm.ValueRef):
+        for operand in instruction.operands:
+            if(libc.isConstantExpr(operand)):
+                pass
+            elif(libc.isConstant(operand)):
+                pass
