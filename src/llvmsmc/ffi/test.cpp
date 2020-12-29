@@ -15,12 +15,21 @@ void testFunction_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
 
   for(auto fun = module->begin(); fun != module->end(); fun++) {
+    if(fun->getName() != "main") continue;
+
     for(auto bb = fun->begin(); bb != fun->end(); bb++) {
       for(auto ins = bb->begin(); ins != bb->end(); ins++) {
-          CallInst* call = dyn_cast<CallInst>(ins);
+        CallInst* call = dyn_cast<CallInst>(ins);
 
-          if(call) {
-            outs() << call->getCalledFunction()->getName();
+        if(call) {
+          Function* called_function = call->getCalledFunction();
+          
+          if(called_function){
+          }
+          else {
+            call->print(outs());
+            outs() <<'\n';
+          }
         }
       }
     }

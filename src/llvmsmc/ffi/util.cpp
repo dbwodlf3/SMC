@@ -121,7 +121,6 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
         for(auto user = ins->op_begin(); user != ins->op_end(); user++){
           auto exp = dyn_cast<ConstantExpr>(user->get());
           if(exp) {
-            outs() << exp->hasName() << "\n";
             if(!exp->hasName()){
               exp->setName(function_namespace + constant_exp_namespace +
                             to_string(constant_exp_index));

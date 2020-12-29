@@ -3,7 +3,7 @@ source_filename = "smc10.c"
 target datalayout = "e-m:e-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu"
 
-@__const.main.shellcode = private unnamed_addr constant [24 x i8] c"1\C0Ph//shh/bin\89\E3PS\89\E1\B0\0B\CD\80\00", align 16
+@__const.main.shellcode = private unnamed_addr constant [24 x i8] c"H1\F6VH\BF/bin//shWT_j;X\99\0F\05\00", align 16
 
 ; Function Attrs: noinline nounwind optnone uwtable
 define dso_local i32 @main() #0 {
