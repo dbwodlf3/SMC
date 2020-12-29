@@ -9,39 +9,54 @@ lib_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'ffi')
 util_so = os.path.join(lib_path, 'libutil.so')
 _libc = ctypes.CDLL(util_so)
 
-def make_opaque_ref(name):
-    newcls = type(name, (ctypes.Structure,), {})
-    return ctypes.POINTER(newcls)
+class Answer(ctypes.Structure):
+    _fields_ = [
+        ('type', ctypes.c_int),
+        ('pattern', ctypes.c_int),
+        ('destName', ctypes.c_char_p)
+    ]
 
 class CustomAPI(object):
-    def giveName(self, LLVMModuleRef):
+    @classmethod
+    def giveName(cls, LLVMModuleRef):
         return _libc.giveName(LLVMModuleRef)
 
-    def dumpModule(self, LLVMModuleRef):
+    @classmethod
+    def dumpModule(cls, LLVMModuleRef):
         return _libc.dumpModule(LLVMModuleRef)
 
-    def testPrint(self):
+    @classmethod
+    def testPrint(cls):
         return _libc.testPrint()
 
-    def dumpNameValues(self, LLVMModuleRef):
+    @classmethod
+    def dumpNameValues(cls, LLVMModuleRef):
         return _libc.dumpNameValues(LLVMModuleRef)
 
-    def isConstant(self, LLVMValueRef):
+    @classmethod
+    def isConstant(cls, LLVMValueRef):
         return _libc.isConstant(LLVMValueRef)
 
-    def isConstantExpr(self, LLVMValueRef):
+    @classmethod
+    def isConstantExpr(cls, LLVMValueRef):
         return _libc.isConstantExpr(LLVMValueRef)
 
-    def isConstantExprIns(self, LLVMValueRef, instruction):
+    @classmethod
+    def isConstantExpr(cls, LLVMValueRef, instruction):
         pass
 
-    def isAlias(self, LLVMValueRef):
+    @classmethod
+    def isAlias(cls, LLVMValueRef):
         return _libc.isAlias(LLVMValueRef)
     
-    def wrapping(self, LLVMValueRef):
+    @classmethod
+    def wrapping(cls, LLVMValueRef):
         pass
-    
 
+class Detectors(object):
+    @classmethod
+    def StoreDetector(cls, LLVMModuleRef) -> Answer:
+        return _libc.StoreDetector(LLVMModuleRef)
 # =============================================================================
 # Set function FFI
 
@@ -57,12 +72,17 @@ _libc.isConstant.restype = ctypes.c_bool
 _libc.isConstantExpr.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isConstantExpr.restype = ctypes.c_bool
 
-_libc.isConstantExprIns.argtypes = [llvmlite.ffi.LLVMValueRef, ctypes.c_char_p]
-_libc.isConstantExprIns.restype = ctypes.c_bool
+_libc.isConstantExpr.argtypes = [llvmlite.ffi.LLVMValueRef, ctypes.c_char_p]
+_libc.isConstantExpr.restype = ctypes.c_bool
 
 _libc.isAlias.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isAlias.restype = ctypes.c_bool
 
+_libc.StoreDetector.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.StoreDetector.restype = Answer
+
 # =============================================================================
 # return libc
 libc = CustomAPI()
+
+test = _libc

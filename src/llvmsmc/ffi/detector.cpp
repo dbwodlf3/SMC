@@ -83,4 +83,30 @@ Answer StoreDetector(LLVMValueRef val) {
   return A;
 }
 
+Answer CallDetector(LLVMValueRef val) {
+  Answer A;
+  Value* value = unwrap(val);
+  CallInst* call = dyn_cast<CallInst>(value);
+
+  A.type = 2;
+
+  if(call == nullptr) throw "This Instruction is not call instruction.";
+
+  outs() << call->getCalledFunction()->getName();
+
+  // Pattern 1
+  // call void (...) %variable
+  outs() << call->getCalledFunction()->getName();
+
+  // Pattern 2
+  // call void (...) bitcast (@global_variable)
+
+  // Pattern 3
+  // call @__remill_function_call(____, %variable, ____)
+
+  A.type = 0;
+
+  return A;
+}
+
 }

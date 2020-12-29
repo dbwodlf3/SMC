@@ -20,25 +20,16 @@ class StoreDetector(CriticalDetector):
 		# init
 		cls.findInstructions()
 
+		# Detect
 		for instruction in cls.instructions:
-			op_iter = instruction.operands
-			op_dest = op_iter.next()
-
-			# pattern 1
-			# store ____, @data_[0-9]*
-			if libc.isAlias(op_dest) :
+			answer = Detectors.StoreDetector(instruction)
+			if answer.pattern == 1:
 				pass
-			# pattern 2
-			# store ____, bitcast(@data_[0-9]*)
-			elif libc.isConstantExprIns(op_dest, 'bitcast') :
+			elif answer.pattern == 2:
 				pass
-			# pattern 3
-			# store ____, inttoptr (ConstantInt)
-			elif libc.isConstantExprIns(op_dest, 'inttoptr') :
+			elif answer.pattern == 3:
 				pass
-			# pattern 4
-			# store ____, %variable
-			else :
+			elif answer.pattern == 4:
 				pass
 
 		return 0
@@ -57,27 +48,7 @@ class CallDetector(CriticalDetector):
 
 	@classmethod
 	def run(cls):
-		# init
-		cls.findInstructions()
-
-		for instruction in cls.instructions:
-			op_iter = instruction.operands
-			function = op_iter.next()
-
-			# pattern 1
-			# call void (...) %variable
-			if function.name:
-				pass
-			# pattern 2
-			# call void (...) bitcast ( @global_variable)
-			elif libc.isConstantExprIns(function, 'bitcast'):
-				pass
-			# pattern 3
-			# call @__remill_function_call(____, %variable, ____)
-			elif function:
-				pass
-			cls.detector.criticalInstructions.append([instruction,
-				dest.name])
+		pass
 		return 0
 
 # legacy code

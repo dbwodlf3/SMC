@@ -15,7 +15,7 @@ message(STATUS "USING COMPILER : ${CMAKE_CXX_COMPILER_ID}")
 message(STATUS "LLVM VERSION : ${LLVM_PACKAGE_VERSION}")
 message(STATUS "Using LLVMConfig.cmake in: ${LLVM_DIR}")
 
-ADD_LIBRARY(util SHARED util.cpp detector.cpp)
+ADD_LIBRARY(util SHARED util.cpp detector.cpp test.cpp)
 
 llvm_map_components_to_libnames(llvm_libs support core irreader)
 

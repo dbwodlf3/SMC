@@ -12,9 +12,11 @@ def readModule(filePath) -> llvm.ModuleRef:
     """
     #
     try:
+        ll_file = False
         ll_file = open(filePath, "r")
     except:
         try:
+            bc_file = False
             bc_file = open(filePath, "rb")
         except:
             pass

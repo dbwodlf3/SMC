@@ -19,6 +19,24 @@ struct Answer {
   char* destName;
 };
 
+bool isConstant_cpp(LLVMValueRef value) {
+  if(dyn_cast<Constant>(unwrap(value))) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
+
+bool isConstantExpr_cpp(LLVMValueRef value){
+  if(dyn_cast<ConstantExpr>(unwrap(value))) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
+
 LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
 
@@ -181,22 +199,12 @@ extern "C" {
     return dumpNameValues_cpp(moduleRef);
   }
 
-  bool isConstant(LLVMValueRef value){
-    if(dyn_cast<Constant>(unwrap(value))) {
-      return 1;
-    }
-    else {
-      return 0;
-    }
+  bool isConstant(LLVMValueRef value) {
+    return isConstant_cpp(value);
   }
 
   bool isConstantExpr(LLVMValueRef value){
-    if(dyn_cast<ConstantExpr>(unwrap(value))) {
-      return 1;
-    }
-    else {
-      return 0;
-    }
+    return isConstantExpr_cpp(value);
   }
 
   bool isAlias(LLVMValueRef value){
