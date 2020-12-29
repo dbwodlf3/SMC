@@ -54,6 +54,7 @@ class Detector:
 		self.initCriticalToken()
 		self.initCriticalVariable()
 		self.checkSMC(StoreDetector)
+		self.checkSMC(CallDetector)
 		self.checkSMC(MemcpyDetector)
 
 	def saveJson(self, filename:str, time: float = 0):

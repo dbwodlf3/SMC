@@ -32,6 +32,15 @@ class CustomAPI(object):
     def isConstantExpr(self, LLVMValueRef):
         return _libc.isConstantExpr(LLVMValueRef)
 
+    def isConstantExprIns(self, LLVMValueRef, instruction):
+        pass
+
+    def isAlias(self, LLVMValueRef):
+        return _libc.isAlias(LLVMValueRef)
+    
+    def wrapping(self, LLVMValueRef):
+        pass
+    
 
 # =============================================================================
 # Set function FFI
@@ -47,6 +56,12 @@ _libc.isConstant.restype = ctypes.c_bool
 
 _libc.isConstantExpr.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isConstantExpr.restype = ctypes.c_bool
+
+_libc.isConstantExprIns.argtypes = [llvmlite.ffi.LLVMValueRef, ctypes.c_char_p]
+_libc.isConstantExprIns.restype = ctypes.c_bool
+
+_libc.isAlias.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.isAlias.restype = ctypes.c_bool
 
 # =============================================================================
 # return libc

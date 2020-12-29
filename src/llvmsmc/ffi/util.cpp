@@ -13,6 +13,12 @@
 using namespace llvm;
 using namespace std;
 
+struct Answer {
+  int type;
+  int pattern;
+  char* destName;
+};
+
 LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
 
@@ -156,6 +162,8 @@ void testPrint_cpp(){
   outs() << "print test";
 }
 
+
+
 extern "C" {
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {
     return giveName_cpp(moduleRef);
@@ -190,4 +198,14 @@ extern "C" {
       return 0;
     }
   }
-}
+
+  bool isAlias(LLVMValueRef value){
+    if(dyn_cast<GlobalAlias>(unwrap(value))){
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  }
+
+} // Extern C

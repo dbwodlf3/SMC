@@ -7,6 +7,7 @@ from Detector.Objects.CriticalDetector import CriticalDetector
 
 class StoreDetector(CriticalDetector):
 	instructions: List[ValueRef] = []
+
 	@classmethod
 	def findInstructions(cls):
 		for function in cls.detector.MODULE_REF.functions:
@@ -16,33 +17,70 @@ class StoreDetector(CriticalDetector):
 						cls.instructions.append(instruction)
 	@classmethod
 	def run(cls):
+		# init
 		cls.findInstructions()
-		
+
 		for instruction in cls.instructions:
 			op_iter = instruction.operands
-			pointer = op_iter.next()
-			operands = getOperands(pointer)
+			op_dest = op_iter.next()
 
-			if pointer.name:
+			# pattern 1
+			# store ____, @data_[0-9]*
+			if libc.isAlias(op_dest) :
 				pass
-			else:
-				if(libc.isConstant(pointer)):
-					print("Fuck!")
-				else:
-					raise Exception('No Name Operand!!')
-
-			if pointer.name in cls.detector.criticalTokens:
+			# pattern 2
+			# store ____, bitcast(@data_[0-9]*)
+			elif libc.isConstantExprIns(op_dest, 'bitcast') :
 				pass
-				cls.detector.criticalInstructions.append([instruction,
-					pointer.name])
+			# pattern 3
+			# store ____, inttoptr (ConstantInt)
+			elif libc.isConstantExprIns(op_dest, 'inttoptr') :
+				pass
+			# pattern 4
+			# store ____, %variable
 			else :
-				for criticalVariable in cls.detector.criticalVariables:
-					if pointer.name == criticalVariable.name:
-						cls.detector.criticalInstructions.append([instruction,
-							pointer.name])
+				pass
 
 		return 0
 
+class CallDetector(CriticalDetector):
+	instructions: List[ValueRef] = []
+
+	@classmethod
+	def findInstructions(cls):
+		for function in cls.detector.MODULE_REF.functions:
+			for block in function.blocks:
+				for instruction in block.instructions:
+					if(instruction.opcode == 'call'):
+						cls.instructions.append(instruction)
+		return 0
+
+	@classmethod
+	def run(cls):
+		# init
+		cls.findInstructions()
+
+		for instruction in cls.instructions:
+			op_iter = instruction.operands
+			function = op_iter.next()
+
+			# pattern 1
+			# call void (...) %variable
+			if function.name:
+				pass
+			# pattern 2
+			# call void (...) bitcast ( @global_variable)
+			elif libc.isConstantExprIns(function, 'bitcast'):
+				pass
+			# pattern 3
+			# call @__remill_function_call(____, %variable, ____)
+			elif function:
+				pass
+			cls.detector.criticalInstructions.append([instruction,
+				dest.name])
+		return 0
+
+# legacy code
 class MemcpyDetector(CriticalDetector):
 	instructions: List[ValueRef] = []
 
