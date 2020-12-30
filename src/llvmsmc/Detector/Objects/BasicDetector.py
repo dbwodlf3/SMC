@@ -19,16 +19,19 @@ class StoreDetector(CriticalDetector):
 	def run(cls):
 		# init
 		cls.findInstructions()
-
 		# Detect
 		for instruction in cls.instructions:
 			answer = Detectors.StoreDetector(instruction)
+
 			if answer.pattern == 1:
-				pass
+				print('pattern 1!')
+				print(answer.destName)
 			elif answer.pattern == 2:
-				pass
+				print('pattern 2!')
+				print(answer.destName)
 			elif answer.pattern == 3:
-				pass
+				print('pattern 3!')
+				print(answer.destName)
 			elif answer.pattern == 4:
 				pass
 
@@ -48,7 +51,15 @@ class CallDetector(CriticalDetector):
 
 	@classmethod
 	def run(cls):
-		pass
+		for instruction in cls.instructions:
+			answer = Detectors.CallDetector(instruction)
+			if answer.pattern == 1:
+				pass
+			elif answer.pattern == 2:
+				pass
+			elif answer.pattern == 3:
+				pass
+
 		return 0
 
 # legacy code
@@ -67,7 +78,7 @@ class MemcpyDetector(CriticalDetector):
 
 	@classmethod
 	def run(cls):
-		cls.findInstructions()
+		# cls.findInstructions()
 		
 		for instruction in cls.instructions:
 			op_iter = instruction.operands

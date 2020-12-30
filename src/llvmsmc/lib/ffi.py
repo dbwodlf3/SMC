@@ -57,6 +57,9 @@ class Detectors(object):
     @classmethod
     def StoreDetector(cls, LLVMModuleRef) -> Answer:
         return _libc.StoreDetector(LLVMModuleRef)
+    @classmethod
+    def CallDetector(cls, LLVMModuleRef) -> Answer:
+        return _libc.CallDetector(LLVMModuleRef)
 # =============================================================================
 # Set function FFI
 
@@ -78,8 +81,14 @@ _libc.isConstantExpr.restype = ctypes.c_bool
 _libc.isAlias.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isAlias.restype = ctypes.c_bool
 
+# =============================================================================
+# Set Detectors FFI
+
 _libc.StoreDetector.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.StoreDetector.restype = Answer
+
+_libc.CallDetector.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.CallDetector.restype = Answer
 
 # =============================================================================
 # return libc
