@@ -29,6 +29,7 @@ void testFunction_cpp(LLVMModuleRef moduleRef) {
           else {
             call->print(outs());
             outs() <<'\n';
+            outs() << call->getOperand(0)->getName();
           }
         }
       }

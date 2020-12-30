@@ -16,20 +16,20 @@ struct Answer {
   // if Answer.type is 0, then it means to None.
   int type;
   int pattern;
-  char* destName;
+  char *destName;
 };
 
 Answer StoreDetector(LLVMValueRef val) {
   Answer A;
-  Value* value = unwrap(val);
-  StoreInst* store = dyn_cast<StoreInst>(value);
+  Value *value = unwrap(val);
+  StoreInst *store = dyn_cast<StoreInst>(value);
 
   A.type = 1;
 
   if(store == nullptr) throw "This Instruction is not store instruction.";
 
   if(dyn_cast<ConstantExpr>(store) == nullptr) {
-    Value* dest = store->getPointerOperand();
+    Value *dest = store->getPointerOperand();
   
     if(dyn_cast<GlobalAlias>(dest)){
       // Pattern 1
@@ -77,7 +77,6 @@ Answer StoreDetector(LLVMValueRef val) {
       }
     }
   }
-
   A.type = 0;
 
   return A;
@@ -85,28 +84,53 @@ Answer StoreDetector(LLVMValueRef val) {
 
 Answer CallDetector(LLVMValueRef val) {
   Answer A;
-  Value* value = unwrap(val);
-  CallInst* call = dyn_cast<CallInst>(value);
+  Value *value = unwrap(val);
+  CallInst *call = dyn_cast<CallInst>(value);
 
   A.type = 2;
 
   if(call == nullptr) throw "This Instruction is not call instruction.";
 
-  outs() << call->getCalledFunction()->getName();
+  Function *called_function = call->getCalledFunction();
 
-  // Pattern 1
-  // call void (...) %variable
-  outs() << call->getCalledFunction()->getName();
+  if( called_function == nullptr){
+    Value *function_pointer = call->getOperand(0);
 
-  // Pattern 2
-  // call void (...) bitcast (@global_variable)
+    if(dyn_cast<ConstantExpr>(function_pointer) == nullptr){
+      // Pattern 1
+      // call void (...) %variable
+      A.pattern = 1;
+      strcpy(A.destName, ((string)function_pointer->getName()).c_str());
 
-  // Pattern 3
-  // call @__remill_function_call(____, %variable, ____)
+      return A;
+    } 
+    else{
+      BitCastInst *bitcast = dyn_cast<BitCastInst>(function_pointer);
+
+      if(bitcast){
+        Value* operand = bitcast->getOperand(0);
+        if(dyn_cast<GlobalValue>(operand)){
+          // Pattern 2
+          // call void (...) bitcast (@global_variable)
+          A.pattern = 2;
+          strcpy(A.destName, ((string)operand->getName()).c_str());
+
+          return A;
+        }
+      }
+    }
+  } 
+  else if(called_function->getName() == "__remill_function_call" ||
+          0) {
+    // Pattern 3
+    // call @__remill_function_call(____, %variable, ____)
+    A.pattern = 3;
+    
+    return A;
+  }
 
   A.type = 0;
 
   return A;
 }
-
 }
