@@ -17,6 +17,7 @@ class ConstraintGenerator:
         self.CONSTRAINTS: list = []
         self.constraintRules: List[Constraint] = []
         self.functionConstraintRules: List[FunctionConstraint] = []
+        self.moduleConstraintRules: List[ModuleConstraint] = []
 
     def addConstraint(self, constraint: Constraint):
         constraint.MODULE = self.MODULE
@@ -26,28 +27,40 @@ class ConstraintGenerator:
         self.functionConstraintRules.append(constraint)
 
     def run(self):
+        #init
         self.initConstraint()
+        # Module Constraints
+
+
+        # Function Constraints
         for function in self.MODULE.functions:
-            # apply 
+            # Function Constraints
             for constraint in self.functionConstraintRules:
                 constraint.applyConstraint(function)
-            # apply constraints    
+
+        # Instruction Constraints 
+        for function in self.MODULE.functions:
             for block in function.blocks:
                 for instruction in block.instructions:
                     for constraint in self.constraintRules:
                         constraint.applyConstraint(instruction)
-            # INIT for Symbols..
-            TokenInitConstraint.applyConstraint()
 
+        # INIT for Symbols..
+        TokenInitConstraint.applyConstraint()
+
+        # Save function constraints
         for constraintRule in self.functionConstraintRules:
             constraint_results = constraintRule.dumpConstraint()
             if constraint_results:
                 self.DATA['ConstraintResult'].append(constraint_results)
+
+        # Save instruction constraints
         for constraintRule in self.constraintRules:
             constraint_results = constraintRule.dumpConstraint()
             if(constraint_results):
                 self.DATA['ConstraintResult'].append(constraint_results)
 
+        # Save result
         constraint_results = TokenInitConstraint.dumpConstraint()
         self.DATA['ConstraintResult'].append(constraint_results)
         return

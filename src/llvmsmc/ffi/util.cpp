@@ -135,6 +135,12 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
   return wrap(module);
 }
 
+LLVMValueRef getAlias_cpp(LLVMModuleRef moduleRef) {
+  Module *module = unwrap(moduleRef);
+
+  
+}
+
 void dumpModule_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
 
@@ -178,8 +184,6 @@ void dumpNameValues_cpp(LLVMModuleRef moduleRef) {
 void testPrint_cpp(){
   outs() << "print test";
 }
-
-
 
 extern "C" {
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {

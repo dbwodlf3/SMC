@@ -35,6 +35,20 @@ def readJson(filename: str):
 def giveName(module: llvm.ModuleRef) -> llvm.ModuleRef:
     return libc.giveName(module)
 
+def getAlias(module: llvm.ModuleRef):
+    pass
+
+class AliasIterator:
+    def __init__(self, ModuleRef):
+        pass
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        raise StopIteration
+    
+
 # VERY STRANGE WAY
 # but... it works. then. and okay. haha...
 def getFunctionByName(functionName:str, module:llvm.ModuleRef):

@@ -13,6 +13,7 @@ class Constraint:
     @classmethod
     def applyConstraint(cls, instruction: llvmIR.Instruction):
         pass
+
     @classmethod
     def dumpConstraint(cls):
         """Return Value is IMM. DON'T EDIT IT."""
@@ -30,5 +31,14 @@ class FunctionConstraint(Constraint):
     def applyConstraint(cls, function: llvm.ValueRef):
         pass
 
-class GlobalVarConstraint(Constraint):
-    pass
+class ModuleConstraint(Constraint):
+    """ModuleConstraint Class is constraint for module. like alias or global
+        values.
+    """
+    CONSTRAINTS = []
+    def __init__(self):
+        self.isConstraintClass = True
+    #
+    @classmethod
+    def applyConstraint(cls, function: llvm.ModuleRef):
+        pass
