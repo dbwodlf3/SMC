@@ -38,7 +38,7 @@ class StoreDetector(CriticalDetector):
 				if variable and 'critical!' in variable.tokens:
 					# limit alias
 					if re.match(r'.*data_[0-9]*', dest_name):
-						print(instruction)
+						# print(instruction)
 						cls.detector.criticalInstructions.append([instruction,
 							variable.name])
 			elif answer.pattern == 2:
@@ -64,10 +64,10 @@ class StoreDetector(CriticalDetector):
 				# ConstantInt
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
-				
+
 				if variable and 'critical!' in variable.tokens:
 					if re.match(r'.*data_[0-9]*', dest_name):
-						print(instruction)
+						# print(instruction)
 						cls.detector.criticalInstructions.append([instruction,
 							variable.name])
 
@@ -77,7 +77,7 @@ class StoreDetector(CriticalDetector):
 
 				if variable and 'critical!' in variable.tokens:
 					if re.match(r'.*data_[0-9]*', dest_name):
-						print(instruction)
+						# print(instruction)
 						cls.detector.criticalInstructions.append([instruction,
 							variable.name])
 
@@ -91,7 +91,8 @@ class CallDetector(CriticalDetector):
 		for function in cls.detector.MODULE_REF.functions:
 			# limit function
 			if re.match(r'.*_main', function.name) == None:
-				continue
+				if 'main' != function.name:
+					continue
 
 			for block in function.blocks:
 				for instruction in block.instructions:
@@ -101,15 +102,34 @@ class CallDetector(CriticalDetector):
 
 	@classmethod
 	def run(cls):
+		# init
+		cls.findInstructions()
+
+		# Detect
 		for instruction in cls.instructions:
 			answer = Detectors.CallDetector(instruction)
 			if answer.pattern == 1:
-				pass
+				dest_name = answer.destName.decode('utf-8')
+				variable = cls.detector.variables.get(dest_name)
+				if variable:
+					# print(instruction)
+					cls.detector.criticalInstructions.append([instruction,
+						variable.name])
 			elif answer.pattern == 2:
-				pass
+				dest_name = answer.destName.decode('utf-8')
+				variable = cls.detector.variables.get(dest_name)
+				if variable:
+					# print(instruction)
+					cls.detector.criticalInstructions.append([instruction,
+						variable.name])
 			elif answer.pattern == 3:
-				pass
+				dest_name = answer.destName.decode('utf-8')
+				variable = cls.detector.variables.get(dest_name)
 
+				if variable and 'critical!' in variable.tokens:
+					# print(instruction)
+					cls.detector.criticalInstructions.append([instruction,
+						variable.name])
 		return 0
 
 # legacy code

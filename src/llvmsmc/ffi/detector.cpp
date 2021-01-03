@@ -89,25 +89,25 @@ Answer CallDetector(LLVMValueRef val) {
   A.type = 2;
 
   if(call == nullptr) throw "This Instruction is not call instruction.";
-
   Function *called_function = call->getCalledFunction();
-
+  
   if( called_function == nullptr){
-    Value *function_pointer = call->getOperand(0);
+    Value *function_pointer = call->getOperand(0); 
+    ConstantExpr* constant_expr = dyn_cast<ConstantExpr>(function_pointer);
 
-    if(dyn_cast<ConstantExpr>(function_pointer) == nullptr){
+    if(constant_expr == nullptr) {
       // Pattern 1
       // call void (...) %variable
+      // this case also include void ()* asm sideeffect... be careful.
       A.pattern = 1;
       A.destName = function_pointer->getName().data();
 
       return A;
     } 
     else{
-      BitCastInst *bitcast = dyn_cast<BitCastInst>(function_pointer);
-
-      if(bitcast){
-        Value* operand = bitcast->getOperand(0);
+      
+      if(constant_expr->getOpcode() == Instruction::BitCast) {
+        Value* operand = constant_expr->getOperand(0);
         if(dyn_cast<GlobalValue>(operand)){
           // Pattern 2
           // call void (...) bitcast (@global_variable)
@@ -119,13 +119,18 @@ Answer CallDetector(LLVMValueRef val) {
       }
     }
   } 
-  else if(called_function->getName() == "__remill_function_call" ||
+  else if(called_function->getName().compare("__remill_function_call") == 0 ||
           0) {
     // Pattern 3
     // call @__remill_function_call(____, %variable, ____)
-    A.pattern = 3;
-    
-    return A;
+    if ( call->arg_size() > 1) {
+      Value* dest = call->getOperand(1);
+
+      A.pattern = 3;
+      A.destName = dest->getName().data();
+
+      return A;
+    };
   }
 
   A.type = 0;

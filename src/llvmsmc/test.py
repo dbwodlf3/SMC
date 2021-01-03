@@ -151,6 +151,7 @@ def detectorTestClang():
     i = 0
 
     for llvm_ir_file, cs_file in zip(llvm_ir_files, cs_files):
+        print(llvm_ir_file, cs_file)
         llvm_ir_file_abs = os.path.join(llvm_ir_dir, llvm_ir_file)
         cs_file_abs = os.path.join(cs_file_dir, cs_file)
         save_file_abs = os.path.join(
@@ -193,11 +194,11 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    constraintGeneratorTestClang()
-    constraintGeneratorTest()
-    cubicSolverTest()
-    cubicSolverTestClang()
-    detectorTest()
+    # constraintGeneratorTestClang()
+    # constraintGeneratorTest()
+    # cubicSolverTest()
+    # cubicSolverTestClang()
+    # detectorTest()
     detectorTestClang()
 
 
