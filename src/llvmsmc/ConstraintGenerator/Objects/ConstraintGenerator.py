@@ -38,7 +38,7 @@ class ConstraintGenerator:
 
         # Module Constraints
         for constraint in self.moduleConstraintRules:
-            constraint.applyConstraint(self.MODULE)
+            constraint.applyConstraint(self.MODULE, self.CODE_SEGMENTS)
 
         # Function Constraints
         for function in self.MODULE.functions:
@@ -55,6 +55,12 @@ class ConstraintGenerator:
 
         # INIT for Symbols..
         TokenInitConstraint.applyConstraint()
+
+        # Save module constraints
+        for constraintRule in self.moduleConstraintRules:
+            constraint_results = constraintRule.dumpConstraint()
+            if constraint_results:
+                self.DATA['ConstraintResult'].append(constraint_results)
 
         # Save function constraints
         for constraintRule in self.functionConstraintRules:

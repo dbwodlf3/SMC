@@ -4,6 +4,7 @@ from typing import List
 from lib import util
 from CubicSolver.Objects.Node import Node
 
+# @Todo make more faster CubicSolver...
 class CubicSolver:
 	result = {
 		'variables':{}
@@ -51,6 +52,8 @@ class CubicSolver:
 			self.addCondition(rule[1], rule[2], True)
 		elif rule_type == 4:
 			self.addCondition(rule[1], rule[2], False)
+		elif rule_type == 5:
+			self.addToken('critical!', rule[1])
 	#
 	def addEdge(self, source: str, dest: str):
 		source_idx = self.keyMap[source]

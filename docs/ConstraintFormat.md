@@ -6,9 +6,9 @@
 | 2       | A            | B            | [[A]] ⊆ [[B]]|
 | 3       | A            | B            | ∀a ∈ [[A]<br>⟶ [[a]] ⊆ [[B]] |
 | 4       | A            | B            | ∀a ∈ [[A]]<br>⟶ [[B]] ⊆ [[a]] |
+| 5       | A            |           ---| 'critical!' ∈ [[A]] |
 
 #### Example
-
 ```json
 {
     "Constraints":[

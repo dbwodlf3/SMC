@@ -17,10 +17,12 @@ class StoreDetector(CriticalDetector):
 				for instruction in block.instructions:
 					if(instruction.opcode == 'store'):
 						cls.instructions.append(instruction)
+
 	@classmethod
 	def run(cls):
 		# init
 		cls.findInstructions()
+
 		# Detect
 		for instruction in cls.instructions:
 			answer = Detectors.StoreDetector(instruction)
@@ -28,9 +30,12 @@ class StoreDetector(CriticalDetector):
 			if answer.pattern == 1:
 				# @data_[0-9]*
 				dest_name = answer.destName.decode('utf-8')
-				if(re.match(r'.*data_[0-9]*', dest_name)):
-					pass
-					# print(dest_name)
+				variable = cls.detector.variables.get(dest_name)
+				if variable:
+					# limit alias
+					if re.match(r'.*data_[0-9]*', dest_name):
+						cls.detector.criticalInstructions.append([instruction,
+							variable.name])
 			elif answer.pattern == 2:
 				# %variable
 				dest_name = answer.destName.decode('utf-8')
@@ -38,15 +43,16 @@ class StoreDetector(CriticalDetector):
 				if variable == None:
 					continue
 				elif 'critical!' in variable.tokens:
-					print(variable)
-					
-				# print(dest_name)
+					# limit areas
+					if re.match(r'.*main!.*',str(instruction)):
+						cls.detector.criticalInstructions.append([instruction,
+							variable.name])	
 			elif answer.pattern == 3:
 				# ConstantInt
 				dest_name = answer.destName.decode('utf-8')
-				print(dest_name)
+				print('pattern3!!!')
 			elif answer.pattern == 4:
-				pass
+				print('pattern4!!!')
 
 		return 0
 

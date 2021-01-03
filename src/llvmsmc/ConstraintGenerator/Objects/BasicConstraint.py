@@ -9,6 +9,9 @@ class TokenInitConstraint(Constraint):
     CONSTRAINTS = []
     @classmethod
     def applyConstraint(cls):
+        # critical
+        cls.CONSTRAINTS.append([0, 'critical!'])
+        # tokens
         for symbol in cls.SYMBOLS:
             cls.CONSTRAINTS.append([0, symbol])
 
@@ -234,7 +237,7 @@ class DataStoreConstraint(Constraint):
 class AliasConstraint(ModuleConstraint):
     CONSTRAINTS = []
     @classmethod
-    def applyConstraint(cls, moduleRef: llvm.ModuleRef):
+    def applyConstraint(cls, moduleRef: llvm.ModuleRef, codeSegments):
         aliases = AliasIter(moduleRef)
         for alias in aliases:
             alias_name = CustomAPI.getName(alias)
@@ -242,4 +245,10 @@ class AliasConstraint(ModuleConstraint):
             # alias!data_[0-9]
             if match:
                 area = int(alias_name[11:], 16)
-                print(area)
+                for code_segment in codeSegments:
+                    start = code_segment[0]
+                    end = code_segment[1]
+                    # if area is in executable segment then make constraint.
+                    if area >= start and area <= end:
+                        cls.CONSTRAINTS.append([5, alias_name])
+                        cls.SYMBOLS.add(alias_name)
