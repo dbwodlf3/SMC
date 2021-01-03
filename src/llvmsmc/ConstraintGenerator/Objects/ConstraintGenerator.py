@@ -1,7 +1,9 @@
 from typing import List
 import json
+
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
+
 from lib.util import readModule, giveName
 from ConstraintGenerator.Objects.Constraint import *
 from ConstraintGenerator.Objects.BasicConstraint import *
@@ -9,12 +11,13 @@ from ConstraintGenerator.Objects.BasicConstraint import *
 class ConstraintGenerator:
     DATA = {"ConstraintResult": []}
     
-    def __init__(self, filename):
-        module = readModule(filename)
+    def __init__(self, ll_file, binary_file):
+        module = readModule(ll_file)
         ir_module = giveName(module)
         self.MODULE = module
         self.IR_MODULE = ir_module
         self.CONSTRAINTS: list = []
+        self.CODE_SEGMENTS = getCodeSegment(binary_file)
         self.constraintRules: List[Constraint] = []
         self.functionConstraintRules: List[FunctionConstraint] = []
         self.moduleConstraintRules: List[ModuleConstraint] = []
@@ -26,11 +29,16 @@ class ConstraintGenerator:
     def addFunctionConstraint(self, constraint: FunctionConstraint):
         self.functionConstraintRules.append(constraint)
 
+    def addModuleConstraint(self, constraint: ModuleConstraint):
+        self.moduleConstraintRules.append(constraint)
+
     def run(self):
         #init
         self.initConstraint()
-        # Module Constraints
 
+        # Module Constraints
+        for constraint in self.moduleConstraintRules:
+            constraint.applyConstraint(self.MODULE)
 
         # Function Constraints
         for function in self.MODULE.functions:
@@ -79,8 +87,13 @@ class ConstraintGenerator:
             json.dump(self.DATA, json_file, indent=4)
 
     def initConstraint(self):
+        # Module Constraints Init
+        self.addModuleConstraint(AliasConstraint)
+
+        # Function Constraints Init
         self.addFunctionConstraint(RetConstraint)
 
+        # Instruction Constraints Init
         self.addConstraint(AllocaConstraint)
         self.addConstraint(IntToPtrConstraint)
         self.addConstraint(BitCastConstraint)

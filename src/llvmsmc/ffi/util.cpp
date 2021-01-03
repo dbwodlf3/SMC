@@ -13,11 +13,49 @@
 using namespace llvm;
 using namespace std;
 
-struct Answer {
-  int type;
-  int pattern;
-  char* destName;
+/* An iterator around a module's globals, including the stop condition */
+struct AliasIterator {
+    typedef llvm::Module::alias_iterator alias_iterator;
+    alias_iterator cur;
+    alias_iterator end;
+
+    AliasIterator(alias_iterator cur, alias_iterator end)
+        :cur(cur), end(end)
+    { }
 };
+
+struct OpaqueAliasIterator;
+typedef OpaqueAliasIterator* LLVMAliasIteratorRef;
+
+static LLVMAliasIteratorRef wrap(AliasIterator *GI){
+  return reinterpret_cast<LLVMAliasIteratorRef>(GI);
+}
+
+static AliasIterator* unwrap(LLVMAliasIteratorRef GI){
+    return reinterpret_cast<AliasIterator*>(GI);
+}
+
+LLVMAliasIteratorRef aliasIter_cpp(LLVMModuleRef moduleRef) {
+  Module *module = unwrap(moduleRef);
+  
+  return wrap(new AliasIterator(module->alias_begin(),
+                                  module->alias_end()));
+}
+
+LLVMValueRef aliasIterNext_cpp(LLVMAliasIteratorRef AI) {
+  AliasIterator *iter = unwrap(AI);
+  if(iter->cur != iter->end) {
+    return wrap(&*iter->cur++);
+  }
+  else {
+    return NULL;
+  }
+}
+
+const char* getName_cpp(LLVMValueRef val) {
+    auto value = unwrap(val);
+    return value->getName().data();
+}
 
 bool isConstant_cpp(LLVMValueRef value) {
   if(dyn_cast<Constant>(unwrap(value))) {
@@ -135,12 +173,6 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
   return wrap(module);
 }
 
-LLVMValueRef getAlias_cpp(LLVMModuleRef moduleRef) {
-  Module *module = unwrap(moduleRef);
-
-  
-}
-
 void dumpModule_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
 
@@ -188,6 +220,18 @@ void testPrint_cpp(){
 extern "C" {
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {
     return giveName_cpp(moduleRef);
+  }
+
+  LLVMAliasIteratorRef aliasIter(LLVMModuleRef moduleRef) {
+    return aliasIter_cpp(moduleRef);
+  }
+
+  LLVMValueRef aliasIterNext(LLVMAliasIteratorRef AI){
+    return aliasIterNext_cpp(AI);
+  }
+
+  const char* getName(LLVMValueRef val) { 
+    return getName_cpp(val);
   }
 
   void dumpModule(LLVMModuleRef moduleRef){

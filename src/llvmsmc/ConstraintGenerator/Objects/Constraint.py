@@ -7,6 +7,7 @@ class Constraint:
     """
     CONSTRAINTS = []
     SYMBOLS = set()
+    MEMORY = []
     def __init__(self):
         self.isConstraintClass = True
     #
@@ -40,5 +41,5 @@ class ModuleConstraint(Constraint):
         self.isConstraintClass = True
     #
     @classmethod
-    def applyConstraint(cls, function: llvm.ModuleRef):
+    def applyConstraint(cls, moduleRef: llvm.ModuleRef):
         pass

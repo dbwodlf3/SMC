@@ -15,17 +15,52 @@ processing_jobs = []
 def constraintGeneratorTest():
     result_save_dir = os.path.join(project_dir, 'dest', 'cg')
     os.makedirs(result_save_dir, exist_ok=True)
-    test_file_dir = os.path.join(project_dir, 'test', 'llvmIR')
-    test_files = [file for file in os.listdir(test_file_dir)]
+    
+    ll_test_file_dir = os.path.join(project_dir, 'test', 'llvmIR')
+    binary_test_file_dir = os.path.join(project_dir, 'test', 'binary')
+
+    ll_test_files = [file for file in os.listdir(ll_test_file_dir)]
+    binary_test_files = [file for file in os.listdir(binary_test_file_dir)]
+
+    ll_test_files.sort()
+    binary_test_files.sort()
+
     process_list = []
 
-    for test_file in test_files:
-        test_file_abs = os.path.join(test_file_dir, test_file)
+    for test_file, binary_file in zip(ll_test_files, binary_test_files):
+        test_file_abs = os.path.join(ll_test_file_dir, test_file)
+        binary_file_abs = os.path.join(binary_test_file_dir, binary_file)
         save_file_abs = os.path.join(
             result_save_dir, test_file.replace('.ll','.json'))
-        p = Process(target=constraintGeneratorRun,
-            args=(test_file_abs, save_file_abs, ))
 
+        p = Process(target=constraintGeneratorRun,
+            args=(test_file_abs, binary_file_abs, save_file_abs, ))
+        process_list.append(p)
+        p.start()
+    
+    for process in process_list:
+        process.join()
+
+def constraintGeneratorTestClang():
+    result_save_dir = os.path.join(project_dir, 'dest', 'cg')
+    os.makedirs(result_save_dir, exist_ok=True)
+
+    ll_test_file_dir = os.path.join(project_dir, 'test', 'llvmIR')
+    binary_test_file_dir = os.path.join(project_dir, 'test', 'binary')
+
+    ll_test_files = [file for file in os.listdir(ll_test_file_dir)]
+    binary_test_files = [file for file in os.listdir(binary_test_file_dir)]
+
+    process_list = []
+
+    for test_file in ll_test_files:
+        test_file_abs = os.path.join(ll_test_file_dir, test_file)
+        binary_file_abs = None
+        save_file_abs = os.path.join(
+            result_save_dir, test_file.replace('.ll','.json'))
+        
+        p = Process(target=constraintGeneratorRun,
+            args=(test_file_abs, binary_file_abs, save_file_abs, ))
         process_list.append(p)
         p.start()
     
@@ -84,9 +119,9 @@ def detectorTest():
     for process in process_list:
         process.join()
 
-def constraintGeneratorRun(srcFile: str, destFile: str):
+def constraintGeneratorRun(llFile: str, binaryFile: str, destFile: str):
     start = time.time()
-    constraint_generator = ConstraintGenerator(srcFile)
+    constraint_generator = ConstraintGenerator(llFile, binaryFile)
 
     constraint_generator.run()
     end = time.time()
@@ -109,7 +144,8 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    # constraintGeneratorTest()
+    constraintGeneratorTestClang()
+    constraintGeneratorTest()
     # cubicSolverTest()
     detectorTest()
 

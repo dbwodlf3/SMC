@@ -1,3 +1,4 @@
+import re
 import llvmlite.ir as ir
 import llvmlite.binding as llvm
 from ConstraintGenerator.Objects.Constraint import *
@@ -226,5 +227,19 @@ class StoreConstraint(Constraint):
                         cls.SYMBOLS.add(pointer)
                         cls.SYMBOLS.add(value)
 
+# ==============================================================================
 class DataStoreConstraint(Constraint):
     pass
+
+class AliasConstraint(ModuleConstraint):
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls, moduleRef: llvm.ModuleRef):
+        aliases = AliasIter(moduleRef)
+        for alias in aliases:
+            alias_name = CustomAPI.getName(alias)
+            match = re.match(r'.*data_[0-9]*', alias_name)
+            # alias!data_[0-9]
+            if match:
+                area = int(alias_name[11:], 16)
+                print(area)

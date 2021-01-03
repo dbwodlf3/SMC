@@ -4,6 +4,7 @@ import json
 import llvmlite.binding as llvm
 import llvmlite.ir as ir
 from lib.ffi import *
+from elftools.elf.elffile import ELFFile
 
 def readModule(filePath) -> llvm.ModuleRef:
     """Return LLVM IR Module Object.
@@ -86,6 +87,22 @@ def checkCallAsm(instruction: llvm.ValueRef):
     if instruction.name:
         return False
     return True
+
+def getCodeSegment(binary_file):
+    result = []
+    if binary_file :
+        with open(binary_file, 'rb') as f:
+            elffile = ELFFile(f)
+            
+            for segment in elffile.iter_segments():
+                if(segment['p_type'] == 'PT_LOAD' and segment['p_flags'] & 0b100):
+                    start = segment['p_vaddr']
+                    end = start + segment['p_memsz']
+                    result.append((start, end))
+
+        return result
+    else :
+        return result
 
 constantExpressions = [
     'getelementptr',

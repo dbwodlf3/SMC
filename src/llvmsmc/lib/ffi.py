@@ -16,10 +16,33 @@ class Answer(ctypes.Structure):
         ('destName', ctypes.c_char_p)
     ]
 
+class AliasIter:
+    def __init__(self, moduleRef):
+        self._iter = _libc.aliasIter(moduleRef)
+
+    def __next__(self):
+        next_item = _libc.aliasIterNext(self._iter)
+        if next_item:
+            return next_item
+        else :
+            raise StopIteration
+    
+    def __iter__(self):
+        return self
+
 class CustomAPI(object):
     @classmethod
     def giveName(cls, LLVMModuleRef):
         return _libc.giveName(LLVMModuleRef)
+
+    @classmethod
+    def getName(cls, LLVMValueRef):
+        name = _libc.getName(LLVMValueRef)
+        return name.decode('utf-8')
+
+    @classmethod
+    def getAliasIter(cls, ModuleRef):
+        pass
 
     @classmethod
     def dumpModule(cls, LLVMModuleRef):
@@ -42,10 +65,6 @@ class CustomAPI(object):
         return _libc.isConstantExpr(LLVMValueRef)
 
     @classmethod
-    def isConstantExpr(cls, LLVMValueRef, instruction):
-        pass
-
-    @classmethod
     def isAlias(cls, LLVMValueRef):
         return _libc.isAlias(LLVMValueRef)
     
@@ -61,9 +80,31 @@ class Detectors(object):
     def CallDetector(cls, LLVMModuleRef) -> Answer:
         return _libc.CallDetector(LLVMModuleRef)
 # =============================================================================
+# Functions
+
+def _make_opaque_ref(name):
+    newcls = type(name, (ctypes.Structure,), {})
+    return ctypes.POINTER(newcls)
+
+# =============================================================================
+# Obaque classes
+
+LLVMAliasIterator = _make_opaque_ref("LLVMAliasIterator")
+
+
+# =============================================================================
 # Set function FFI
 
 _libc.giveName.restype = llvmlite.ffi.LLVMModuleRef
+
+_libc.getName.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.getName.restype = ctypes.c_char_p
+
+_libc.aliasIter.argtypes = [llvmlite.ffi.LLVMModuleRef]
+_libc.aliasIter.restype = LLVMAliasIterator
+
+_libc.aliasIterNext.argtypes = [LLVMAliasIterator]
+_libc.aliasIterNext.restype = llvmlite.ffi.LLVMValueRef
 
 _libc.dumpModule.argtypes = [llvmlite.ffi.LLVMModuleRef]
 

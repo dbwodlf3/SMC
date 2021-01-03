@@ -7,6 +7,7 @@ from lib.ffi import *
 from Detector.Objects.CriticalDetector import CriticalDetector
 
 class StoreDetector(CriticalDetector):
+
 	instructions: List[ValueRef] = []
 
 	@classmethod
@@ -28,7 +29,8 @@ class StoreDetector(CriticalDetector):
 				# @data_[0-9]*
 				dest_name = answer.destName.decode('utf-8')
 				if(re.match(r'.*data_[0-9]*', dest_name)):
-					print(dest_name)
+					pass
+					# print(dest_name)
 			elif answer.pattern == 2:
 				# %variable
 				dest_name = answer.destName.decode('utf-8')
