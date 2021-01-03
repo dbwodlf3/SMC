@@ -42,7 +42,7 @@ def constraintGeneratorTest():
         process.join()
 
 def constraintGeneratorTestClang():
-    result_save_dir = os.path.join(project_dir, 'dest', 'cg')
+    result_save_dir = os.path.join(project_dir, 'dest', 'cg_clang')
     os.makedirs(result_save_dir, exist_ok=True)
 
     ll_test_file_dir = os.path.join(project_dir, 'test', 'clang')
@@ -53,12 +53,11 @@ def constraintGeneratorTestClang():
 
     for test_file in ll_test_files:
         test_file_abs = os.path.join(ll_test_file_dir, test_file)
-        binary_file_abs = None
         save_file_abs = os.path.join(
             result_save_dir, test_file.replace('.ll','.json'))
         
         p = Process(target=constraintGeneratorRun,
-            args=(test_file_abs, binary_file_abs, save_file_abs, ))
+            args=(test_file_abs, None, save_file_abs, ))
         process_list.append(p)
         p.start()
     
@@ -69,6 +68,26 @@ def cubicSolverTest():
     result_save_dir = os.path.join(project_dir, 'dest', 'cs')
     os.makedirs(result_save_dir, exist_ok=True)
     test_file_dir = os.path.join(project_dir, 'dest', 'cg')
+    test_files = [file for file in os.listdir(test_file_dir)]
+    process_list = []
+
+    for test_file in test_files:
+        test_file_abs = os.path.join(test_file_dir, test_file)
+        save_file_abs = os.path.join(
+            result_save_dir, test_file.replace('.json','.cs.json'))
+        p = Process(target=cubicSolverRun,
+            args=(test_file_abs, save_file_abs, ))
+
+        process_list.append(p)
+        p.start()
+    
+    for process in process_list:
+        process.join()
+
+def cubicSolverTestClang():
+    result_save_dir = os.path.join(project_dir, 'dest', 'cs_clang')
+    os.makedirs(result_save_dir, exist_ok=True)
+    test_file_dir = os.path.join(project_dir, 'dest', 'cg_clang')
     test_files = [file for file in os.listdir(test_file_dir)]
     process_list = []
 
@@ -118,10 +137,10 @@ def detectorTest():
         process.join()
 
 def detectorTestClang():
-    result_save_dir = os.path.join(project_dir, 'dest', 'de')
+    result_save_dir = os.path.join(project_dir, 'dest', 'de_clang')
     os.makedirs(result_save_dir, exist_ok=True)
     llvm_ir_dir = os.path.join(project_dir, 'test', 'clang')
-    cs_file_dir = os.path.join(project_dir, 'dest', 'cs')
+    cs_file_dir = os.path.join(project_dir, 'dest', 'cs_clang')
     llvm_ir_files = [file for file in os.listdir(llvm_ir_dir)]
     cs_files = [file for file in os.listdir(cs_file_dir)]
     process_list = []
@@ -174,11 +193,12 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
     detector.saveJson(resultFile, end - start)
 
 def main():
-    # constraintGeneratorTestClang()
+    constraintGeneratorTestClang()
     constraintGeneratorTest()
     cubicSolverTest()
+    cubicSolverTestClang()
     detectorTest()
-    # detectorTestClang()
+    detectorTestClang()
 
 
 

@@ -24,9 +24,13 @@ Answer StoreDetector(LLVMValueRef val) {
   Value *value = unwrap(val);
   StoreInst *store = dyn_cast<StoreInst>(value);
   A.type = 1;
+
   if(store == nullptr) throw "This Instruction is not store instruction.";
 
-  if(dyn_cast<ConstantExpr>(store) == nullptr) {
+  Value *dest = store->getPointerOperand();
+  ConstantExpr *dest_expr = dyn_cast<ConstantExpr>(dest);
+
+  if(dest_expr == nullptr) {
     Value *dest = store->getPointerOperand();
     if(dyn_cast<GlobalAlias>(dest)){
       // Pattern 1
@@ -46,11 +50,8 @@ Answer StoreDetector(LLVMValueRef val) {
     }
   }
   else {
-    BitCastInst* bitcast = dyn_cast<BitCastInst>(store->getPointerOperand());
-    IntToPtrInst* inttoptr = dyn_cast<IntToPtrInst>(store->getPointerOperand());
-
-    if(bitcast) {
-      ConstantInt* dest = dyn_cast<ConstantInt>(inttoptr->getOperand(0));
+    if(dest_expr->getOpcode() == Instruction::IntToPtr) {
+      ConstantInt* dest = dyn_cast<ConstantInt>(dest_expr->getOperand(0));
 
       if(dest) {
         // Pattern 3
@@ -61,8 +62,8 @@ Answer StoreDetector(LLVMValueRef val) {
         return A;
       }
     }
-    else if(inttoptr) {
-      GlobalAlias* dest = dyn_cast<GlobalAlias>(bitcast->getOperand(0));
+    else if(dest_expr->getOpcode() == Instruction::BitCast) {
+      GlobalAlias* dest = dyn_cast<GlobalAlias>(dest_expr->getOperand(0));
 
       if(dest) {
         // Pattern 4
@@ -77,7 +78,6 @@ Answer StoreDetector(LLVMValueRef val) {
   A.type = 0;
   A.pattern = 0;
 
-  outs() << "작동중 끝\n";
   return A;
 }
 
