@@ -1,3 +1,4 @@
+import re
 from typing import List
 from llvmlite.binding import ValueRef
 
@@ -24,14 +25,24 @@ class StoreDetector(CriticalDetector):
 			answer = Detectors.StoreDetector(instruction)
 
 			if answer.pattern == 1:
-				print('pattern 1!')
-				print(answer.destName)
+				# @data_[0-9]*
+				dest_name = answer.destName.decode('utf-8')
+				if(re.match(r'.*data_[0-9]*', dest_name)):
+					print(dest_name)
 			elif answer.pattern == 2:
-				print('pattern 2!')
-				print(answer.destName)
+				# %variable
+				dest_name = answer.destName.decode('utf-8')
+				variable = cls.detector.variables.get(dest_name)
+				if variable == None:
+					continue
+				elif 'critical!' in variable.tokens:
+					print(variable)
+					
+				# print(dest_name)
 			elif answer.pattern == 3:
-				print('pattern 3!')
-				print(answer.destName)
+				# ConstantInt
+				dest_name = answer.destName.decode('utf-8')
+				print(dest_name)
 			elif answer.pattern == 4:
 				pass
 

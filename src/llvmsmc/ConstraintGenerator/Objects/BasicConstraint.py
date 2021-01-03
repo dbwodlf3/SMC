@@ -4,9 +4,12 @@ from ConstraintGenerator.Objects.Constraint import *
 from lib.util import *
 from lib.ffi import *
 
-
-# @Todo
-# Constant Value (Noname Value)
+class TokenInitConstraint(Constraint):
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls):
+        for symbol in cls.SYMBOLS:
+            cls.CONSTRAINTS.append([0, symbol])
 
 class RetConstraint(FunctionConstraint):
     """
@@ -24,6 +27,44 @@ class RetConstraint(FunctionConstraint):
                     for var in variables:
                         cls.CONSTRAINTS.append([2, var,
                             f'''{instruction.function.name}!ret'''])
+
+class CallConstraint(Constraint):
+    """
+    `Instruction Syntax`: \<result> = call \<ty> \<fnty> \<fnptrval>
+        (\<function args>) \n
+    `Constraint Result`: [[arg1]] ⊆ [[param1]], [[arg2]] ⊆ [[param2]], ...
+        and, [[RETURN_VALUE]] ⊆ [[result]] \n
+    It is some different other constraints. Let's is that fnptrval's formal args 
+        are param, fnptrval's actual args are arg and fnptrval's
+        return token 'RETURN_VALUE'.
+    """
+    @classmethod
+    def applyConstraint(cls, instruction: llvm.ValueRef):
+        if instruction.opcode == 'call':
+            # skip about 'call asm'
+            if checkCallAsm(instruction):
+                return
+            result = instruction.name
+            args = []
+            for i in instruction.operands:
+                # variable
+                if i.name:
+                    args.append([i.name])
+                #  constant
+                else :
+                    args.append(getOperands(i))
+            call_function_name = args[-1][0]
+            call_function_ref = getFunctionByName(call_function_name,
+                cls.MODULE)
+                
+            if not call_function_ref:
+                return
+            for idx, parameter in enumerate(call_function_ref.arguments):
+                if args[idx] and parameter.name:
+                    for arg in args[idx]:
+                        cls.CONSTRAINTS.append([2, arg, parameter.name])
+                        cls.SYMBOLS.add(arg)
+                        cls.SYMBOLS.add(parameter.name)
 
 class AllocaConstraint(Constraint):
     """
@@ -185,60 +226,5 @@ class StoreConstraint(Constraint):
                         cls.SYMBOLS.add(pointer)
                         cls.SYMBOLS.add(value)
 
-# @Todo apply FUNCTION Constraint..
-
-class CallConstraint(Constraint):
-    """
-    `Instruction Syntax`: \<result> = call \<ty> \<fnty> \<fnptrval>
-        (\<function args>) \n
-    `Constraint Result`: [[arg1]] ⊆ [[param1]], [[arg2]] ⊆ [[param2]], ...
-        and, [[RETURN_VALUE]] ⊆ [[result]] \n
-    It is some different other constraints. Let's is that fnptrval's formal args 
-        are param, fnptrval's actual args are arg and fnptrval's
-        return token 'RETURN_VALUE'.
-    """
-    @classmethod
-    def applyConstraint(cls, instruction: llvm.ValueRef):
-        if instruction.opcode == 'call':
-            # skip about 'call asm'
-            if checkCallAsm(instruction):
-                return
-            result = instruction.name
-            args = []
-            for i in instruction.operands:
-                # variable
-                if i.name:
-                    args.append([i.name])
-                #  constant
-                else :
-                    args.append(getOperands(i))
-            call_function_name = args[-1][0]
-            call_function_ref = getFunctionByName(call_function_name,
-                cls.MODULE)
-                
-            if not call_function_ref:
-                return
-            for idx, parameter in enumerate(call_function_ref.arguments):
-                if args[idx] and parameter.name:
-                    for arg in args[idx]:
-                        cls.CONSTRAINTS.append([2, arg, parameter.name])
-                        cls.SYMBOLS.add(arg)
-                        cls.SYMBOLS.add(parameter.name)
-
-class TokenInitConstraint(Constraint):
-    CONSTRAINTS = []
-    @classmethod
-    def applyConstraint(cls):
-        for symbol in cls.SYMBOLS:
-            cls.CONSTRAINTS.append([0, symbol])
-
-class ConstantConstraint(Constraint):
-    CONSTRAINTS = []
-
-    @classmethod
-    def applyConstraint(cls, instruction: llvm.ValueRef):
-        for operand in instruction.operands:
-            if(libc.isConstantExpr(operand)):
-                pass
-            elif(libc.isConstant(operand)):
-                pass
+class DataStoreConstraint(Constraint):
+    pass
