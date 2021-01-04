@@ -15,7 +15,8 @@ class StoreDetector(CriticalDetector):
 		for function in cls.detector.MODULE_REF.functions:
 			# limit function
 			if re.match(r'.*_main', function.name) == None:
-				continue
+				if 'main' != function.name:
+					continue
 			
 			for block in function.blocks:
 				for instruction in block.instructions:
