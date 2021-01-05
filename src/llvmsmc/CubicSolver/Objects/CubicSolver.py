@@ -54,6 +54,8 @@ class CubicSolver:
 			self.addCondition(rule[1], rule[2], False)
 		elif rule_type == 5:
 			self.addToken('critical!', rule[1])
+		elif rule_type == 6:
+			self.addToken('data!', rule[1])
 	#
 	def addEdge(self, source: str, dest: str):
 		source_idx = self.keyMap[source]

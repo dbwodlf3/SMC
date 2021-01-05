@@ -93,6 +93,9 @@ class ConstraintGenerator:
             json.dump(self.DATA, json_file, indent=4)
 
     def initConstraint(self):
+        # Extra Constraints Init
+        self.addConstraint(DataConstraint)
+
         # Module Constraints Init
         self.addModuleConstraint(AliasConstraint)
 

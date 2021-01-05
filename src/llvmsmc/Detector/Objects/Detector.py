@@ -55,7 +55,6 @@ class Detector:
 		self.initCriticalVariable()
 		self.checkSMC(StoreDetector)
 		self.checkSMC(CallDetector)
-		self.checkSMC(MemcpyDetector)
 
 	def saveJson(self, filename:str, time: float = 0):
 		self.result['time'] = time
@@ -69,12 +68,13 @@ class Detector:
 				count += 1
 				if j==instruction:
 					detect = {
-						'function':instruction.function.name,
-						'block':instruction.block.name,
-						'order':count,
-						'instruction':instruction.opcode,
-						'criticalOperand':criticalInstruction[1],
-						'str':f'''{criticalInstruction[0]}'''
+						'Function':instruction.function.name,
+						'Block':instruction.block.name,
+						'Order':count,
+						'LLVM Instruction':instruction.opcode,
+						'Pattern':criticalInstruction[2],
+						'CriticalOperand':criticalInstruction[1],
+						'Str':f'''{criticalInstruction[0]}'''
 					}
 					self.result['detect'].append(detect)
 

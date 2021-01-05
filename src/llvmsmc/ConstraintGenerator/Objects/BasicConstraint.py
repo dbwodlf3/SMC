@@ -11,6 +11,8 @@ class TokenInitConstraint(Constraint):
     def applyConstraint(cls):
         # critical
         cls.CONSTRAINTS.append([0, 'critical!'])
+        # data!
+        cls.CONSTRAINTS.append([0, 'data!'])
         # tokens
         for symbol in cls.SYMBOLS:
             cls.CONSTRAINTS.append([0, symbol])
@@ -231,10 +233,22 @@ class StoreConstraint(Constraint):
                         cls.SYMBOLS.add(value)
 
 # ==============================================================================
-class DataStoreConstraint(Constraint):
-    pass
-
+class DataConstraint(Constraint):
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls, instruction: llvm.ValueRef):
+        if instruction.opcode == 'alloca':
+            result = instruction.name
+            if result:
+                cls.CONSTRAINTS.append([6, result])
+                cls.SYMBOLS.add(result)
+            
 class AliasConstraint(ModuleConstraint):
+    """
+    Lifted code by mcsema express constant memory address like "@data_[0-9]*"
+    So, if that alias like @data_[0-9] and if that [0-9]* are between code
+    area then it will have 'critical!' token.
+    """
     CONSTRAINTS = []
     @classmethod
     def applyConstraint(cls, moduleRef: llvm.ModuleRef, codeSegments):

@@ -286,10 +286,13 @@ def detectorRun(llvmFile: str, variableFile: str, resultFile: str):
 
 def main():
     constraintGeneratorTest()
+    constraintGeneratorTestClang()
     constraintGeneratorTestCase()
+
     cubicSolverTest()
     cubicSolverTestClang()
     cubicSolverTestCase()
+    
     detectorTest()
     detectorTestClang()
     detectorTestCase()

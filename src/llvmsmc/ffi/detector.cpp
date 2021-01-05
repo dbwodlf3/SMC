@@ -91,7 +91,7 @@ Answer CallDetector(LLVMValueRef val) {
   if(call == nullptr) throw "This Instruction is not call instruction.";
   Function *called_function = call->getCalledFunction();
   
-  if( called_function == nullptr){
+  if(called_function == nullptr) {
     Value *function_pointer = call->getOperand(0); 
     ConstantExpr* constant_expr = dyn_cast<ConstantExpr>(function_pointer);
 
@@ -119,8 +119,7 @@ Answer CallDetector(LLVMValueRef val) {
       }
     }
   } 
-  else if(called_function->getName().compare("__remill_function_call") == 0 ||
-          0) {
+  else if(called_function->getName().compare("__remill_function_call") == 0) {
     // Pattern 3
     // call @__remill_function_call(____, %variable, ____)
     if ( call->arg_size() > 1) {
@@ -137,5 +136,5 @@ Answer CallDetector(LLVMValueRef val) {
   A.pattern = 0;
 
   return A;
-}
+  }
 }

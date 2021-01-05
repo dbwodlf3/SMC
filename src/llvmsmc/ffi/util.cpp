@@ -132,6 +132,13 @@ LLVMModuleRef giveName_cpp(LLVMModuleRef moduleRef) {
 
     // set local variable names
     for(auto bb = function->begin(); bb != function->end(); bb++) {
+      string bb_name = bb->getName();
+
+      if(bb_name == "") {
+        bb->setName(to_string(function_name_index));
+        function_name_index++;
+      }
+
       for(auto instruction = bb->begin(); instruction != bb->end();
           instruction++){
         if(instruction->getType()->isVoidTy())continue;
