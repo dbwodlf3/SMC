@@ -1,4 +1,4 @@
-; ModuleID = 'gcc_m32_NO_PIE_smc12.bc'
+; ModuleID = 'gcc_m32_NO_PIE_smc12.ll.bc'
 source_filename = "llvm-link"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu-elf"
@@ -53,7 +53,6 @@ target triple = "i386-pc-linux-gnu-elf"
 @8 = internal constant %struct.Memory* (%struct.State*, i32, %struct.Memory*)* @__libc_csu_fini_wrapper
 @llvm.global_dtors = appending global [1 x { i32, void ()*, i8* }] [{ i32, void ()*, i8* } { i32 101, void ()* @__mcsema_destructor, i8* null }]
 
-@data_8048450 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 52, i32 32)
 @data_8048439 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 52, i32 9)
 @data_8048555 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 56, i32 29)
 @data_8048530 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 54, i32 208)
@@ -67,14 +66,9 @@ target triple = "i386-pc-linux-gnu-elf"
 @data_8048521 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 54, i32 193)
 @data_8048509 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 54, i32 169)
 @data_80484dd = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 54, i32 125)
-@data_804856d = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 58, i32 9)
 @data_804a028 = internal alias i8, getelementptr inbounds (%seg_8049f0c__init_array_8_type, %seg_8049f0c__init_array_8_type* @seg_8049f0c__init_array_8, i32 0, i32 15, i32 0)
 @data_8048382 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 46, i32 50)
 @data_8048360 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 46, i32 16)
-@data_804830c = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 42, i32 0)
-@data_804a008 = internal alias i8, getelementptr inbounds (%seg_8049f0c__init_array_8_type, %seg_8049f0c__init_array_8_type* @seg_8049f0c__init_array_8, i32 0, i32 9, i32 4)
-@data_804a004 = internal alias i8, getelementptr inbounds (%seg_8049f0c__init_array_8_type, %seg_8049f0c__init_array_8_type* @seg_8049f0c__init_array_8, i32 0, i32 9, i32 0)
-@data_80482ee = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 39, i32 30)
 @data_80482d9 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 39, i32 9)
 @data_8048538 = internal alias i8, getelementptr inbounds (%seg_8048000_LOAD_2d0_type, %seg_8048000_LOAD_2d0_type* @seg_8048000_LOAD_2d0, i32 0, i32 56, i32 0)
 @data_8049f0c = internal alias i8*, getelementptr inbounds (%seg_8049f0c__init_array_8_type, %seg_8049f0c__init_array_8_type* @seg_8049f0c__init_array_8, i32 0, i32 1)
@@ -100,123 +94,73 @@ target triple = "i386-pc-linux-gnu-elf"
 @EDI_2296_55b12bd921c0 = private thread_local(initialexec) alias i32, getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 11, i32 0, i32 0)
 @EBP_2328_55b12bd99b10 = private thread_local(initialexec) alias i32*, bitcast (i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 15, i32 0, i32 0) to i32**)
 
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_sync_hyper_call(%struct.State* dereferenceable(3376), %struct.Memory*, i32) #0
-
 ; Function Attrs: nounwind readnone speculatable willreturn
-declare !remill.function.type !1215 i32 @llvm.ctpop.i32(i32) #1
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_error(%struct.State* dereferenceable(3376) %0, i32 %1, %struct.Memory* %2) #2 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_load(%struct.Memory*) #3
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_store(%struct.Memory*) #3
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_load(%struct.Memory*) #3
-
-; Function Attrs: nounwind readnone
-declare !remill.function.type !1215 dso_local i32 @__remill_fpu_exception_test_and_clear(i32, i32) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_store(%struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_begin(%struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_end(%struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_begin(%struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_end(%struct.Memory*) #5
+declare !remill.function.type !1215 i32 @llvm.ctpop.i32(i32) #0
 
 ; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_call(%struct.State* nonnull, i32, %struct.Memory*) #6
+declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_call(%struct.State* nonnull, i32, %struct.Memory*) local_unnamed_addr #1
 
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_return(%struct.State* nonnull, i32, %struct.Memory*) #6
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_jump(%struct.State* nonnull, i32, %struct.Memory*) #6
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_missing_block(%struct.State* nonnull %0, i32 %1, %struct.Memory* %2) #7 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_async_hyper_call(%struct.State* nonnull, i32, %struct.Memory*) #6
-
-; Function Attrs: naked nobuiltin noinline
-define private void @_start() #8 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048350;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @6, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define private void @_start() #2 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048350;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @6, void ()** nonnull @2) #12
   ret void
 }
 
-; Function Attrs: naked nobuiltin noinline
-define private void @__libc_csu_init() #8 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048500;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @7, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define private void @__libc_csu_init() #2 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048500;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @7, void ()** nonnull @2) #12
   ret void
 }
 
-; Function Attrs: naked nobuiltin noinline
-define private void @__libc_csu_fini() #8 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048560;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @8, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define private void @__libc_csu_fini() #2 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048560;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @8, void ()** nonnull @2) #12
   ret void
 }
 
-; Function Attrs: naked nobuiltin noinline
-define private void @frame_dummy() #8 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048460;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @4, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define private void @frame_dummy() #2 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048460;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @4, void ()** nonnull @2) #12
   ret void
 }
 
-; Function Attrs: naked nobuiltin noinline
-define private void @__do_global_dtors_aux() #8 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048430;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @5, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define private void @__do_global_dtors_aux() #2 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048430;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @5, void ()** nonnull @2) #12
   ret void
 }
 
 ; Function Attrs: noreturn
-declare void @abort() #9
+declare void @abort() local_unnamed_addr #3
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_80482d0__init_proc(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @sub_80482d0__init_proc(%struct.Memory* noalias %memory) unnamed_addr #4 {
 inst_80482d0:
-  %0 = load i32, i32* @EBX_2232_55b12bd921c0
+  %0 = load i32, i32* @EBX_2232_55b12bd921c0, align 8
   %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %2 = add i32 %1, -4
   %3 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %4 = add i32 %3, %2
+  %4 = add i32 %2, %3
   %5 = inttoptr i32 %4 to i32*
-  store i32 %0, i32* %5
-  %6 = sub i32 %2, 8
+  store i32 %0, i32* %5, align 4
+  %6 = add i32 %1, -12
   %7 = inttoptr i32 %6 to i32*
-  %8 = add i32 %6, -4
+  %8 = add i32 %1, -16
   %9 = add i32 %3, %8
   %10 = inttoptr i32 %9 to i32*
-  store i32 ptrtoint (i8* @data_80482d9 to i32), i32* %10
+  store i32 ptrtoint (i8* @data_80482d9 to i32), i32* %10, align 4
   %11 = getelementptr i32, i32* %7, i32 -1
-  %12 = load i32, i32* %11
-  store i32 %6, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219, !alias.scope !1221, !noalias !1224
-  %13 = add i32 7463, %12
+  %12 = load i32, i32* %11, align 4
+  store i32 %6, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219, !alias.scope !1221, !noalias !1224
+  %13 = add i32 %12, 7463
   %14 = inttoptr i32 %13 to i32*
-  store i32 %13, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %13, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
   %15 = getelementptr i32, i32* %14, i32 -1
-  %16 = load i32, i32* %15
-  store i32 %16, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
+  %16 = load i32, i32* %15, align 4
+  store i32 %16, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
   store i8 0, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
   %17 = and i32 %16, 255
-  %18 = call i32 @llvm.ctpop.i32(i32 %17) #14, !range !1240
+  %18 = call i32 @llvm.ctpop.i32(i32 %17) #12, !range !1240
   %19 = trunc i32 %18 to i8
   %20 = and i8 %19, 1
   %21 = xor i8 %20, 1
@@ -232,143 +176,67 @@ inst_80482d0:
   br i1 %22, label %inst_80482ee, label %inst_80482e9
 
 inst_80482ee:                                     ; preds = %inst_80482e9, %inst_80482d0
-  %26 = phi %struct.Memory* [ %memory, %inst_80482d0 ], [ %61, %inst_80482e9 ]
-  %27 = load i32, i32* @ESP_2312_55b12bd921c0
-  %28 = add i32 8, %27
-  %29 = icmp ult i32 %28, %27
-  %30 = icmp ult i32 %28, 8
-  %31 = or i1 %29, %30
-  %32 = zext i1 %31 to i8
-  store i8 %32, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %33 = and i32 %28, 255
-  %34 = call i32 @llvm.ctpop.i32(i32 %33) #14, !range !1240
-  %35 = trunc i32 %34 to i8
-  %36 = and i8 %35, 1
-  %37 = xor i8 %36, 1
-  store i8 %37, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %38 = xor i32 8, %27
-  %39 = xor i32 %38, %28
-  %40 = lshr i32 %39, 4
-  %41 = trunc i32 %40 to i8
-  %42 = and i8 %41, 1
-  store i8 %42, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %43 = icmp eq i32 %28, 0
-  %44 = zext i1 %43 to i8
-  store i8 %44, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %45 = lshr i32 %28, 31
-  %46 = trunc i32 %45 to i8
-  store i8 %46, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %47 = lshr i32 %27, 31
-  %48 = xor i32 %45, %47
-  %49 = add nuw nsw i32 %48, %45
-  %50 = icmp eq i32 %49, 2
-  %51 = zext i1 %50 to i8
-  store i8 %51, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %52 = add i32 %28, 4
-  %53 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %54 = add i32 %53, %28
-  %55 = inttoptr i32 %54 to i32*
-  %56 = load i32, i32* %55
-  store i32 %56, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %57 = add i32 %52, 4
-  store i32 %57, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  %26 = phi %struct.Memory* [ %memory, %inst_80482d0 ], [ %54, %inst_80482e9 ]
+  %27 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %28 = add i32 %27, 8
+  %29 = icmp ugt i32 %27, -9
+  %30 = zext i1 %29 to i8
+  store i8 %30, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %31 = and i32 %28, 255
+  %32 = call i32 @llvm.ctpop.i32(i32 %31) #12, !range !1240
+  %33 = trunc i32 %32 to i8
+  %34 = and i8 %33, 1
+  %35 = xor i8 %34, 1
+  store i8 %35, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %36 = xor i32 %28, %27
+  %37 = lshr i32 %36, 4
+  %38 = trunc i32 %37 to i8
+  %39 = and i8 %38, 1
+  store i8 %39, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %40 = icmp eq i32 %28, 0
+  %41 = zext i1 %40 to i8
+  store i8 %41, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %42 = lshr i32 %28, 31
+  %43 = trunc i32 %42 to i8
+  store i8 %43, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %44 = lshr i32 %27, 31
+  %45 = xor i32 %42, %44
+  %46 = add nuw nsw i32 %45, %42
+  %47 = icmp eq i32 %46, 2
+  %48 = zext i1 %47 to i8
+  store i8 %48, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %49 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %50 = add i32 %49, %28
+  %51 = inttoptr i32 %50 to i32*
+  %52 = load i32, i32* %51, align 4
+  store i32 %52, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
+  %53 = add i32 %27, 16
+  store i32 %53, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %26
 
 inst_80482e9:                                     ; preds = %inst_80482d0
-  %58 = icmp eq i8 %23, 0
-  %59 = select i1 %58, i32 ptrtoint (i8* @data_80482e9 to i32), i32 ptrtoint (i8* @data_80482ee to i32)
-  %60 = add i32 %59, 5
-  store i32 %60, i32* %10
-  store i32 %8, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %61 = call %struct.Memory* @ext_804a03c___gmon_start__(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
+  store i32 add (i32 ptrtoint (i8* @data_80482e9 to i32), i32 5), i32* %10, align 4
+  store i32 %8, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %54 = call fastcc %struct.Memory* @ext_804a03c___gmon_start__(%struct.Memory* %memory)
   br label %inst_80482ee
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048300(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
-inst_8048300:
-  %0 = load i32, i32* bitcast (i8* @data_804a004 to i32*)
-  %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %2 = add i32 %1, -4
-  %3 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %4 = add i32 %3, %2
-  %5 = inttoptr i32 %4 to i32*
-  store i32 %0, i32* %5
-  store i32 %2, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %6 = load i32, i32* bitcast (i8* @data_804a008 to i32*)
-  store i32 %6, i32* @EIP_2472_55b12bd921c0, align 4, !tbaa !1219
-  %7 = icmp eq i32 %6, 134513420
-  %8 = sub i32 ptrtoint (i8* @data_804830c to i32), %6
-  %9 = icmp eq i32 %8, 0
-  %10 = or i1 %7, %9
-  br i1 %10, label %inst_804830c, label %44
-
-inst_804830c:                                     ; preds = %inst_8048300
-  %11 = add i32 %6, 2
-  %12 = load i8*, i8** @EAX_2216_55b12bd999b0
-  %13 = load i32, i32* @EAX_2216_55b12bd921c0
-  %14 = trunc i32 %13 to i8
-  %15 = load i8, i8* %12
-  %16 = add i8 %15, %14
-  store i8 %16, i8* %12
-  %17 = lshr i8 %14, 7
-  store i32 %11, i32* @EIP_2472_55b12bd921c0
-  %18 = add i32 %11, 2
-  %19 = load i8, i8* %12
-  %20 = add i8 %19, %14
-  store i8 %20, i8* %12
-  %21 = icmp ult i8 %20, %19
-  %22 = icmp ult i8 %20, %14
-  %23 = or i1 %21, %22
-  %24 = zext i1 %23 to i8
-  store i8 %24, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %25 = zext i8 %20 to i32
-  %26 = call i32 @llvm.ctpop.i32(i32 %25) #14, !range !1240
-  %27 = trunc i32 %26 to i8
-  %28 = and i8 %27, 1
-  %29 = xor i8 %28, 1
-  store i8 %29, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %30 = xor i8 %19, %14
-  %31 = xor i8 %30, %20
-  %32 = lshr i8 %31, 4
-  %33 = and i8 %32, 1
-  store i8 %33, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %34 = icmp eq i8 %20, 0
-  %35 = zext i1 %34 to i8
-  store i8 %35, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %36 = lshr i8 %20, 7
-  store i8 %36, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %37 = lshr i8 %19, 7
-  %38 = xor i8 %36, %37
-  %39 = xor i8 %36, %17
-  %40 = add nuw nsw i8 %38, %39
-  %41 = icmp eq i8 %40, 2
-  %42 = zext i1 %41 to i8
-  store i8 %42, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %43 = call %struct.Memory* @ext_8048310_mprotect(%struct.State* @__mcsema_reg_state, i32 %18, %struct.Memory* %memory)
-  ret %struct.Memory* %43
-
-44:                                               ; preds = %inst_8048300
-  %45 = call %struct.Memory* @__remill_jump(%struct.State* @__mcsema_reg_state, i32 %6, %struct.Memory* %memory)
-  ret %struct.Memory* %45
-}
-
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048350__start(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: noinline noreturn nounwind
+define internal fastcc void @sub_8048350__start(%struct.Memory* noalias %memory) unnamed_addr #5 {
 inst_8048350:
-  store i32 0, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
+  store i32 0, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
   %0 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %1 = add i32 %0, 4
   %2 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
   %3 = add i32 %2, %0
   %4 = inttoptr i32 %3 to i32*
-  %5 = load i32, i32* %4
-  store i32 %5, i32* @ESI_2280_55b12bd921c0, align 4, !tbaa !1219
-  store i32 %1, i32* @ECX_2248_55b12bd921c0, align 4, !tbaa !1219
-  %6 = and i32 -16, %1
+  %5 = load i32, i32* %4, align 4
+  store i32 %5, i32* @ESI_2280_55b12bd921c0, align 8, !tbaa !1219
+  store i32 %1, i32* @ECX_2248_55b12bd921c0, align 8, !tbaa !1219
+  %6 = and i32 %1, -16
   store i8 0, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %7 = and i32 %6, 255
-  %8 = call i32 @llvm.ctpop.i32(i32 %7) #14, !range !1240
+  %7 = and i32 %1, 240
+  %8 = call i32 @llvm.ctpop.i32(i32 %7) #12, !range !1240
   %9 = trunc i32 %8 to i8
   %10 = and i8 %9, 1
   %11 = xor i8 %10, 1
@@ -376,141 +244,117 @@ inst_8048350:
   %12 = icmp eq i32 %6, 0
   %13 = zext i1 %12 to i8
   store i8 %13, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %14 = lshr i32 %6, 31
+  %14 = lshr i32 %1, 31
   %15 = trunc i32 %14 to i8
   store i8 %15, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
   store i8 0, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
   store i8 0, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %16 = load i32, i32* @EAX_2216_55b12bd921c0
+  %16 = load i32, i32* @EAX_2216_55b12bd921c0, align 8
   %17 = add i32 %6, -4
-  %18 = add i32 %2, %17
+  %18 = add i32 %17, %2
   %19 = inttoptr i32 %18 to i32*
-  store i32 %16, i32* %19
-  %20 = add i32 %17, -4
-  %21 = add i32 %2, %20
+  store i32 %16, i32* %19, align 4
+  %20 = add i32 %6, %2
+  %21 = add i32 %20, -8
   %22 = inttoptr i32 %21 to i32*
-  store i32 %17, i32* %22
-  %23 = load i32, i32* @EDX_2264_55b12bd921c0
-  %24 = add i32 %20, -4
-  %25 = add i32 %2, %24
+  store i32 %17, i32* %22, align 4
+  %23 = load i32, i32* @EDX_2264_55b12bd921c0, align 8
+  %24 = add i32 %6, %2
+  %25 = add i32 %24, -12
   %26 = inttoptr i32 %25 to i32*
-  store i32 %23, i32* %26
-  %27 = add i32 %24, -4
-  %28 = add i32 %2, %27
+  store i32 %23, i32* %26, align 4
+  %27 = add i32 %6, -16
+  %28 = add i32 %27, %2
   %29 = inttoptr i32 %28 to i32*
-  store i32 ptrtoint (i8* @data_8048360 to i32), i32* %29
-  store i32 %27, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %30 = call %struct.Memory* @sub_8048383(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
-  %31 = load i32, i32* @EBX_2232_55b12bd921c0
-  %32 = add i32 7328, %31
-  store i32 %32, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %33 = icmp ult i32 %32, %31
-  %34 = icmp ult i32 %32, 7328
-  %35 = or i1 %33, %34
-  %36 = zext i1 %35 to i8
-  store i8 %36, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %37 = and i32 %32, 255
-  %38 = call i32 @llvm.ctpop.i32(i32 %37) #14, !range !1240
-  %39 = trunc i32 %38 to i8
-  %40 = and i8 %39, 1
-  %41 = xor i8 %40, 1
-  store i8 %41, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %42 = xor i32 7328, %31
-  %43 = xor i32 %42, %32
-  %44 = lshr i32 %43, 4
-  %45 = trunc i32 %44 to i8
-  %46 = and i8 %45, 1
-  store i8 %46, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %47 = icmp eq i32 %32, 0
-  %48 = zext i1 %47 to i8
-  store i8 %48, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %49 = lshr i32 %32, 31
-  %50 = trunc i32 %49 to i8
-  store i8 %50, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %51 = lshr i32 %31, 31
-  %52 = xor i32 %49, %51
-  %53 = add nuw nsw i32 %52, %49
-  %54 = icmp eq i32 %53, 2
-  %55 = zext i1 %54 to i8
-  store i8 %55, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %56 = sub i32 %32, 6816
-  %57 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %58 = add i32 %57, -4
-  %59 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %60 = add i32 %59, %58
-  %61 = inttoptr i32 %60 to i32*
-  store i32 %56, i32* %61
-  %62 = sub i32 %32, 6912
-  %63 = add i32 %58, -4
-  %64 = add i32 %59, %63
-  %65 = inttoptr i32 %64 to i32*
-  store i32 %62, i32* %65
-  %66 = load i32, i32* @ECX_2248_55b12bd921c0
-  %67 = add i32 %63, -4
-  %68 = add i32 %59, %67
-  %69 = inttoptr i32 %68 to i32*
-  store i32 %66, i32* %69
-  %70 = load i32, i32* @ESI_2280_55b12bd921c0
-  %71 = add i32 %67, -4
-  %72 = add i32 %59, %71
+  store i32 ptrtoint (i8* @data_8048360 to i32), i32* %29, align 4
+  store i32 %27, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %30 = call fastcc %struct.Memory* @sub_8048383(%struct.Memory* %memory)
+  %31 = load i32, i32* @EBX_2232_55b12bd921c0, align 8
+  %32 = add i32 %31, 7328
+  store i32 %32, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
+  %33 = icmp ugt i32 %31, -7329
+  %34 = zext i1 %33 to i8
+  store i8 %34, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %35 = and i32 %32, 255
+  %36 = call i32 @llvm.ctpop.i32(i32 %35) #12, !range !1240
+  %37 = trunc i32 %36 to i8
+  %38 = and i8 %37, 1
+  %39 = xor i8 %38, 1
+  store i8 %39, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %40 = xor i32 %32, %31
+  %41 = lshr i32 %40, 4
+  %42 = trunc i32 %41 to i8
+  %43 = and i8 %42, 1
+  store i8 %43, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %44 = icmp eq i32 %32, 0
+  %45 = zext i1 %44 to i8
+  store i8 %45, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %46 = lshr i32 %32, 31
+  %47 = trunc i32 %46 to i8
+  store i8 %47, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %48 = lshr i32 %31, 31
+  %49 = xor i32 %46, %48
+  %50 = add nuw nsw i32 %49, %46
+  %51 = icmp eq i32 %50, 2
+  %52 = zext i1 %51 to i8
+  store i8 %52, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %53 = add i32 %31, 512
+  %54 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
+  %55 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %56 = add i32 %55, %54
+  %57 = add i32 %56, -4
+  %58 = inttoptr i32 %57 to i32*
+  store i32 %53, i32* %58, align 4
+  %59 = add i32 %31, 416
+  %60 = add i32 %55, %54
+  %61 = add i32 %60, -8
+  %62 = inttoptr i32 %61 to i32*
+  store i32 %59, i32* %62, align 4
+  %63 = load i32, i32* @ECX_2248_55b12bd921c0, align 8
+  %64 = add i32 %55, %54
+  %65 = add i32 %64, -12
+  %66 = inttoptr i32 %65 to i32*
+  store i32 %63, i32* %66, align 4
+  %67 = load i32, i32* @ESI_2280_55b12bd921c0, align 8
+  %68 = add i32 %55, %54
+  %69 = add i32 %68, -16
+  %70 = inttoptr i32 %69 to i32*
+  store i32 %67, i32* %70, align 4
+  store i32 (i32, i8**, i8**)* @main, i32 (i32, i8**, i8**)** @EAX_2216_55b12bda11b0, align 8
+  %71 = add i32 %55, %54
+  %72 = add i32 %71, -20
   %73 = inttoptr i32 %72 to i32*
-  store i32 %70, i32* %73
-  store i32 (i32, i8**, i8**)* @main, i32 (i32, i8**, i8**)** @EAX_2216_55b12bda11b0
-  %74 = add i32 %71, -4
-  %75 = add i32 %59, %74
+  store i32 ptrtoint (i32 (i32, i8**, i8**)* @main to i32), i32* %73, align 4
+  %74 = add i32 %54, -24
+  %75 = add i32 %55, %74
   %76 = inttoptr i32 %75 to i32*
-  store i32 ptrtoint (i32 (i32, i8**, i8**)* @main to i32), i32* %76
-  %77 = add i32 %74, -4
-  %78 = add i32 %59, %77
-  %79 = inttoptr i32 %78 to i32*
-  store i32 ptrtoint (i8* @data_8048382 to i32), i32* %79
-  store i32 %77, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %80 = call %struct.Memory* @ext_804a038___libc_start_main(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %30)
-  store i8* @data_8048382, i8** @EIP_2472_55b12bd999b0
-  call void @abort() #14
+  store i32 ptrtoint (i8* @data_8048382 to i32), i32* %76, align 4
+  store i32 %74, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  call fastcc void @ext_804a038___libc_start_main(%struct.Memory* %30)
+  store i8* @data_8048382, i8** @EIP_2472_55b12bd999b0, align 8
+  call void @abort() #12
   unreachable
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048460_frame_dummy(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: nofree noinline norecurse nounwind
+define internal fastcc %struct.Memory* @sub_8048460_frame_dummy(%struct.Memory* noalias readnone returned %memory) unnamed_addr #6 {
 inst_8048460:
-  %0 = load i32, i32* @EBP_2328_55b12bd921c0
+  %0 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
   %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %2 = add i32 %1, -4
   %3 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %4 = add i32 %3, %2
+  %4 = add i32 %2, %3
   %5 = inttoptr i32 %4 to i32*
-  store i32 %0, i32* %5
-  store i32 %0, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %6 = call %struct.Memory* @sub_80483f0_register_tm_clones(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
+  store i32 %0, i32* %5, align 4
+  store i32 %0, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %6 = call fastcc %struct.Memory* @sub_80483f0_register_tm_clones(%struct.Memory* %memory)
   ret %struct.Memory* %6
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048390__dl_relocate_static_pie(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
-inst_8048390:
-  %0 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %1 = add i32 %0, 4
-  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %memory
-}
-
-; Function Attrs: alwaysinline inlinehint
-define internal %struct.Memory* @sub_80483a0___x86_get_pc_thunk_bx(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #11 {
-inst_80483a0:
-  %0 = load i32*, i32** @ESP_2312_55b12bd99b10
-  %1 = load i32, i32* @ESP_2312_55b12bd921c0
-  %2 = load i32, i32* %0
-  store i32 %2, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %3 = add i32 %1, 4
-  store i32 %3, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %memory
-}
-
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_80483b0_deregister_tm_clones(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: nofree noinline norecurse nounwind
+define internal fastcc %struct.Memory* @sub_80483b0_deregister_tm_clones(%struct.Memory* noalias readnone returned %memory) unnamed_addr #6 {
 inst_80483b0:
-  store i8* @data_804a028, i8** @EAX_2216_55b12bd999b0
+  store i8* @data_804a028, i8** @EAX_2216_55b12bd999b0, align 8
   store i8 0, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
   store i8 1, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
   store i8 0, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
@@ -519,15 +363,15 @@ inst_80483b0:
   store i8 0, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
   %0 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %1 = add i32 %0, 4
-  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %memory
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_80483f0_register_tm_clones(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: nofree noinline norecurse nounwind
+define internal fastcc %struct.Memory* @sub_80483f0_register_tm_clones(%struct.Memory* noalias readnone returned %memory) unnamed_addr #6 {
 inst_80483f0:
-  store i32 0, i32* @EDX_2264_55b12bd921c0, align 4, !tbaa !1219
-  store i32 0, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
+  store i32 0, i32* @EDX_2264_55b12bd921c0, align 8, !tbaa !1219
+  store i32 0, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
   store i8 0, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1216
   store i8 1, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1216
   store i8 0, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1216
@@ -536,97 +380,46 @@ inst_80483f0:
   store i8 0, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1216
   %0 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %1 = add i32 %0, 4
-  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %memory
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048564__term_proc(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
-inst_8048564:
-  %0 = load i32, i32* @EBX_2232_55b12bd921c0
-  %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %2 = add i32 %1, -4
-  %3 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %4 = add i32 %3, %2
-  %5 = inttoptr i32 %4 to i32*
-  store i32 %0, i32* %5
-  %6 = sub i32 %2, 8
-  %7 = add i32 %6, -4
-  %8 = add i32 %3, %7
-  %9 = inttoptr i32 %8 to i32*
-  store i32 ptrtoint (i8* @data_804856d to i32), i32* %9
-  %10 = icmp ult i32 %2, %6
-  %11 = icmp ult i32 %2, 8
-  %12 = or i1 %10, %11
-  %13 = zext i1 %12 to i8
-  store i8 %13, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %14 = and i32 %2, 255
-  %15 = call i32 @llvm.ctpop.i32(i32 %14) #14, !range !1240
-  %16 = trunc i32 %15 to i8
-  %17 = and i8 %16, 1
-  %18 = xor i8 %17, 1
-  store i8 %18, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %19 = xor i32 8, %6
-  %20 = xor i32 %19, %2
-  %21 = lshr i32 %20, 4
-  %22 = trunc i32 %21 to i8
-  %23 = and i8 %22, 1
-  store i8 %23, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %24 = icmp eq i32 %2, 0
-  %25 = zext i1 %24 to i8
-  store i8 %25, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %26 = lshr i32 %2, 31
-  %27 = trunc i32 %26 to i8
-  store i8 %27, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %28 = lshr i32 %6, 31
-  %29 = xor i32 %26, %28
-  %30 = add nuw nsw i32 %29, %26
-  %31 = icmp eq i32 %30, 2
-  %32 = zext i1 %31 to i8
-  store i8 %32, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %33 = load i32, i32* %5
-  store i32 %33, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %34 = add i32 %1, 4
-  store i32 %34, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %memory
-}
-
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048383(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: nofree noinline norecurse nounwind
+define internal fastcc %struct.Memory* @sub_8048383(%struct.Memory* noalias readnone returned %memory) unnamed_addr #6 {
 inst_8048383:
-  %0 = load i32*, i32** @ESP_2312_55b12bd99b10
-  %1 = load i32, i32* @ESP_2312_55b12bd921c0
-  %2 = load i32, i32* %0
-  store i32 %2, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
+  %0 = load i32*, i32** @ESP_2312_55b12bd99b10, align 8
+  %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %2 = load i32, i32* %0, align 4
+  store i32 %2, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
   %3 = add i32 %1, 4
-  store i32 %3, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %3, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %memory
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.Memory* noalias %memory) unnamed_addr #4 {
 inst_80484ab:
-  %0 = load i32, i32* @EBP_2328_55b12bd921c0
+  %0 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
   %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %2 = add i32 %1, -4
   %3 = inttoptr i32 %2 to i32*
   %4 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
   %5 = add i32 %4, %2
   %6 = inttoptr i32 %5 to i32*
-  store i32 %0, i32* %6
-  store i32 %2, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %7 = sub i32 %2, 24
-  store i32 %7, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %0, i32* %6, align 4
+  store i32 %2, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %7 = add i32 %1, -28
+  store i32 %7, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   %8 = icmp ult i32 %2, 24
   %9 = zext i1 %8 to i8
   store i8 %9, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
   %10 = and i32 %7, 255
-  %11 = call i32 @llvm.ctpop.i32(i32 %10) #14, !range !1240
+  %11 = call i32 @llvm.ctpop.i32(i32 %10) #12, !range !1240
   %12 = trunc i32 %11 to i8
   %13 = and i8 %12, 1
   %14 = xor i8 %13, 1
   store i8 %14, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %15 = xor i32 24, %2
+  %15 = xor i32 %2, 16
   %16 = xor i32 %15, %7
   %17 = lshr i32 %16, 4
   %18 = trunc i32 %17 to i8
@@ -645,385 +438,341 @@ inst_80484ab:
   %28 = zext i1 %27 to i8
   store i8 %28, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
   %29 = getelementptr i32, i32* %3, i32 -3
-  store i32 4096, i32* %29
+  store i32 4096, i32* %29, align 4
   %30 = getelementptr i32, i32* %3, i32 2
-  %31 = load i32, i32* %30
-  store i32 %31, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  %32 = load i32, i32* %29
-  store i32 %32, i32* @ECX_2248_55b12bd921c0, align 4, !tbaa !1219
-  store i32 0, i32* @EDX_2264_55b12bd921c0, align 4, !tbaa !1219
-  store i8* @data_80484c5, i8** @EIP_2472_55b12bd999b0
+  %31 = load i32, i32* %30, align 4
+  store i32 %31, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
+  %32 = load i32, i32* %29, align 4
+  store i32 %32, i32* @ECX_2248_55b12bd921c0, align 8, !tbaa !1219
+  store i32 0, i32* @EDX_2264_55b12bd921c0, align 8, !tbaa !1219
+  store i8* @data_80484c5, i8** @EIP_2472_55b12bd999b0, align 8
   %33 = icmp eq i32 %32, 0
-  br i1 %33, label %34, label %35
+  br i1 %33, label %34, label %_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit
 
 34:                                               ; preds = %inst_80484ab
-  call void @abort() #14
+  call void @abort() #12
   unreachable
 
-35:                                               ; preds = %inst_80484ab
-  %36 = zext i32 %31 to i64
-  %37 = zext i32 %32 to i64
-  %38 = udiv i64 %36, %37
-  %39 = icmp ult i64 %38, 4294967296
-  br i1 %39, label %_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit, label %40
-
-40:                                               ; preds = %35
-  call void @abort() #14
-  unreachable
-
-_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit: ; preds = %35
-  %41 = urem i64 %36, %37
-  %42 = trunc i64 %41 to i32
-  store i32 %42, i32* @EDX_2264_55b12bd921c0, align 4, !tbaa !1219
-  %43 = sub i32 0, %42
-  %44 = add i32 %31, %43
-  store i32 %44, i32* %30
-  %45 = load i32, i32* %29
-  store i32 %45, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  %46 = sub i32 %7, 4
-  %47 = icmp ult i32 %7, 4
-  %48 = zext i1 %47 to i8
-  store i8 %48, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %49 = and i32 %46, 255
-  %50 = call i32 @llvm.ctpop.i32(i32 %49) #14, !range !1240
-  %51 = trunc i32 %50 to i8
-  %52 = and i8 %51, 1
-  %53 = xor i8 %52, 1
-  store i8 %53, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %54 = xor i32 4, %7
-  %55 = xor i32 %54, %46
-  %56 = lshr i32 %55, 4
-  %57 = trunc i32 %56 to i8
-  %58 = and i8 %57, 1
-  store i8 %58, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %59 = icmp eq i32 %46, 0
-  %60 = zext i1 %59 to i8
-  store i8 %60, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %61 = lshr i32 %46, 31
-  %62 = trunc i32 %61 to i8
-  store i8 %62, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %63 = xor i32 %61, %22
-  %64 = add nuw nsw i32 %63, %22
-  %65 = icmp eq i32 %64, 2
-  %66 = zext i1 %65 to i8
-  store i8 %66, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %67 = add i32 %46, -4
-  %68 = add i32 %4, %67
-  %69 = inttoptr i32 %68 to i32*
-  store i32 7, i32* %69
-  %70 = add i32 %67, -4
-  %71 = add i32 %4, %70
-  %72 = inttoptr i32 %71 to i32*
-  store i32 %45, i32* %72
-  %73 = load i32, i32* %30
-  %74 = add i32 %70, -4
-  %75 = add i32 %4, %74
-  %76 = inttoptr i32 %75 to i32*
-  store i32 %73, i32* %76
-  %77 = add i32 %74, -4
-  %78 = add i32 %4, %77
-  %79 = inttoptr i32 %78 to i32*
-  store i32 ptrtoint (i8* @data_80484dd to i32), i32* %79
-  store i32 %77, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %80 = call %struct.Memory* @ext_804a030_mprotect(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
-  %81 = load i32, i32* @EAX_2216_55b12bd921c0
-  %82 = sub i32 %81, -1
-  %83 = icmp ult i32 %81, -1
-  %84 = zext i1 %83 to i8
-  store i8 %84, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %85 = and i32 %82, 255
-  %86 = call i32 @llvm.ctpop.i32(i32 %85) #14, !range !1240
-  %87 = trunc i32 %86 to i8
-  %88 = and i8 %87, 1
-  %89 = xor i8 %88, 1
-  store i8 %89, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %90 = xor i32 -1, %81
-  %91 = xor i32 %90, %82
-  %92 = lshr i32 %91, 4
-  %93 = trunc i32 %92 to i8
-  %94 = and i8 %93, 1
-  store i8 %94, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %95 = icmp eq i32 %82, 0
-  %96 = zext i1 %95 to i8
-  store i8 %96, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %97 = lshr i32 %82, 31
-  %98 = trunc i32 %97 to i8
-  store i8 %98, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %99 = lshr i32 %81, 31
-  %100 = xor i32 1, %99
-  %101 = xor i32 %97, %99
-  %102 = add nuw nsw i32 %101, %100
-  %103 = icmp eq i32 %102, 2
-  %104 = zext i1 %103 to i8
-  store i8 %104, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %105 = icmp eq i8 %96, 0
-  br i1 %105, label %inst_80484ec, label %inst_80484e5
-
-inst_80484f1:                                     ; preds = %inst_80484e5, %inst_80484ec
-  %106 = load i32, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1216
-  %107 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %108 = add i32 %107, %106
-  %109 = inttoptr i32 %108 to i32*
-  %110 = load i32, i32* %109
-  store i32 %110, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %111 = add i32 %106, 4
-  %112 = add i32 %111, 4
-  store i32 %112, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %80
-
-inst_80484ec:                                     ; preds = %_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit
-  store i32 0, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  br label %inst_80484f1
-
-inst_80484e5:                                     ; preds = %_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit
-  store i32 -1, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  br label %inst_80484f1
+_ZN12_GLOBAL__N_19DIVedxeaxI2RnIjLb1EEEEP6MemoryS4_R5StateT_2InIjE.exit: ; preds = %inst_80484ab
+  %35 = urem i32 %31, %32
+  store i32 %35, i32* @EDX_2264_55b12bd921c0, align 8, !tbaa !1219
+  %36 = sub i32 %31, %35
+  store i32 %36, i32* %30, align 4
+  %37 = load i32, i32* %29, align 4
+  store i32 %37, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
+  %38 = add i32 %1, -32
+  %39 = icmp ult i32 %7, 4
+  %40 = zext i1 %39 to i8
+  store i8 %40, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %41 = and i32 %38, 255
+  %42 = call i32 @llvm.ctpop.i32(i32 %41) #12, !range !1240
+  %43 = trunc i32 %42 to i8
+  %44 = and i8 %43, 1
+  %45 = xor i8 %44, 1
+  store i8 %45, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %46 = xor i32 %7, %38
+  %47 = lshr i32 %46, 4
+  %48 = trunc i32 %47 to i8
+  %49 = and i8 %48, 1
+  store i8 %49, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %50 = icmp eq i32 %38, 0
+  %51 = zext i1 %50 to i8
+  store i8 %51, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %52 = lshr i32 %38, 31
+  %53 = trunc i32 %52 to i8
+  store i8 %53, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %54 = xor i32 %52, %22
+  %55 = add nuw nsw i32 %54, %22
+  %56 = icmp eq i32 %55, 2
+  %57 = zext i1 %56 to i8
+  store i8 %57, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %58 = add i32 %4, %1
+  %59 = add i32 %58, -36
+  %60 = inttoptr i32 %59 to i32*
+  store i32 7, i32* %60, align 4
+  %61 = add i32 %4, %1
+  %62 = add i32 %61, -40
+  %63 = inttoptr i32 %62 to i32*
+  store i32 %37, i32* %63, align 4
+  %64 = load i32, i32* %30, align 4
+  %65 = add i32 %4, %1
+  %66 = add i32 %65, -44
+  %67 = inttoptr i32 %66 to i32*
+  store i32 %64, i32* %67, align 4
+  %68 = add i32 %1, -48
+  %69 = add i32 %4, %68
+  %70 = inttoptr i32 %69 to i32*
+  store i32 ptrtoint (i8* @data_80484dd to i32), i32* %70, align 4
+  store i32 %68, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %71 = call fastcc %struct.Memory* @ext_804a030_mprotect(%struct.Memory* %memory)
+  %72 = load i32, i32* @EAX_2216_55b12bd921c0, align 8
+  %73 = add i32 %72, 1
+  %74 = icmp ne i32 %72, -1
+  %75 = zext i1 %74 to i8
+  store i8 %75, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %76 = and i32 %73, 255
+  %77 = call i32 @llvm.ctpop.i32(i32 %76) #12, !range !1240
+  %78 = trunc i32 %77 to i8
+  %79 = and i8 %78, 1
+  %80 = xor i8 %79, 1
+  store i8 %80, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %81 = xor i32 %72, 16
+  %82 = xor i32 %81, %73
+  %83 = lshr i32 %82, 4
+  %84 = trunc i32 %83 to i8
+  %85 = and i8 %84, 1
+  store i8 %85, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %86 = icmp eq i32 %73, 0
+  %87 = zext i1 %86 to i8
+  store i8 %87, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %88 = lshr i32 %73, 31
+  %89 = trunc i32 %88 to i8
+  store i8 %89, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %90 = lshr i32 %72, 31
+  %91 = xor i32 %90, 1
+  %92 = xor i32 %88, %90
+  %93 = add nuw nsw i32 %92, %91
+  %94 = icmp eq i32 %93, 2
+  %95 = zext i1 %94 to i8
+  store i8 %95, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %. = sext i1 %86 to i32
+  store i32 %., i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
+  %96 = load i32, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1216
+  %97 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %98 = add i32 %97, %96
+  %99 = inttoptr i32 %98 to i32*
+  %100 = load i32, i32* %99, align 4
+  store i32 %100, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %101 = add i32 %96, 8
+  store i32 %101, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  ret %struct.Memory* %71
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048500___libc_csu_init(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @sub_8048500___libc_csu_init(%struct.Memory* noalias %memory) unnamed_addr #4 {
 inst_8048500:
-  %0 = load i32, i32* @EBP_2328_55b12bd921c0
+  %0 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
   %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %2 = add i32 %1, -4
   %3 = inttoptr i32 %2 to i32*
   %4 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
   %5 = add i32 %4, %2
   %6 = inttoptr i32 %5 to i32*
-  store i32 %0, i32* %6
-  %7 = load i32, i32* @EDI_2296_55b12bd921c0
-  %8 = add i32 %2, -4
-  %9 = getelementptr i32, i32* %3, i32 -1
-  %10 = add i32 %4, %8
-  %11 = inttoptr i32 %10 to i32*
-  store i32 %7, i32* %11
-  %12 = load i32, i32* @ESI_2280_55b12bd921c0
-  %13 = add i32 %8, -4
-  %14 = getelementptr i32, i32* %9, i32 -1
-  %15 = add i32 %4, %13
-  %16 = inttoptr i32 %15 to i32*
-  store i32 %12, i32* %16
-  %17 = load i32, i32* @EBX_2232_55b12bd921c0
-  %18 = add i32 %13, -4
-  %19 = getelementptr i32, i32* %14, i32 -1
-  %20 = add i32 %4, %18
+  store i32 %0, i32* %6, align 4
+  %7 = load i32, i32* @EDI_2296_55b12bd921c0, align 8
+  %8 = add i32 %4, %1
+  %9 = add i32 %8, -8
+  %10 = inttoptr i32 %9 to i32*
+  store i32 %7, i32* %10, align 4
+  %11 = load i32, i32* @ESI_2280_55b12bd921c0, align 8
+  %12 = add i32 %4, %1
+  %13 = add i32 %12, -12
+  %14 = inttoptr i32 %13 to i32*
+  store i32 %11, i32* %14, align 4
+  %15 = load i32, i32* @EBX_2232_55b12bd921c0, align 8
+  %16 = add i32 %1, -16
+  %17 = add i32 %4, %16
+  %18 = inttoptr i32 %17 to i32*
+  store i32 %15, i32* %18, align 4
+  %19 = add i32 %4, %1
+  %20 = add i32 %19, -20
   %21 = inttoptr i32 %20 to i32*
-  store i32 %17, i32* %21
-  %22 = add i32 %18, -4
-  %23 = add i32 %4, %22
-  %24 = inttoptr i32 %23 to i32*
-  store i32 ptrtoint (i8* @data_8048509 to i32), i32* %24
-  %25 = getelementptr i32, i32* %19, i32 -1
-  %26 = load i32, i32* %25
-  %27 = add i32 6903, %26
-  store i32 %27, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %28 = sub i32 %18, 12
-  %29 = inttoptr i32 %28 to i32*
-  %30 = icmp ult i32 %18, 12
-  %31 = zext i1 %30 to i8
-  store i8 %31, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %32 = and i32 %28, 255
-  %33 = call i32 @llvm.ctpop.i32(i32 %32) #14, !range !1240
-  %34 = trunc i32 %33 to i8
-  %35 = and i8 %34, 1
-  %36 = xor i8 %35, 1
-  store i8 %36, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %37 = xor i32 12, %18
-  %38 = xor i32 %37, %28
-  %39 = lshr i32 %38, 4
-  %40 = trunc i32 %39 to i8
-  %41 = and i8 %40, 1
-  store i8 %41, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %42 = icmp eq i32 %28, 0
-  %43 = zext i1 %42 to i8
-  store i8 %43, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %44 = lshr i32 %28, 31
-  %45 = trunc i32 %44 to i8
-  store i8 %45, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %46 = lshr i32 %18, 31
-  %47 = xor i32 %44, %46
-  %48 = add nuw nsw i32 %47, %46
-  %49 = icmp eq i32 %48, 2
-  %50 = zext i1 %49 to i8
-  store i8 %50, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %51 = getelementptr i32, i32* %29, i32 10
-  %52 = load i32, i32* %51
-  store i32 %52, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %53 = sub i32 %27, 240
-  store i32 %53, i32* @ESI_2280_55b12bd921c0, align 4, !tbaa !1219
-  %54 = add i32 %28, -4
-  %55 = add i32 %4, %54
-  %56 = inttoptr i32 %55 to i32*
-  store i32 ptrtoint (i8* @data_8048521 to i32), i32* %56
-  store i32 %54, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %57 = call %struct.Memory* @sub_80482d0__init_proc(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
-  %58 = load i32, i32* @EBX_2232_55b12bd921c0
-  %59 = sub i32 %58, 244
-  store i32 %59, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  %60 = load i32, i32* @ESI_2280_55b12bd921c0
-  %61 = sub i32 %60, %59
-  %62 = ashr i32 %61, 1
-  %63 = ashr i32 %62, 1
-  %64 = icmp eq i32 %63, 0
-  br i1 %64, label %inst_8048555, label %inst_8048530
+  store i32 ptrtoint (i8* @data_8048509 to i32), i32* %21, align 4
+  %22 = getelementptr i32, i32* %3, i32 -4
+  %23 = load i32, i32* %22, align 4
+  %24 = add i32 %23, 6903
+  store i32 %24, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
+  %25 = add i32 %1, -28
+  %26 = inttoptr i32 %25 to i32*
+  %27 = icmp ult i32 %16, 12
+  %28 = zext i1 %27 to i8
+  store i8 %28, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %29 = and i32 %25, 255
+  %30 = call i32 @llvm.ctpop.i32(i32 %29) #12, !range !1240
+  %31 = trunc i32 %30 to i8
+  %32 = and i8 %31, 1
+  %33 = xor i8 %32, 1
+  store i8 %33, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %34 = xor i32 %16, %25
+  %35 = lshr i32 %34, 4
+  %36 = trunc i32 %35 to i8
+  %37 = and i8 %36, 1
+  store i8 %37, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %38 = icmp eq i32 %25, 0
+  %39 = zext i1 %38 to i8
+  store i8 %39, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %40 = lshr i32 %25, 31
+  %41 = trunc i32 %40 to i8
+  store i8 %41, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %42 = lshr i32 %16, 31
+  %43 = xor i32 %40, %42
+  %44 = add nuw nsw i32 %43, %42
+  %45 = icmp eq i32 %44, 2
+  %46 = zext i1 %45 to i8
+  store i8 %46, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %47 = getelementptr i32, i32* %26, i32 10
+  %48 = load i32, i32* %47, align 4
+  store i32 %48, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %49 = add i32 %23, 6663
+  store i32 %49, i32* @ESI_2280_55b12bd921c0, align 8, !tbaa !1219
+  %50 = add i32 %1, -32
+  %51 = add i32 %4, %50
+  %52 = inttoptr i32 %51 to i32*
+  store i32 ptrtoint (i8* @data_8048521 to i32), i32* %52, align 4
+  store i32 %50, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %53 = call fastcc %struct.Memory* @sub_80482d0__init_proc(%struct.Memory* %memory)
+  %54 = load i32, i32* @EBX_2232_55b12bd921c0, align 8
+  %55 = add i32 %54, -244
+  store i32 %55, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
+  %56 = load i32, i32* @ESI_2280_55b12bd921c0, align 8
+  %57 = sub i32 %56, %55
+  %58 = ashr i32 %57, 2
+  %59 = icmp eq i32 %58, 0
+  br i1 %59, label %inst_8048555, label %inst_8048530
 
 inst_8048555:                                     ; preds = %inst_8048538, %inst_8048500
-  %65 = phi %struct.Memory* [ %57, %inst_8048500 ], [ %167, %inst_8048538 ]
-  %66 = load i32, i32* @ESP_2312_55b12bd921c0
-  %67 = add i32 12, %66
-  %68 = icmp ult i32 %67, %66
-  %69 = icmp ult i32 %67, 12
-  %70 = or i1 %68, %69
-  %71 = zext i1 %70 to i8
-  store i8 %71, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %72 = and i32 %67, 255
-  %73 = call i32 @llvm.ctpop.i32(i32 %72) #14, !range !1240
-  %74 = trunc i32 %73 to i8
-  %75 = and i8 %74, 1
-  %76 = xor i8 %75, 1
-  store i8 %76, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %77 = xor i32 12, %66
-  %78 = xor i32 %77, %67
-  %79 = lshr i32 %78, 4
-  %80 = trunc i32 %79 to i8
-  %81 = and i8 %80, 1
-  store i8 %81, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %82 = icmp eq i32 %67, 0
-  %83 = zext i1 %82 to i8
-  store i8 %83, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %84 = lshr i32 %67, 31
-  %85 = trunc i32 %84 to i8
-  store i8 %85, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %86 = lshr i32 %66, 31
-  %87 = xor i32 %84, %86
-  %88 = add nuw nsw i32 %87, %84
-  %89 = icmp eq i32 %88, 2
-  %90 = zext i1 %89 to i8
-  store i8 %90, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %91 = add i32 %67, 4
-  %92 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %93 = add i32 %92, %67
-  %94 = inttoptr i32 %93 to i32*
-  %95 = load i32, i32* %94
-  store i32 %95, i32* @EBX_2232_55b12bd921c0, align 4, !tbaa !1219
-  %96 = add i32 %91, 4
-  %97 = add i32 %92, %91
-  %98 = inttoptr i32 %97 to i32*
-  %99 = load i32, i32* %98
-  store i32 %99, i32* @ESI_2280_55b12bd921c0, align 4, !tbaa !1219
-  %100 = add i32 %96, 4
-  %101 = add i32 %92, %96
-  %102 = inttoptr i32 %101 to i32*
-  %103 = load i32, i32* %102
-  store i32 %103, i32* @EDI_2296_55b12bd921c0, align 4, !tbaa !1219
-  %104 = add i32 %100, 4
-  %105 = add i32 %92, %100
-  %106 = inttoptr i32 %105 to i32*
-  %107 = load i32, i32* %106
-  store i32 %107, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %108 = add i32 %104, 4
-  store i32 %108, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %65
+  %60 = phi %struct.Memory* [ %53, %inst_8048500 ], [ %151, %inst_8048538 ]
+  %61 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %62 = add i32 %61, 12
+  %63 = icmp ugt i32 %61, -13
+  %64 = zext i1 %63 to i8
+  store i8 %64, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %65 = and i32 %62, 255
+  %66 = call i32 @llvm.ctpop.i32(i32 %65) #12, !range !1240
+  %67 = trunc i32 %66 to i8
+  %68 = and i8 %67, 1
+  %69 = xor i8 %68, 1
+  store i8 %69, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %70 = xor i32 %62, %61
+  %71 = lshr i32 %70, 4
+  %72 = trunc i32 %71 to i8
+  %73 = and i8 %72, 1
+  store i8 %73, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %74 = icmp eq i32 %62, 0
+  %75 = zext i1 %74 to i8
+  store i8 %75, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %76 = lshr i32 %62, 31
+  %77 = trunc i32 %76 to i8
+  store i8 %77, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %78 = lshr i32 %61, 31
+  %79 = xor i32 %76, %78
+  %80 = add nuw nsw i32 %79, %76
+  %81 = icmp eq i32 %80, 2
+  %82 = zext i1 %81 to i8
+  store i8 %82, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %83 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %84 = add i32 %83, %62
+  %85 = inttoptr i32 %84 to i32*
+  %86 = load i32, i32* %85, align 4
+  store i32 %86, i32* @EBX_2232_55b12bd921c0, align 8, !tbaa !1219
+  %87 = add i32 %83, %61
+  %88 = add i32 %87, 16
+  %89 = inttoptr i32 %88 to i32*
+  %90 = load i32, i32* %89, align 4
+  store i32 %90, i32* @ESI_2280_55b12bd921c0, align 8, !tbaa !1219
+  %91 = add i32 %83, %61
+  %92 = add i32 %91, 20
+  %93 = inttoptr i32 %92 to i32*
+  %94 = load i32, i32* %93, align 4
+  store i32 %94, i32* @EDI_2296_55b12bd921c0, align 8, !tbaa !1219
+  %95 = add i32 %83, %61
+  %96 = add i32 %95, 24
+  %97 = inttoptr i32 %96 to i32*
+  %98 = load i32, i32* %97, align 4
+  store i32 %98, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %99 = add i32 %61, 32
+  store i32 %99, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  ret %struct.Memory* %60
 
 inst_8048538:                                     ; preds = %inst_8048530, %inst_8048538
-  %109 = phi i32 [ add (i32 ptrtoint (i8* @data_8048530 to i32), i32 8), %inst_8048530 ], [ %177, %inst_8048538 ]
-  %110 = phi %struct.Memory* [ %57, %inst_8048530 ], [ %167, %inst_8048538 ]
-  %111 = add i32 %109, 3
-  %112 = load i32, i32* @ESP_2312_55b12bd921c0
-  %113 = sub i32 %112, 4
-  %114 = inttoptr i32 %113 to i32*
-  %115 = icmp ult i32 %112, 4
-  %116 = zext i1 %115 to i8
-  store i8 %116, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %117 = and i32 %113, 255
-  %118 = call i32 @llvm.ctpop.i32(i32 %117) #14, !range !1240
+  %100 = phi i32 [ add (i32 ptrtoint (i8* @data_8048530 to i32), i32 8), %inst_8048530 ], [ %158, %inst_8048538 ]
+  %101 = phi %struct.Memory* [ %53, %inst_8048530 ], [ %151, %inst_8048538 ]
+  %102 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %103 = add i32 %102, -4
+  %104 = inttoptr i32 %103 to i32*
+  %105 = icmp ult i32 %102, 4
+  %106 = zext i1 %105 to i8
+  store i8 %106, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %107 = and i32 %103, 255
+  %108 = call i32 @llvm.ctpop.i32(i32 %107) #12, !range !1240
+  %109 = trunc i32 %108 to i8
+  %110 = and i8 %109, 1
+  %111 = xor i8 %110, 1
+  store i8 %111, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %112 = xor i32 %103, %102
+  %113 = lshr i32 %112, 4
+  %114 = trunc i32 %113 to i8
+  %115 = and i8 %114, 1
+  store i8 %115, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %116 = icmp eq i32 %103, 0
+  %117 = zext i1 %116 to i8
+  store i8 %117, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %118 = lshr i32 %103, 31
   %119 = trunc i32 %118 to i8
-  %120 = and i8 %119, 1
-  %121 = xor i8 %120, 1
-  store i8 %121, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %122 = xor i32 4, %112
-  %123 = xor i32 %122, %113
-  %124 = lshr i32 %123, 4
-  %125 = trunc i32 %124 to i8
-  %126 = and i8 %125, 1
-  store i8 %126, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %127 = icmp eq i32 %113, 0
-  %128 = zext i1 %127 to i8
-  store i8 %128, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %129 = lshr i32 %113, 31
-  %130 = trunc i32 %129 to i8
-  store i8 %130, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %131 = lshr i32 %112, 31
-  %132 = xor i32 %129, %131
-  %133 = add nuw nsw i32 %132, %131
-  %134 = icmp eq i32 %133, 2
-  %135 = zext i1 %134 to i8
-  store i8 %135, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %136 = add i32 %111, 1
-  %137 = load i32, i32* @EBP_2328_55b12bd921c0
-  %138 = add i32 %113, -4
-  %139 = getelementptr i32, i32* %114, i32 -1
-  %140 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %141 = add i32 %140, %138
-  %142 = inttoptr i32 %141 to i32*
-  store i32 %137, i32* %142
-  %143 = add i32 %136, 4
-  %144 = getelementptr i32, i32* %139, i32 11
-  %145 = load i32, i32* %144
-  %146 = add i32 %138, -4
-  %147 = getelementptr i32, i32* %139, i32 -1
-  %148 = add i32 %140, %146
-  %149 = inttoptr i32 %148 to i32*
-  store i32 %145, i32* %149
-  %150 = add i32 %143, 4
-  %151 = getelementptr i32, i32* %147, i32 11
-  %152 = load i32, i32* %151
-  %153 = add i32 %146, -4
-  %154 = add i32 %140, %153
-  %155 = inttoptr i32 %154 to i32*
-  store i32 %152, i32* %155
-  %156 = add i32 %150, 7
-  %157 = load i32, i32* @EBX_2232_55b12bd921c0
-  %158 = load i32, i32* @EDI_2296_55b12bd921c0
-  %159 = mul i32 %158, 4
-  %160 = add i32 %157, -244
-  %161 = add i32 %160, %159
-  %162 = add i32 %153, -4
-  %163 = inttoptr i32 %161 to i32*
-  %164 = load i32, i32* %163
-  %165 = add i32 %140, %162
-  %166 = inttoptr i32 %165 to i32*
-  store i32 %156, i32* %166
-  store i32 %162, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  store i32 %164, i32* @EIP_2472_55b12bd921c0, align 4, !tbaa !1219
-  %167 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 %164, %struct.Memory* %110)
-  %168 = load i32, i32* @EDI_2296_55b12bd921c0
-  %169 = add i32 1, %168
-  store i32 %169, i32* @EDI_2296_55b12bd921c0, align 4, !tbaa !1219
-  %170 = load i32, i32* @ESP_2312_55b12bd921c0
-  %171 = add i32 16, %170
-  store i32 %171, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %172 = load i32, i32* @ESI_2280_55b12bd921c0
-  %173 = sub i32 %172, %169
-  %174 = icmp eq i32 %173, 0
-  %175 = zext i1 %174 to i8
-  %176 = icmp eq i8 %175, 0
-  %177 = select i1 %176, i32 ptrtoint (i8* @data_8048538 to i32), i32 ptrtoint (i8* @data_8048555 to i32)
-  br i1 %176, label %inst_8048538, label %inst_8048555
+  store i8 %119, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %120 = lshr i32 %102, 31
+  %121 = xor i32 %118, %120
+  %122 = add nuw nsw i32 %121, %120
+  %123 = icmp eq i32 %122, 2
+  %124 = zext i1 %123 to i8
+  store i8 %124, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %125 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
+  %126 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %127 = add i32 %126, %102
+  %128 = add i32 %127, -8
+  %129 = inttoptr i32 %128 to i32*
+  store i32 %125, i32* %129, align 4
+  %130 = getelementptr i32, i32* %104, i32 10
+  %131 = load i32, i32* %130, align 4
+  %132 = add i32 %126, %102
+  %133 = add i32 %132, -12
+  %134 = inttoptr i32 %133 to i32*
+  store i32 %131, i32* %134, align 4
+  %135 = getelementptr i32, i32* %104, i32 9
+  %136 = load i32, i32* %135, align 4
+  %137 = add i32 %126, %102
+  %138 = add i32 %137, -16
+  %139 = inttoptr i32 %138 to i32*
+  store i32 %136, i32* %139, align 4
+  %140 = add i32 %100, 19
+  %141 = load i32, i32* @EBX_2232_55b12bd921c0, align 8
+  %142 = load i32, i32* @EDI_2296_55b12bd921c0, align 8
+  %143 = shl i32 %142, 2
+  %144 = add i32 %141, -244
+  %145 = add i32 %144, %143
+  %146 = add i32 %102, -20
+  %147 = inttoptr i32 %145 to i32*
+  %148 = load i32, i32* %147, align 4
+  %149 = add i32 %126, %146
+  %150 = inttoptr i32 %149 to i32*
+  store i32 %140, i32* %150, align 4
+  store i32 %146, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  store i32 %148, i32* @EIP_2472_55b12bd921c0, align 8, !tbaa !1219
+  %151 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 %148, %struct.Memory* %101)
+  %152 = load i32, i32* @EDI_2296_55b12bd921c0, align 8
+  %153 = add i32 %152, 1
+  store i32 %153, i32* @EDI_2296_55b12bd921c0, align 8, !tbaa !1219
+  %154 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %155 = add i32 %154, 16
+  store i32 %155, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %156 = load i32, i32* @ESI_2280_55b12bd921c0, align 8
+  %157 = icmp ne i32 %156, %153
+  %158 = select i1 %157, i32 ptrtoint (i8* @data_8048538 to i32), i32 ptrtoint (i8* @data_8048555 to i32)
+  br i1 %157, label %inst_8048538, label %inst_8048555
 
 inst_8048530:                                     ; preds = %inst_8048500
-  store i32 0, i32* @EDI_2296_55b12bd921c0, align 4, !tbaa !1219
-  store i32 %63, i32* @ESI_2280_55b12bd921c0, align 4, !tbaa !1219
+  store i32 0, i32* @EDI_2296_55b12bd921c0, align 8, !tbaa !1219
+  store i32 %58, i32* @ESI_2280_55b12bd921c0, align 8, !tbaa !1219
   br label %inst_8048538
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048430___do_global_dtors_aux(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: nofree noinline nounwind
+define internal fastcc %struct.Memory* @sub_8048430___do_global_dtors_aux(%struct.Memory* noalias readnone returned %memory) unnamed_addr #7 {
 inst_8048430:
-  %0 = load i8, i8* @data_804a028
+  %0 = load i8, i8* @data_804a028, align 8
   store i8 0, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
   %1 = zext i8 %0 to i32
-  %2 = call i32 @llvm.ctpop.i32(i32 %1) #14, !range !1240
+  %2 = call i32 @llvm.ctpop.i32(i32 %1) #12, !range !1240
   %3 = trunc i32 %2 to i8
   %4 = and i8 %3, 1
   %5 = xor i8 %4, 1
@@ -1035,405 +784,401 @@ inst_8048430:
   %8 = lshr i8 %0, 7
   store i8 %8, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
   store i8 0, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %9 = icmp eq i8 %7, 0
-  br i1 %9, label %inst_8048450, label %inst_8048439
+  br i1 %6, label %inst_8048439, label %inst_8048450
 
 inst_8048450:                                     ; preds = %inst_8048430
-  %10 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %11 = add i32 %10, 4
-  store i32 %11, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  %9 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
+  %10 = add i32 %9, 4
+  store i32 %10, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %memory
 
 inst_8048439:                                     ; preds = %inst_8048430
-  %12 = load i32, i32* @EBP_2328_55b12bd921c0
-  %13 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
-  %14 = add i32 %13, -4
-  %15 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %16 = add i32 %15, %14
-  %17 = inttoptr i32 %16 to i32*
-  store i32 %12, i32* %17
-  store i32 %14, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %18 = sub i32 %14, 8
-  %19 = icmp ult i32 %14, 8
-  %20 = zext i1 %19 to i8
-  store i8 %20, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %21 = and i32 %18, 255
-  %22 = call i32 @llvm.ctpop.i32(i32 %21) #14, !range !1240
-  %23 = trunc i32 %22 to i8
-  %24 = and i8 %23, 1
-  %25 = xor i8 %24, 1
-  store i8 %25, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %26 = xor i32 8, %14
-  %27 = xor i32 %26, %18
-  %28 = lshr i32 %27, 4
-  %29 = trunc i32 %28 to i8
-  %30 = and i8 %29, 1
-  store i8 %30, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %31 = icmp eq i32 %18, 0
-  %32 = zext i1 %31 to i8
-  store i8 %32, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %33 = lshr i32 %18, 31
-  %34 = trunc i32 %33 to i8
-  store i8 %34, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %35 = lshr i32 %14, 31
-  %36 = xor i32 %33, %35
-  %37 = add nuw nsw i32 %36, %35
-  %38 = icmp eq i32 %37, 2
-  %39 = zext i1 %38 to i8
-  store i8 %39, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %40 = add i32 %18, -4
-  %41 = add i32 %15, %40
-  %42 = inttoptr i32 %41 to i32*
-  store i32 add (i32 ptrtoint (i8* @data_8048439 to i32), i32 11), i32* %42
-  store i32 %40, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %43 = call %struct.Memory* @sub_80483b0_deregister_tm_clones(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
-  store i8 1, i8* @data_804a028
-  %44 = load i32, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1216
-  %45 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %46 = add i32 %45, %44
-  %47 = inttoptr i32 %46 to i32*
-  %48 = load i32, i32* %47
-  store i32 %48, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %49 = add i32 %44, 4
-  %50 = add i32 %49, 4
-  store i32 %50, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %43
-}
-
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048466_main(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
-inst_8048466:
-  %0 = load i32*, i32** @ESP_2312_55b12bd99b10
-  %1 = load i32, i32* @ESP_2312_55b12bd921c0
-  %2 = add i32 %1, 4
-  store i32 %2, i32* @ECX_2248_55b12bd921c0, align 4, !tbaa !1219
-  %3 = and i32 -16, %1
-  %4 = load i32, i32* %0
-  %5 = add i32 %3, -4
-  %6 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %7 = add i32 %6, %5
-  %8 = inttoptr i32 %7 to i32*
-  store i32 %4, i32* %8
-  %9 = load i32, i32* @EBP_2328_55b12bd921c0
-  %10 = add i32 %5, -4
-  %11 = add i32 %6, %10
-  %12 = inttoptr i32 %11 to i32*
-  store i32 %9, i32* %12
-  store i32 %10, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  %13 = add i32 %10, -4
-  %14 = add i32 %6, %13
-  %15 = inttoptr i32 %14 to i32*
-  store i32 %2, i32* %15
-  %16 = sub i32 %13, 4
-  %17 = lshr i32 %16, 31
-  %18 = sub i32 %16, 12
-  %19 = icmp ult i32 %16, 12
-  %20 = zext i1 %19 to i8
-  store i8 %20, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %21 = and i32 %18, 255
-  %22 = call i32 @llvm.ctpop.i32(i32 %21) #14, !range !1240
-  %23 = trunc i32 %22 to i8
-  %24 = and i8 %23, 1
-  %25 = xor i8 %24, 1
-  store i8 %25, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %26 = xor i32 12, %16
-  %27 = xor i32 %26, %18
-  %28 = lshr i32 %27, 4
-  %29 = trunc i32 %28 to i8
-  %30 = and i8 %29, 1
-  store i8 %30, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  store i8 0, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %31 = lshr i32 %18, 31
+  %11 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
+  %12 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
+  %13 = add i32 %12, -4
+  %14 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %15 = add i32 %14, %13
+  %16 = inttoptr i32 %15 to i32*
+  store i32 %11, i32* %16, align 4
+  store i32 %13, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %17 = add i32 %12, -12
+  %18 = icmp ult i32 %13, 8
+  %19 = zext i1 %18 to i8
+  store i8 %19, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %20 = and i32 %17, 255
+  %21 = call i32 @llvm.ctpop.i32(i32 %20) #12, !range !1240
+  %22 = trunc i32 %21 to i8
+  %23 = and i8 %22, 1
+  %24 = xor i8 %23, 1
+  store i8 %24, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %25 = xor i32 %13, %17
+  %26 = lshr i32 %25, 4
+  %27 = trunc i32 %26 to i8
+  %28 = and i8 %27, 1
+  store i8 %28, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %29 = icmp eq i32 %17, 0
+  %30 = zext i1 %29 to i8
+  store i8 %30, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %31 = lshr i32 %17, 31
   %32 = trunc i32 %31 to i8
   store i8 %32, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %33 = xor i32 %31, %17
-  %34 = add nuw nsw i32 %33, %17
-  %35 = icmp eq i32 %34, 2
-  %36 = zext i1 %35 to i8
-  store i8 %36, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %37 = add i32 %18, -4
-  %38 = add i32 %6, %37
-  %39 = inttoptr i32 %38 to i32*
-  store i32 ptrtoint (i8* @data_804a020 to i32), i32* %39
-  %40 = add i32 %37, -4
-  %41 = add i32 %6, %40
-  %42 = inttoptr i32 %41 to i32*
-  store i32 ptrtoint (i8* @data_8048484 to i32), i32* %42
-  store i32 %40, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %43 = call %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %memory)
-  %44 = load i32, i32* @ESP_2312_55b12bd921c0
-  %45 = add i32 16, %44
-  %46 = icmp ult i32 %45, %44
-  %47 = icmp ult i32 %45, 16
-  %48 = or i1 %46, %47
-  %49 = zext i1 %48 to i8
-  store i8 %49, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %50 = and i32 %45, 255
-  %51 = call i32 @llvm.ctpop.i32(i32 %50) #14, !range !1240
-  %52 = trunc i32 %51 to i8
-  %53 = and i8 %52, 1
-  %54 = xor i8 %53, 1
-  store i8 %54, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %55 = xor i32 16, %44
-  %56 = xor i32 %55, %45
-  %57 = lshr i32 %56, 4
-  %58 = trunc i32 %57 to i8
-  %59 = and i8 %58, 1
-  store i8 %59, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %60 = icmp eq i32 %45, 0
-  %61 = zext i1 %60 to i8
-  store i8 %61, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %62 = lshr i32 %45, 31
-  %63 = trunc i32 %62 to i8
-  store i8 %63, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %64 = lshr i32 %44, 31
-  %65 = xor i32 %62, %64
-  %66 = add nuw nsw i32 %65, %62
-  %67 = icmp eq i32 %66, 2
-  %68 = zext i1 %67 to i8
-  store i8 %68, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  store i8* @data_804a020, i8** @EAX_2216_55b12bd999b0
-  %69 = add i32 %45, -4
-  %70 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %71 = add i32 %70, %69
-  %72 = inttoptr i32 %71 to i32*
-  store i32 ptrtoint (i8* @data_804848e to i32), i32* %72
-  store i32 %69, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  store i8* @data_804a020, i8** @EIP_2472_55b12bd999b0
-  %73 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i8* @data_804a020 to i32), %struct.Memory* %43)
-  %74 = load i32, i32* @ESP_2312_55b12bd921c0
-  %75 = sub i32 %74, 12
-  %76 = icmp ult i32 %74, 12
-  %77 = zext i1 %76 to i8
-  store i8 %77, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %78 = and i32 %75, 255
-  %79 = call i32 @llvm.ctpop.i32(i32 %78) #14, !range !1240
-  %80 = trunc i32 %79 to i8
-  %81 = and i8 %80, 1
-  %82 = xor i8 %81, 1
-  store i8 %82, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %83 = xor i32 12, %74
-  %84 = xor i32 %83, %75
-  %85 = lshr i32 %84, 4
-  %86 = trunc i32 %85 to i8
-  %87 = and i8 %86, 1
-  store i8 %87, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %88 = icmp eq i32 %75, 0
-  %89 = zext i1 %88 to i8
-  store i8 %89, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %90 = lshr i32 %75, 31
-  %91 = trunc i32 %90 to i8
-  store i8 %91, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %92 = lshr i32 %74, 31
-  %93 = xor i32 %90, %92
-  %94 = add nuw nsw i32 %93, %92
-  %95 = icmp eq i32 %94, 2
-  %96 = zext i1 %95 to i8
-  store i8 %96, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  %97 = add i32 %75, -4
-  %98 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %99 = add i32 %98, %97
-  %100 = inttoptr i32 %99 to i32*
-  store i32 ptrtoint (i8* @data_8048580 to i32), i32* %100
-  %101 = add i32 %97, -4
-  %102 = add i32 %98, %101
-  %103 = inttoptr i32 %102 to i32*
-  store i32 ptrtoint (i8* @data_804849b to i32), i32* %103
-  store i32 %101, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  %104 = call %struct.Memory* @ext_804a034_printf(%struct.State* @__mcsema_reg_state, i32 undef, %struct.Memory* %73)
-  %105 = load i32, i32* @ESP_2312_55b12bd921c0
-  %106 = add i32 16, %105
-  %107 = icmp ult i32 %106, %105
-  %108 = icmp ult i32 %106, 16
-  %109 = or i1 %107, %108
-  %110 = zext i1 %109 to i8
-  store i8 %110, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
-  %111 = and i32 %106, 255
-  %112 = call i32 @llvm.ctpop.i32(i32 %111) #14, !range !1240
-  %113 = trunc i32 %112 to i8
-  %114 = and i8 %113, 1
-  %115 = xor i8 %114, 1
-  store i8 %115, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
-  %116 = xor i32 16, %105
-  %117 = xor i32 %116, %106
-  %118 = lshr i32 %117, 4
-  %119 = trunc i32 %118 to i8
-  %120 = and i8 %119, 1
-  store i8 %120, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
-  %121 = icmp eq i32 %106, 0
-  %122 = zext i1 %121 to i8
-  store i8 %122, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
-  %123 = lshr i32 %106, 31
-  %124 = trunc i32 %123 to i8
-  store i8 %124, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
-  %125 = lshr i32 %105, 31
-  %126 = xor i32 %123, %125
-  %127 = add nuw nsw i32 %126, %123
-  %128 = icmp eq i32 %127, 2
-  %129 = zext i1 %128 to i8
-  store i8 %129, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
-  store i32 0, i32* @EAX_2216_55b12bd921c0, align 4, !tbaa !1219
-  %130 = load i32*, i32** @EBP_2328_55b12bd99b10
-  %131 = load i32, i32* @EBP_2328_55b12bd921c0
-  %132 = getelementptr i32, i32* %130, i32 -1
-  %133 = load i32, i32* %132
-  store i32 %133, i32* @ECX_2248_55b12bd921c0, align 4, !tbaa !1219
-  %134 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
-  %135 = add i32 %134, %131
-  %136 = inttoptr i32 %135 to i32*
-  %137 = load i32, i32* %136
-  store i32 %137, i32* @EBP_2328_55b12bd921c0, align 4, !tbaa !1219
-  store i32 %133, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
-  ret %struct.Memory* %104
+  %33 = lshr i32 %13, 31
+  %34 = xor i32 %31, %33
+  %35 = add nuw nsw i32 %34, %33
+  %36 = icmp eq i32 %35, 2
+  %37 = zext i1 %36 to i8
+  store i8 %37, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %38 = add i32 %12, -16
+  %39 = add i32 %14, %38
+  %40 = inttoptr i32 %39 to i32*
+  store i32 add (i32 ptrtoint (i8* @data_8048439 to i32), i32 11), i32* %40, align 4
+  store i32 %38, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %41 = call fastcc %struct.Memory* @sub_80483b0_deregister_tm_clones(%struct.Memory* %memory)
+  store i8 1, i8* @data_804a028, align 8
+  %42 = load i32, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1216
+  %43 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %44 = add i32 %43, %42
+  %45 = inttoptr i32 %44 to i32*
+  %46 = load i32, i32* %45, align 4
+  store i32 %46, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %47 = add i32 %42, 8
+  store i32 %47, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  ret %struct.Memory* %41
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048560___libc_csu_fini(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #10 {
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @sub_8048466_main(%struct.Memory* noalias %memory) unnamed_addr #4 {
+inst_8048466:
+  %0 = load i32*, i32** @ESP_2312_55b12bd99b10, align 8
+  %1 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %2 = add i32 %1, 4
+  store i32 %2, i32* @ECX_2248_55b12bd921c0, align 8, !tbaa !1219
+  %3 = and i32 %1, -16
+  %4 = load i32, i32* %0, align 4
+  %5 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %6 = add i32 %5, %3
+  %7 = add i32 %6, -4
+  %8 = inttoptr i32 %7 to i32*
+  store i32 %4, i32* %8, align 4
+  %9 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
+  %10 = add i32 %3, -8
+  %11 = add i32 %5, %10
+  %12 = inttoptr i32 %11 to i32*
+  store i32 %9, i32* %12, align 4
+  store i32 %10, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  %13 = add i32 %5, %3
+  %14 = add i32 %13, -12
+  %15 = inttoptr i32 %14 to i32*
+  store i32 %2, i32* %15, align 4
+  %16 = add i32 %3, -16
+  %17 = lshr i32 %16, 31
+  %18 = add i32 %3, -28
+  %19 = icmp eq i32 %16, 0
+  %20 = zext i1 %19 to i8
+  store i8 %20, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %21 = and i32 %18, 244
+  %22 = call i32 @llvm.ctpop.i32(i32 %21) #12, !range !1240
+  %23 = trunc i32 %22 to i8
+  %24 = and i8 %23, 1
+  %25 = xor i8 %24, 1
+  store i8 %25, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %26 = xor i32 %16, %18
+  %27 = lshr i32 %26, 4
+  %28 = trunc i32 %27 to i8
+  %29 = and i8 %28, 1
+  store i8 %29, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  store i8 0, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %30 = lshr i32 %18, 31
+  %31 = trunc i32 %30 to i8
+  store i8 %31, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %32 = xor i32 %30, %17
+  %33 = add nuw nsw i32 %32, %17
+  %34 = icmp eq i32 %33, 2
+  %35 = zext i1 %34 to i8
+  store i8 %35, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %36 = add i32 %5, %3
+  %37 = add i32 %36, -32
+  %38 = inttoptr i32 %37 to i32*
+  store i32 ptrtoint (i8* @data_804a020 to i32), i32* %38, align 4
+  %39 = add i32 %3, -36
+  %40 = add i32 %5, %39
+  %41 = inttoptr i32 %40 to i32*
+  store i32 ptrtoint (i8* @data_8048484 to i32), i32* %41, align 4
+  store i32 %39, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %42 = call fastcc %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.Memory* %memory)
+  %43 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %44 = add i32 %43, 16
+  %45 = icmp ugt i32 %43, -17
+  %46 = zext i1 %45 to i8
+  store i8 %46, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %47 = and i32 %44, 255
+  %48 = call i32 @llvm.ctpop.i32(i32 %47) #12, !range !1240
+  %49 = trunc i32 %48 to i8
+  %50 = and i8 %49, 1
+  %51 = xor i8 %50, 1
+  store i8 %51, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %52 = xor i32 %43, 16
+  %53 = xor i32 %52, %44
+  %54 = lshr i32 %53, 4
+  %55 = trunc i32 %54 to i8
+  %56 = and i8 %55, 1
+  store i8 %56, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %57 = icmp eq i32 %44, 0
+  %58 = zext i1 %57 to i8
+  store i8 %58, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %59 = lshr i32 %44, 31
+  %60 = trunc i32 %59 to i8
+  store i8 %60, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %61 = lshr i32 %43, 31
+  %62 = xor i32 %59, %61
+  %63 = add nuw nsw i32 %62, %59
+  %64 = icmp eq i32 %63, 2
+  %65 = zext i1 %64 to i8
+  store i8 %65, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  store i8* @data_804a020, i8** @EAX_2216_55b12bd999b0, align 8
+  %66 = add i32 %43, 12
+  %67 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %68 = add i32 %67, %66
+  %69 = inttoptr i32 %68 to i32*
+  store i32 ptrtoint (i8* @data_804848e to i32), i32* %69, align 4
+  store i32 %66, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  store i8* @data_804a020, i8** @EIP_2472_55b12bd999b0, align 8
+  %70 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i8* @data_804a020 to i32), %struct.Memory* %42)
+  %71 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %72 = add i32 %71, -12
+  %73 = icmp ult i32 %71, 12
+  %74 = zext i1 %73 to i8
+  store i8 %74, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %75 = and i32 %72, 255
+  %76 = call i32 @llvm.ctpop.i32(i32 %75) #12, !range !1240
+  %77 = trunc i32 %76 to i8
+  %78 = and i8 %77, 1
+  %79 = xor i8 %78, 1
+  store i8 %79, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %80 = xor i32 %72, %71
+  %81 = lshr i32 %80, 4
+  %82 = trunc i32 %81 to i8
+  %83 = and i8 %82, 1
+  store i8 %83, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %84 = icmp eq i32 %72, 0
+  %85 = zext i1 %84 to i8
+  store i8 %85, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %86 = lshr i32 %72, 31
+  %87 = trunc i32 %86 to i8
+  store i8 %87, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %88 = lshr i32 %71, 31
+  %89 = xor i32 %86, %88
+  %90 = add nuw nsw i32 %89, %88
+  %91 = icmp eq i32 %90, 2
+  %92 = zext i1 %91 to i8
+  store i8 %92, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  %93 = add i32 %71, -16
+  %94 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %95 = add i32 %93, %94
+  %96 = inttoptr i32 %95 to i32*
+  store i32 ptrtoint (i8* @data_8048580 to i32), i32* %96, align 4
+  %97 = add i32 %71, -20
+  %98 = add i32 %94, %97
+  %99 = inttoptr i32 %98 to i32*
+  store i32 ptrtoint (i8* @data_804849b to i32), i32* %99, align 4
+  store i32 %97, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  %100 = call fastcc %struct.Memory* @ext_804a034_printf(%struct.Memory* %70)
+  %101 = load i32, i32* @ESP_2312_55b12bd921c0, align 8
+  %102 = add i32 %101, 16
+  %103 = icmp ugt i32 %101, -17
+  %104 = zext i1 %103 to i8
+  store i8 %104, i8* @CF_2065_55b12bd92190, align 1, !tbaa !1226
+  %105 = and i32 %102, 255
+  %106 = call i32 @llvm.ctpop.i32(i32 %105) #12, !range !1240
+  %107 = trunc i32 %106 to i8
+  %108 = and i8 %107, 1
+  %109 = xor i8 %108, 1
+  store i8 %109, i8* @PF_2067_55b12bd92190, align 1, !tbaa !1241
+  %110 = xor i32 %101, 16
+  %111 = xor i32 %110, %102
+  %112 = lshr i32 %111, 4
+  %113 = trunc i32 %112 to i8
+  %114 = and i8 %113, 1
+  store i8 %114, i8* @AF_2069_55b12bd92190, align 1, !tbaa !1245
+  %115 = icmp eq i32 %102, 0
+  %116 = zext i1 %115 to i8
+  store i8 %116, i8* @ZF_2071_55b12bd92190, align 1, !tbaa !1242
+  %117 = lshr i32 %102, 31
+  %118 = trunc i32 %117 to i8
+  store i8 %118, i8* @SF_2073_55b12bd92190, align 1, !tbaa !1243
+  %119 = lshr i32 %101, 31
+  %120 = xor i32 %117, %119
+  %121 = add nuw nsw i32 %120, %117
+  %122 = icmp eq i32 %121, 2
+  %123 = zext i1 %122 to i8
+  store i8 %123, i8* @OF_2077_55b12bd92190, align 1, !tbaa !1244
+  store i32 0, i32* @EAX_2216_55b12bd921c0, align 8, !tbaa !1219
+  %124 = load i32*, i32** @EBP_2328_55b12bd99b10, align 8
+  %125 = load i32, i32* @EBP_2328_55b12bd921c0, align 8
+  %126 = getelementptr i32, i32* %124, i32 -1
+  %127 = load i32, i32* %126, align 4
+  store i32 %127, i32* @ECX_2248_55b12bd921c0, align 8, !tbaa !1219
+  %128 = load i32, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 5, i32 1, i32 0, i32 0), align 8, !tbaa !1216
+  %129 = add i32 %128, %125
+  %130 = inttoptr i32 %129 to i32*
+  %131 = load i32, i32* %130, align 4
+  store i32 %131, i32* @EBP_2328_55b12bd921c0, align 8, !tbaa !1219
+  store i32 %127, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
+  ret %struct.Memory* %100
+}
+
+; Function Attrs: nofree noinline norecurse nounwind
+define internal fastcc %struct.Memory* @sub_8048560___libc_csu_fini(%struct.Memory* noalias readnone returned %memory) unnamed_addr #6 {
 inst_8048560:
   %0 = load i32, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1216
   %1 = add i32 %0, 4
-  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 4, !tbaa !1219
+  store i32 %1, i32* @ESP_2312_55b12bd921c0, align 8, !tbaa !1219
   ret %struct.Memory* %memory
 }
 
 ; Function Attrs: noinline
-declare !remill.function.type !1246 void @__libc_start_main(i32 (i32, i8**, i8**)*, i32, i8**, i8*, i32 (i32, i8**, i8**)*, void ()*, void ()*, i32*) #12
+declare !remill.function.type !1246 void @__libc_start_main(i32 (i32, i8**, i8**)*, i32, i8**, i8*, i32 (i32, i8**, i8**)*, void ()*, void ()*, i32*) #8
 
-; Function Attrs: noinline
-define internal %struct.Memory* @ext_804a03c___gmon_start__(%struct.State* %0, i32 %1, %struct.Memory* %2) #12 {
-  %4 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (void ()* @__gmon_start__ to i32), %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @ext_804a03c___gmon_start__(%struct.Memory* %0) unnamed_addr #9 {
+  %2 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (void ()* @__gmon_start__ to i32), %struct.Memory* %0)
+  ret %struct.Memory* %2
 }
 
 ; Function Attrs: noinline
-define weak void @__gmon_start__() #12 !remill.function.type !1246 {
+define weak void @__gmon_start__() #8 !remill.function.type !1246 {
   ret void
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @ext_804a034_printf(%struct.State* %0, i32 %1, %struct.Memory* %2) #12 {
-  %4 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i32 (i8*, ...)* @printf to i32), %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @ext_804a034_printf(%struct.Memory* %0) unnamed_addr #9 {
+  %2 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i32 (i8*, ...)* @printf to i32), %struct.Memory* %0)
+  ret %struct.Memory* %2
 }
 
-; Function Attrs: noinline
-declare !remill.function.type !1246 i32 @printf(i8*, ...) #12
+; Function Attrs: nofree noinline nounwind
+declare !remill.function.type !1246 i32 @printf(i8* nocapture readonly, ...) #10
 
-; Function Attrs: noinline
-define internal %struct.Memory* @ext_804a030_mprotect(%struct.State* %0, i32 %1, %struct.Memory* %2) #12 {
-  %4 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i32 (i32, i32, i32)* @mprotect to i32), %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noinline nounwind
+define internal fastcc %struct.Memory* @ext_804a030_mprotect(%struct.Memory* %0) unnamed_addr #9 {
+  %2 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i32 (i32, i32, i32)* @mprotect to i32), %struct.Memory* %0)
+  ret %struct.Memory* %2
 }
 
 ; Function Attrs: nobuiltin noinline
-declare !remill.function.type !1246 i32 @mprotect(i32, i32, i32) #13
+declare !remill.function.type !1246 i32 @mprotect(i32, i32, i32) #11
 
-; Function Attrs: noinline
-define internal %struct.Memory* @ext_804a038___libc_start_main(%struct.State* %0, i32 %1, %struct.Memory* %2) #12 {
-  %4 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (void (i32 (i32, i8**, i8**)*, i32, i8**, i8*, i32 (i32, i8**, i8**)*, void ()*, void ()*, i32*)* @__libc_start_main to i32), %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noinline nounwind
+define internal fastcc void @ext_804a038___libc_start_main(%struct.Memory* %0) unnamed_addr #9 {
+  %2 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (void (i32 (i32, i8**, i8**)*, i32, i8**, i8*, i32 (i32, i8**, i8**)*, void ()*, void ()*, i32*)* @__libc_start_main to i32), %struct.Memory* %0)
+  ret void
 }
 
-; Function Attrs: noinline
-define internal %struct.Memory* @ext_8048310_mprotect(%struct.State* %0, i32 %1, %struct.Memory* %2) #12 {
-  %4 = call %struct.Memory* @__remill_function_call(%struct.State* @__mcsema_reg_state, i32 ptrtoint (i32 (i32, i32, i32)* @mprotect to i32), %struct.Memory* %2)
-  ret %struct.Memory* %4
-}
-
-; Function Attrs: naked nobuiltin noinline
-define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #8 !remill.function.type !1246 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048466;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @1, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #2 !remill.function.type !1246 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048466;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @1, void ()** nonnull @2) #12
   ret i32 undef
 }
 
 ; Function Attrs: noinline
-declare !remill.function.type !1247 void @__mcsema_attach_call() #12
+declare !remill.function.type !1247 void @__mcsema_attach_call() #8
 
-define internal %struct.Memory* @main_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048466_main(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: nounwind
+define internal %struct.Memory* @main_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* %2) #12 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_8048466_main(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal void @__mcsema_early_init() {
-  %1 = load volatile i1, i1* @0
+; Function Attrs: nofree norecurse nounwind
+define internal fastcc void @__mcsema_early_init() unnamed_addr #13 {
+  %1 = load volatile i1, i1* @0, align 1
   br i1 %1, label %2, label %3
 
 2:                                                ; preds = %0
   ret void
 
 3:                                                ; preds = %0
-  store volatile i1 true, i1* @0
+  store volatile i1 true, i1* @0, align 1
   ret void
 }
 
-; Function Attrs: naked nobuiltin noinline
-define dso_local dllexport void @getMemoryPermission() #8 !remill.function.type !1246 {
-  call void asm sideeffect "pushl $0;pushl $$0x80484ab;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @3, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define dso_local dllexport void @getMemoryPermission() #2 !remill.function.type !1246 {
+  call void asm sideeffect "pushl $0;pushl $$0x80484ab;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @3, void ()** nonnull @2) #12
   ret void
 }
 
-define internal %struct.Memory* @getMemoryPermission_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: nounwind
+define internal %struct.Memory* @getMemoryPermission_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* %2) #12 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_80484ab_getMemoryPermission(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal %struct.Memory* @frame_dummy_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048460_frame_dummy(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: nofree norecurse nounwind
+define internal %struct.Memory* @frame_dummy_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* readnone returned %2) #13 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_8048460_frame_dummy(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal %struct.Memory* @__do_global_dtors_aux_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048430___do_global_dtors_aux(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: nofree nounwind
+define internal %struct.Memory* @__do_global_dtors_aux_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* readnone returned %2) #14 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_8048430___do_global_dtors_aux(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal %struct.Memory* @_start_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048350__start(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: noreturn nounwind
+define internal noalias nonnull %struct.Memory* @_start_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* %2) #15 {
+  call fastcc void @__mcsema_early_init()
+  tail call fastcc void @sub_8048350__start(%struct.Memory* %2)
+  unreachable
+}
+
+; Function Attrs: nounwind
+define internal %struct.Memory* @__libc_csu_init_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* %2) #12 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_8048500___libc_csu_init(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal %struct.Memory* @__libc_csu_init_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048500___libc_csu_init(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
-  ret %struct.Memory* %4
-}
-
-define internal void @__mcsema_constructor() {
+; Function Attrs: nounwind
+define internal void @__mcsema_constructor() #12 {
   call void @__libc_csu_init()
   ret void
 }
 
-define internal %struct.Memory* @__libc_csu_fini_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048560___libc_csu_fini(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
+; Function Attrs: nofree norecurse nounwind
+define internal %struct.Memory* @__libc_csu_fini_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* readnone returned %2) #13 {
+  call fastcc void @__mcsema_early_init()
+  %4 = tail call fastcc %struct.Memory* @sub_8048560___libc_csu_fini(%struct.Memory* %2)
   ret %struct.Memory* %4
 }
 
-define internal void @__mcsema_destructor() {
+; Function Attrs: nounwind
+define internal void @__mcsema_destructor() #12 {
   call void @__libc_csu_fini()
   ret void
 }
 
-attributes #0 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { nounwind readnone speculatable willreturn }
-attributes #2 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #4 = { nounwind readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #5 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #6 = { noduplicate noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #7 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #8 = { naked nobuiltin noinline }
-attributes #9 = { noreturn }
-attributes #10 = { noinline "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #11 = { alwaysinline inlinehint "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #12 = { noinline }
-attributes #13 = { nobuiltin noinline }
-attributes #14 = { nounwind }
+attributes #0 = { nounwind readnone speculatable willreturn }
+attributes #1 = { noduplicate noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { naked nobuiltin noinline nounwind }
+attributes #3 = { noreturn }
+attributes #4 = { noinline nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #5 = { noinline noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #6 = { nofree noinline norecurse nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #7 = { nofree noinline nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #8 = { noinline }
+attributes #9 = { noinline nounwind }
+attributes #10 = { nofree noinline nounwind }
+attributes #11 = { nobuiltin noinline }
+attributes #12 = { nounwind }
+attributes #13 = { nofree norecurse nounwind }
+attributes #14 = { nofree nounwind }
+attributes #15 = { noreturn nounwind }
 
 !llvm.ident = !{!0, !0, !0}
 !llvm.module.flags = !{!1, !2, !3}

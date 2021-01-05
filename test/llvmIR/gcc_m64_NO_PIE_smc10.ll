@@ -1,4 +1,4 @@
-; ModuleID = 'gcc_m64_NO_PIE_smc10.ll'
+; ModuleID = 'gcc_m64_NO_PIE_smc10.ll.bc'
 source_filename = "llvm-link"
 target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-f80:128-n8:16:32:64-S128"
 target triple = "x86_64-pc-linux-gnu-elf"
@@ -643,7 +643,7 @@ inst_400630:
   %22 = icmp eq i64 %21, 0
   br i1 %22, label %inst_400686, label %inst_400666
 
-inst_400670:                                      ; preds = %inst_400670, %inst_400666
+inst_400670:                                      ; preds = %inst_400666, %inst_400670
   %23 = phi i64 [ add (i64 ptrtoint (i8* @data_400666 to i64), i64 10), %inst_400666 ], [ %68, %inst_400670 ]
   %24 = phi %struct.Memory* [ %20, %inst_400666 ], [ %39, %inst_400670 ]
   %25 = load i64, i64* @R15_2456_55bbe5ed81d8, align 8

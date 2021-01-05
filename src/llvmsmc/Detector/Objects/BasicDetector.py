@@ -124,11 +124,12 @@ class CallDetector(CriticalDetector):
 					cls.detector.criticalInstructions.append([instruction,
 						variable.name, 2.2])
 			elif answer.pattern == 3:
+				# Pattern 3
+				# call @__remill_function_call(____, %variable, ____)
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
 
-				if variable and 'critical!' in variable.tokens:
-					# print(instruction)
+				if variable and 'data!' in variable.tokens:
 					cls.detector.criticalInstructions.append([instruction,
 						variable.name, 2.3])
 		return 0
