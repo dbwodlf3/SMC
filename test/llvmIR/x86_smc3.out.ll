@@ -1,4 +1,4 @@
-; ModuleID = 'x86_smc3.out.bc'
+; ModuleID = 'x86_smc3.out.ll.bc'
 source_filename = "llvm-link"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu-elf"
@@ -68,188 +68,130 @@ target triple = "i386-pc-linux-gnu-elf"
 @EAX_2216_55ccbaa3a050 = private thread_local(initialexec) alias i32, getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 1, i32 0, i32 0)
 @EDX_2264_55ccbaa3a038 = private thread_local(initialexec) alias i16, bitcast (i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 7, i32 0, i32 0) to i16*)
 
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_sync_hyper_call(%struct.State* dereferenceable(3376), %struct.Memory*, i32) #0
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_error(%struct.State* dereferenceable(3376) %0, i32 %1, %struct.Memory* %2) #1 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_load(%struct.Memory*) #2
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_store(%struct.Memory*) #2
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_load(%struct.Memory*) #2
-
-; Function Attrs: nounwind readnone
-declare !remill.function.type !1215 dso_local i32 @__remill_fpu_exception_test_and_clear(i32, i32) #3
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_store(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_begin(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_end(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_begin(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_end(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_call(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_return(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_jump(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_missing_block(%struct.State* nonnull %0, i32 %1, %struct.Memory* %2) #6 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_async_hyper_call(%struct.State* nonnull, i32, %struct.Memory*) #5
-
 ; Function Attrs: noreturn
-declare void @abort() #7
+declare void @abort() local_unnamed_addr #0
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_804807c_main(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #8 {
+; Function Attrs: noinline noreturn nounwind
+define internal fastcc void @sub_804807c_main() unnamed_addr #1 {
 inst_804807c:
-  store i32 3, i32* @EAX_2216_55ccbaa3a050, align 4, !tbaa !1216
-  store i32 0, i32* @ECX_2248_55ccbaa3a050, align 4, !tbaa !1216
-  store i8* @data_804811d, i8** @EBX_2232_55ccbaa41840
-  %0 = load i32, i32* bitcast (i8* @data_804811d to i32*)
-  store i32 %0, i32* @EDX_2264_55ccbaa3a050, align 4, !tbaa !1216
-  store i32 %0, i32* bitcast (i8* @data_8048135 to i32*)
-  store i16 0, i16* bitcast (i8* @data_8048136 to i16*)
-  store i16 0, i16* bitcast (i8* @data_8048138 to i16*)
-  store i8* @data_804813a, i8** @EDI_2296_55ccbaa41840
-  br label %inst_80480a3
-
-inst_80480a3:                                     ; preds = %inst_80480f4, %inst_804807c
-  %1 = load i32, i32* @ECX_2248_55ccbaa3a050
-  %2 = sub i32 3, %1
-  %3 = icmp eq i32 %2, 0
-  br i1 %3, label %inst_80480f9, label %inst_80480a7
+  store i32 3, i32* @EAX_2216_55ccbaa3a050, align 8, !tbaa !1215
+  store i32 0, i32* @ECX_2248_55ccbaa3a050, align 8, !tbaa !1215
+  store i8* @data_804811d, i8** @EBX_2232_55ccbaa41840, align 8
+  %0 = load i32, i32* bitcast (i8* @data_804811d to i32*), align 4
+  store i32 %0, i32* @EDX_2264_55ccbaa3a050, align 8, !tbaa !1215
+  store i32 %0, i32* bitcast (i8* @data_8048135 to i32*), align 4
+  store i16 0, i16* bitcast (i8* @data_8048136 to i16*), align 2
+  store i16 0, i16* bitcast (i8* @data_8048138 to i16*), align 4
+  store i8* @data_804813a, i8** @EDI_2296_55ccbaa41840, align 8
+  %1 = load i32, i32* @ECX_2248_55ccbaa3a050, align 8
+  %2 = icmp eq i32 %1, 3
+  br i1 %2, label %inst_80480f9, label %inst_80480a7
 
 inst_80480f4:                                     ; preds = %inst_80480ba, %inst_80480a7
-  %4 = add i32 1, %1
-  store i32 %4, i32* @ECX_2248_55ccbaa3a050, align 4, !tbaa !1216
-  br label %inst_80480a3
+  %3 = add i32 %6, 1
+  store i32 %3, i32* @ECX_2248_55ccbaa3a050, align 8, !tbaa !1215
+  %4 = icmp eq i32 %3, 3
+  br i1 %4, label %inst_80480f9, label %inst_80480a7
 
-inst_80480f9:                                     ; preds = %inst_80480a3
-  %5 = load i16, i16* inttoptr (i32 add (i32 ptrtoint (i8* @data_804811d to i32), i32 21) to i16*)
-  store i16 %5, i16* @EDX_2264_55ccbaa3a038, align 2, !tbaa !1220
-  store i8* @data_804806c, i8** @ESI_2280_55ccbaa41840
-  store i8* @data_804810e, i8** @ESP_2312_55ccbaa41840
-  store i8 0, i8* @CF_2065_55ccbaa3a020, align 1, !tbaa !1222
-  store i8 0, i8* @PF_2067_55ccbaa3a020, align 1, !tbaa !1235
-  store i8 0, i8* @AF_2069_55ccbaa3a020, align 1, !tbaa !1236
-  store i8 0, i8* @ZF_2071_55ccbaa3a020, align 1, !tbaa !1237
-  store i8 0, i8* @SF_2073_55ccbaa3a020, align 1, !tbaa !1238
-  store i8 0, i8* @OF_2077_55ccbaa3a020, align 1, !tbaa !1239
-  call void @abort() #11
+inst_80480f9:                                     ; preds = %inst_80480f4, %inst_804807c
+  %5 = load i16, i16* inttoptr (i32 add (i32 ptrtoint (i8* @data_804811d to i32), i32 21) to i16*), align 2
+  store i16 %5, i16* @EDX_2264_55ccbaa3a038, align 8, !tbaa !1219
+  store i8* @data_804806c, i8** @ESI_2280_55ccbaa41840, align 8
+  store i8* @data_804810e, i8** @ESP_2312_55ccbaa41840, align 8
+  store i8 0, i8* @CF_2065_55ccbaa3a020, align 1, !tbaa !1221
+  store i8 0, i8* @PF_2067_55ccbaa3a020, align 1, !tbaa !1234
+  store i8 0, i8* @AF_2069_55ccbaa3a020, align 1, !tbaa !1235
+  store i8 0, i8* @ZF_2071_55ccbaa3a020, align 1, !tbaa !1236
+  store i8 0, i8* @SF_2073_55ccbaa3a020, align 1, !tbaa !1237
+  store i8 0, i8* @OF_2077_55ccbaa3a020, align 1, !tbaa !1238
+  call void @abort() #6
   unreachable
 
-inst_80480a7:                                     ; preds = %inst_80480a3
-  %6 = sext i32 %1 to i64
-  %7 = mul nsw i64 %6, 4
-  %8 = trunc i64 %7 to i32
-  store i32 %8, i32* @EBP_2328_55ccbaa3a050, align 4, !tbaa !1216
-  %9 = getelementptr i8, i8* @data_8048060, i32 %8
-  %10 = bitcast i8* %9 to i32*
-  %11 = load i32, i32* %10
-  %12 = icmp eq i32 %11, 0
-  br i1 %12, label %inst_80480f4, label %inst_80480ba
+inst_80480a7:                                     ; preds = %inst_804807c, %inst_80480f4
+  %6 = phi i32 [ %3, %inst_80480f4 ], [ %1, %inst_804807c ]
+  %7 = shl i32 %6, 2
+  store i32 %7, i32* @EBP_2328_55ccbaa3a050, align 8, !tbaa !1215
+  %8 = getelementptr i8, i8* @data_8048060, i32 %7
+  %9 = bitcast i8* %8 to i32*
+  %10 = load i32, i32* %9, align 4
+  %11 = icmp eq i32 %10, 0
+  br i1 %11, label %inst_80480f4, label %inst_80480ba
 
 inst_80480ba:                                     ; preds = %inst_80480a7
-  %13 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 166) to i16*)
-  %14 = load i8*, i8** @EDI_2296_55ccbaa41840
-  %15 = load i32, i32* @EDI_2296_55ccbaa3a050
-  %16 = bitcast i8* %14 to i16*
-  store i16 %13, i16* %16
-  %17 = trunc i32 %8 to i8
-  %18 = getelementptr i8, i8* %14, i32 2
-  store i8 %17, i8* %18
-  %19 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 169) to i16*)
-  %20 = getelementptr i8, i8* %14, i32 3
-  %21 = bitcast i8* %20 to i16*
-  store i16 %19, i16* %21
-  %22 = load i8, i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 171)
-  %23 = getelementptr i8, i8* %14, i32 5
-  store i8 %22, i8* %23
-  %24 = trunc i32 %11 to i8
-  %25 = getelementptr i8, i8* %14, i32 6
-  store i8 %24, i8* %25
-  %26 = getelementptr i8, i8* %14, i32 7
-  store i8 0, i8* %26
-  %27 = getelementptr i16, i16* %16, i32 4
-  store i16 0, i16* %27
-  %28 = load i32, i32* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 7, i32 0) to i32*)
-  store i32 %28, i32* @EDX_2264_55ccbaa3a050, align 4, !tbaa !1216
-  %29 = getelementptr i8, i8* %14, i32 10
+  %12 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 166) to i16*), align 2
+  %13 = load i8*, i8** @EDI_2296_55ccbaa41840, align 8
+  %14 = load i32, i32* @EDI_2296_55ccbaa3a050, align 8
+  %15 = bitcast i8* %13 to i16*
+  store i16 %12, i16* %15, align 2
+  %16 = trunc i32 %7 to i8
+  %17 = getelementptr i8, i8* %13, i32 2
+  store i8 %16, i8* %17, align 1
+  %18 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 169) to i16*), align 2
+  %19 = getelementptr i8, i8* %13, i32 3
+  %20 = bitcast i8* %19 to i16*
+  store i16 %18, i16* %20, align 2
+  %21 = load i8, i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 5, i32 171), align 1
+  %22 = getelementptr i8, i8* %13, i32 5
+  store i8 %21, i8* %22, align 1
+  %23 = trunc i32 %10 to i8
+  %24 = getelementptr i8, i8* %13, i32 6
+  store i8 %23, i8* %24, align 1
+  %25 = getelementptr i8, i8* %13, i32 7
+  store i8 0, i8* %25, align 1
+  %26 = getelementptr i8, i8* %13, i32 8
+  %27 = bitcast i8* %26 to i16*
+  store i16 0, i16* %27, align 2
+  %28 = load i32, i32* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 7, i32 0) to i32*), align 4
+  store i32 %28, i32* @EDX_2264_55ccbaa3a050, align 8, !tbaa !1215
+  %29 = getelementptr i8, i8* %13, i32 10
   %30 = bitcast i8* %29 to i32*
-  store i32 %28, i32* %30
-  %31 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 7, i32 4) to i16*)
-  store i16 %31, i16* @EDX_2264_55ccbaa3a038, align 2, !tbaa !1220
-  %32 = getelementptr i16, i16* %16, i32 7
-  store i16 %31, i16* %32
-  %33 = add i32 16, %15
-  store i32 %33, i32* @EDI_2296_55ccbaa3a050, align 4, !tbaa !1216
+  store i32 %28, i32* %30, align 4
+  %31 = load i16, i16* bitcast (i8* getelementptr inbounds (%seg_8048060__text_fc_type, %seg_8048060__text_fc_type* @seg_8048060__text_fc, i32 0, i32 7, i32 4) to i16*), align 4
+  store i16 %31, i16* @EDX_2264_55ccbaa3a038, align 8, !tbaa !1219
+  %32 = getelementptr i8, i8* %13, i32 14
+  %33 = bitcast i8* %32 to i16*
+  store i16 %31, i16* %33, align 2
+  %34 = add i32 %14, 16
+  store i32 %34, i32* @EDI_2296_55ccbaa3a050, align 8, !tbaa !1215
   br label %inst_80480f4
 }
 
-; Function Attrs: naked nobuiltin noinline
-define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #9 !remill.function.type !1240 {
-  call void asm sideeffect "pushl $0;pushl $$0x804807c;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @1, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #2 !remill.function.type !1239 {
+  call void asm sideeffect "pushl $0;pushl $$0x804807c;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @1, void ()** nonnull @2) #6
   ret i32 undef
 }
 
 ; Function Attrs: noinline
-declare !remill.function.type !1241 void @__mcsema_attach_call() #10
+declare !remill.function.type !1240 void @__mcsema_attach_call() #3
 
-define internal %struct.Memory* @main_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_804807c_main(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noreturn nounwind
+define internal noalias nonnull %struct.Memory* @main_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* nocapture readnone %2) #4 {
+  call fastcc void @__mcsema_early_init()
+  tail call fastcc void @sub_804807c_main()
+  unreachable
 }
 
-define internal void @__mcsema_early_init() {
-  %1 = load volatile i1, i1* @0
+; Function Attrs: nofree norecurse nounwind
+define internal fastcc void @__mcsema_early_init() unnamed_addr #5 {
+  %1 = load volatile i1, i1* @0, align 1
   br i1 %1, label %2, label %3
 
 2:                                                ; preds = %0
   ret void
 
 3:                                                ; preds = %0
-  store volatile i1 true, i1* @0
+  store volatile i1 true, i1* @0, align 1
   ret void
 }
 
-attributes #0 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #4 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #5 = { noduplicate noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #6 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #7 = { noreturn }
-attributes #8 = { noinline "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #9 = { naked nobuiltin noinline }
-attributes #10 = { noinline }
-attributes #11 = { nounwind }
+attributes #0 = { noreturn }
+attributes #1 = { noinline noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #2 = { naked nobuiltin noinline nounwind }
+attributes #3 = { noinline }
+attributes #4 = { noreturn nounwind }
+attributes #5 = { nofree norecurse nounwind }
+attributes #6 = { nounwind }
 
 !llvm.ident = !{!0, !0, !0}
 !llvm.module.flags = !{!1, !2, !3}
@@ -1470,30 +1412,29 @@ attributes #11 = { nounwind }
 !1212 = !DIImportedEntity(tag: DW_TAG_imported_declaration, scope: !11, entity: !1192, file: !1202, line: 75)
 !1213 = !DIImportedEntity(tag: DW_TAG_imported_declaration, scope: !11, entity: !1194, file: !1202, line: 76)
 !1214 = !DIImportedEntity(tag: DW_TAG_imported_declaration, scope: !11, entity: !1200, file: !1202, line: 77)
-!1215 = !{!"base.helper.semantics"}
-!1216 = !{!1217, !1217, i64 0}
-!1217 = !{!"int", !1218, i64 0}
-!1218 = !{!"omnipotent char", !1219, i64 0}
-!1219 = !{!"Simple C++ TBAA"}
-!1220 = !{!1221, !1221, i64 0}
-!1221 = !{!"short", !1218, i64 0}
-!1222 = !{!1223, !1218, i64 2065}
-!1223 = !{!"_ZTS5State", !1218, i64 16, !1224, i64 2064, !1218, i64 2080, !1225, i64 2088, !1226, i64 2112, !1229, i64 2208, !1230, i64 2480, !1231, i64 2608, !1232, i64 2736, !1218, i64 2760, !1218, i64 2768, !1233, i64 3280}
-!1224 = !{!"_ZTS10ArithFlags", !1218, i64 0, !1218, i64 1, !1218, i64 2, !1218, i64 3, !1218, i64 4, !1218, i64 5, !1218, i64 6, !1218, i64 7, !1218, i64 8, !1218, i64 9, !1218, i64 10, !1218, i64 11, !1218, i64 12, !1218, i64 13, !1218, i64 14, !1218, i64 15}
-!1225 = !{!"_ZTS8Segments", !1221, i64 0, !1218, i64 2, !1221, i64 4, !1218, i64 6, !1221, i64 8, !1218, i64 10, !1221, i64 12, !1218, i64 14, !1221, i64 16, !1218, i64 18, !1221, i64 20, !1218, i64 22}
-!1226 = !{!"_ZTS12AddressSpace", !1227, i64 0, !1228, i64 8, !1227, i64 16, !1228, i64 24, !1227, i64 32, !1228, i64 40, !1227, i64 48, !1228, i64 56, !1227, i64 64, !1228, i64 72, !1227, i64 80, !1228, i64 88}
-!1227 = !{!"long", !1218, i64 0}
-!1228 = !{!"_ZTS3Reg", !1218, i64 0, !1217, i64 4}
-!1229 = !{!"_ZTS3GPR", !1227, i64 0, !1228, i64 8, !1227, i64 16, !1228, i64 24, !1227, i64 32, !1228, i64 40, !1227, i64 48, !1228, i64 56, !1227, i64 64, !1228, i64 72, !1227, i64 80, !1228, i64 88, !1227, i64 96, !1228, i64 104, !1227, i64 112, !1228, i64 120, !1227, i64 128, !1228, i64 136, !1227, i64 144, !1228, i64 152, !1227, i64 160, !1228, i64 168, !1227, i64 176, !1228, i64 184, !1227, i64 192, !1228, i64 200, !1227, i64 208, !1228, i64 216, !1227, i64 224, !1228, i64 232, !1227, i64 240, !1228, i64 248, !1227, i64 256, !1228, i64 264}
-!1230 = !{!"_ZTS8X87Stack", !1218, i64 0}
-!1231 = !{!"_ZTS3MMX", !1218, i64 0}
-!1232 = !{!"_ZTS14FPUStatusFlags", !1218, i64 0, !1218, i64 1, !1218, i64 2, !1218, i64 3, !1218, i64 4, !1218, i64 5, !1218, i64 6, !1218, i64 7, !1218, i64 8, !1218, i64 9, !1218, i64 10, !1218, i64 11, !1218, i64 12, !1218, i64 13, !1218, i64 14, !1218, i64 15, !1218, i64 16, !1218, i64 17, !1218, i64 18, !1218, i64 19, !1218, i64 20}
-!1233 = !{!"_ZTS13SegmentCaches", !1234, i64 0, !1234, i64 16, !1234, i64 32, !1234, i64 48, !1234, i64 64, !1234, i64 80}
-!1234 = !{!"_ZTS13SegmentShadow", !1218, i64 0, !1217, i64 8, !1217, i64 12}
-!1235 = !{!1223, !1218, i64 2067}
-!1236 = !{!1223, !1218, i64 2069}
-!1237 = !{!1223, !1218, i64 2071}
-!1238 = !{!1223, !1218, i64 2073}
-!1239 = !{!1223, !1218, i64 2077}
-!1240 = !{!"base.entrypoint"}
-!1241 = !{!"base.helper.mcsema"}
+!1215 = !{!1216, !1216, i64 0}
+!1216 = !{!"int", !1217, i64 0}
+!1217 = !{!"omnipotent char", !1218, i64 0}
+!1218 = !{!"Simple C++ TBAA"}
+!1219 = !{!1220, !1220, i64 0}
+!1220 = !{!"short", !1217, i64 0}
+!1221 = !{!1222, !1217, i64 2065}
+!1222 = !{!"_ZTS5State", !1217, i64 16, !1223, i64 2064, !1217, i64 2080, !1224, i64 2088, !1225, i64 2112, !1228, i64 2208, !1229, i64 2480, !1230, i64 2608, !1231, i64 2736, !1217, i64 2760, !1217, i64 2768, !1232, i64 3280}
+!1223 = !{!"_ZTS10ArithFlags", !1217, i64 0, !1217, i64 1, !1217, i64 2, !1217, i64 3, !1217, i64 4, !1217, i64 5, !1217, i64 6, !1217, i64 7, !1217, i64 8, !1217, i64 9, !1217, i64 10, !1217, i64 11, !1217, i64 12, !1217, i64 13, !1217, i64 14, !1217, i64 15}
+!1224 = !{!"_ZTS8Segments", !1220, i64 0, !1217, i64 2, !1220, i64 4, !1217, i64 6, !1220, i64 8, !1217, i64 10, !1220, i64 12, !1217, i64 14, !1220, i64 16, !1217, i64 18, !1220, i64 20, !1217, i64 22}
+!1225 = !{!"_ZTS12AddressSpace", !1226, i64 0, !1227, i64 8, !1226, i64 16, !1227, i64 24, !1226, i64 32, !1227, i64 40, !1226, i64 48, !1227, i64 56, !1226, i64 64, !1227, i64 72, !1226, i64 80, !1227, i64 88}
+!1226 = !{!"long", !1217, i64 0}
+!1227 = !{!"_ZTS3Reg", !1217, i64 0, !1216, i64 4}
+!1228 = !{!"_ZTS3GPR", !1226, i64 0, !1227, i64 8, !1226, i64 16, !1227, i64 24, !1226, i64 32, !1227, i64 40, !1226, i64 48, !1227, i64 56, !1226, i64 64, !1227, i64 72, !1226, i64 80, !1227, i64 88, !1226, i64 96, !1227, i64 104, !1226, i64 112, !1227, i64 120, !1226, i64 128, !1227, i64 136, !1226, i64 144, !1227, i64 152, !1226, i64 160, !1227, i64 168, !1226, i64 176, !1227, i64 184, !1226, i64 192, !1227, i64 200, !1226, i64 208, !1227, i64 216, !1226, i64 224, !1227, i64 232, !1226, i64 240, !1227, i64 248, !1226, i64 256, !1227, i64 264}
+!1229 = !{!"_ZTS8X87Stack", !1217, i64 0}
+!1230 = !{!"_ZTS3MMX", !1217, i64 0}
+!1231 = !{!"_ZTS14FPUStatusFlags", !1217, i64 0, !1217, i64 1, !1217, i64 2, !1217, i64 3, !1217, i64 4, !1217, i64 5, !1217, i64 6, !1217, i64 7, !1217, i64 8, !1217, i64 9, !1217, i64 10, !1217, i64 11, !1217, i64 12, !1217, i64 13, !1217, i64 14, !1217, i64 15, !1217, i64 16, !1217, i64 17, !1217, i64 18, !1217, i64 19, !1217, i64 20}
+!1232 = !{!"_ZTS13SegmentCaches", !1233, i64 0, !1233, i64 16, !1233, i64 32, !1233, i64 48, !1233, i64 64, !1233, i64 80}
+!1233 = !{!"_ZTS13SegmentShadow", !1217, i64 0, !1216, i64 8, !1216, i64 12}
+!1234 = !{!1222, !1217, i64 2067}
+!1235 = !{!1222, !1217, i64 2069}
+!1236 = !{!1222, !1217, i64 2071}
+!1237 = !{!1222, !1217, i64 2073}
+!1238 = !{!1222, !1217, i64 2077}
+!1239 = !{!"base.entrypoint"}
+!1240 = !{!"base.helper.mcsema"}

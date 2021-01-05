@@ -1,4 +1,4 @@
-; ModuleID = 'x86_smc1.out.bc'
+; ModuleID = 'x86_smc1.out.ll.bc'
 source_filename = "llvm-link"
 target datalayout = "e-m:e-p:32:32-p270:32:32-p271:32:32-p272:64:64-f64:32:64-f80:32-n8:16:32-S128"
 target triple = "i386-pc-linux-gnu-elf"
@@ -36,14 +36,12 @@ target triple = "i386-pc-linux-gnu-elf"
 %struct.SegmentShadow = type { %union.anon, i32, i32 }
 %seg_8048060__text_2e_type = type <{ [96 x i8], [46 x i8], [2 x i8], [1 x i8] }>
 %struct.Memory = type opaque
-%seg_8048094__prgend_1_type = type <{ [148 x i8], [1 x i8] }>
 
 @__mcsema_reg_state = thread_local(initialexec) global %struct.State zeroinitializer
 @seg_8048060__text_2e = internal global %seg_8048060__text_2e_type <{ [96 x i8] zeroinitializer, [46 x i8] c"\BD\90\80\04\08\B9\01\00\00\00\BA\01\00\00\00;M\00t\11\83\C1\01\88\D3\83\C2\00\88\D8\A2{\80\04\08\EB\EA\B8\01\00\00\001\DB\CD\80", [2 x i8] zeroinitializer, [1 x i8] c"\08" }>, align 32768
 @0 = internal global i1 false
 @1 = internal constant %struct.Memory* (%struct.State*, i32, %struct.Memory*)* @main_wrapper
 @2 = internal constant void ()* @__mcsema_attach_call
-@seg_8048094__prgend_1 = internal constant %seg_8048094__prgend_1_type zeroinitializer, align 32768
 
 @data_804806f = internal alias i8, getelementptr inbounds (%seg_8048060__text_2e_type, %seg_8048060__text_2e_type* @seg_8048060__text_2e, i32 0, i32 1, i32 15)
 @data_804807b = internal alias i8, getelementptr inbounds (%seg_8048060__text_2e_type, %seg_8048060__text_2e_type* @seg_8048060__text_2e, i32 0, i32 1, i32 27)
@@ -61,80 +59,30 @@ target triple = "i386-pc-linux-gnu-elf"
 @EBP_2328_55ce27b7b840 = private thread_local(initialexec) alias i8*, bitcast (i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 15, i32 0, i32 0) to i8**)
 @EIP_2472_55ce27b74050 = private thread_local(initialexec) alias i32, getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 6, i32 33, i32 0, i32 0)
 
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_sync_hyper_call(%struct.State* dereferenceable(3376), %struct.Memory*, i32) #0
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_error(%struct.State* dereferenceable(3376) %0, i32 %1, %struct.Memory* %2) #1 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_load(%struct.Memory*) #2
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_store_store(%struct.Memory*) #2
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_load(%struct.Memory*) #2
-
-; Function Attrs: nounwind readnone
-declare !remill.function.type !1215 dso_local i32 @__remill_fpu_exception_test_and_clear(i32, i32) #3
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_barrier_load_store(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_begin(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_atomic_end(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_begin(%struct.Memory*) #4
-
-; Function Attrs: noduplicate noinline nounwind optnone readnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_delay_slot_end(%struct.Memory*) #4
-
 ; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_call(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_function_return(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_jump(%struct.State* nonnull, i32, %struct.Memory*) #5
-
-; Function Attrs: alwaysinline inlinehint noduplicate noreturn nounwind
-define internal %struct.Memory* @__remill_missing_block(%struct.State* nonnull %0, i32 %1, %struct.Memory* %2) #6 !remill.function.type !1215 {
-  call void @abort()
-  unreachable
-}
-
-; Function Attrs: noduplicate noinline nounwind optnone
-declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_async_hyper_call(%struct.State* nonnull, i32, %struct.Memory*) #5
+declare !remill.function.type !1215 dso_local %struct.Memory* @__remill_async_hyper_call(%struct.State* nonnull, i32, %struct.Memory*) local_unnamed_addr #0
 
 ; Function Attrs: noreturn
-declare void @abort() #7
+declare void @abort() local_unnamed_addr #1
 
-; Function Attrs: noinline
-define internal %struct.Memory* @sub_8048060_main(%struct.State* noalias nonnull %state, i32 %pc, %struct.Memory* noalias %memory) #8 {
+; Function Attrs: noinline noreturn nounwind
+define internal fastcc void @sub_8048060_main(%struct.Memory* noalias %memory) unnamed_addr #2 {
 inst_8048060:
-  store i8* @data_8048090, i8** @EBP_2328_55ce27b7b840
-  store i32 1, i32* @ECX_2248_55ce27b74050, align 4, !tbaa !1216
-  store i32 1, i32* @EDX_2264_55ce27b74050, align 4, !tbaa !1216
-  br label %inst_804806f
+  store i8* @data_8048090, i8** @EBP_2328_55ce27b7b840, align 8
+  store i32 1, i32* @ECX_2248_55ce27b74050, align 8, !tbaa !1216
+  store i32 1, i32* @EDX_2264_55ce27b74050, align 8, !tbaa !1216
+  %0 = load i32, i32* @ECX_2248_55ce27b74050, align 8
+  %1 = load i32, i32* bitcast (i8* @data_8048090 to i32*), align 16
+  %2 = icmp eq i32 %0, %1
+  br i1 %2, label %inst_8048085, label %inst_8048074
 
-inst_804806f:                                     ; preds = %inst_8048074, %inst_8048060
-  %0 = load i32, i32* @ECX_2248_55ce27b74050
-  %1 = load i32, i32* bitcast (i8* @data_8048090 to i32*)
-  %2 = sub i32 %0, %1
-  %3 = icmp eq i32 %2, 0
-  br i1 %3, label %inst_8048085, label %inst_8048074
+inst_804806f.inst_8048085_crit_edge:              ; preds = %inst_8048074
+  store i32 %5, i32* @ECX_2248_55ce27b74050, align 8
+  br label %inst_8048085
 
-inst_8048085:                                     ; preds = %inst_804806f
-  store i32 1, i32* @EAX_2216_55ce27b74050, align 4, !tbaa !1216
-  store i32 0, i32* @EBX_2232_55ce27b74050, align 4, !tbaa !1216
+inst_8048085:                                     ; preds = %inst_804806f.inst_8048085_crit_edge, %inst_8048060
+  store i32 1, i32* @EAX_2216_55ce27b74050, align 8, !tbaa !1216
+  store i32 0, i32* @EBX_2232_55ce27b74050, align 8, !tbaa !1216
   store i8 0, i8* @CF_2065_55ce27b74020, align 1, !tbaa !1220
   store i8 1, i8* @PF_2067_55ce27b74020, align 1, !tbaa !1234
   store i8 1, i8* @ZF_2071_55ce27b74020, align 1, !tbaa !1235
@@ -143,57 +91,57 @@ inst_8048085:                                     ; preds = %inst_804806f
   store i8 0, i8* @AF_2069_55ce27b74020, align 1, !tbaa !1238
   store i32 128, i32* bitcast (i64* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 0, i32 2, i32 0) to i32*), align 8, !tbaa !1239
   store i32 4, i32* getelementptr inbounds (%struct.State, %struct.State* @__mcsema_reg_state, i32 0, i32 0, i32 0), align 16, !tbaa !1240
-  %4 = call %struct.Memory* @__remill_async_hyper_call(%struct.State* @__mcsema_reg_state, i32 add (i32 ptrtoint (i8* @data_804806f to i32), i32 31), %struct.Memory* %memory)
-  store i32 add (i32 ptrtoint (i8* @data_804806f to i32), i32 31), i32* @EIP_2472_55ce27b74050
-  call void @abort() #11
+  %3 = call %struct.Memory* @__remill_async_hyper_call(%struct.State* @__mcsema_reg_state, i32 add (i32 ptrtoint (i8* @data_804806f to i32), i32 31), %struct.Memory* %memory)
+  store i32 add (i32 ptrtoint (i8* @data_804806f to i32), i32 31), i32* @EIP_2472_55ce27b74050, align 8
+  call void @abort() #7
   unreachable
 
-inst_8048074:                                     ; preds = %inst_804806f
-  %5 = add i32 1, %0
-  store i32 %5, i32* @ECX_2248_55ce27b74050, align 4, !tbaa !1216
-  store i8 1, i8* @data_804807b
-  br label %inst_804806f
+inst_8048074:                                     ; preds = %inst_8048060, %inst_8048074
+  %4 = phi i32 [ %5, %inst_8048074 ], [ %0, %inst_8048060 ]
+  %5 = add i32 %4, 1
+  store i8 1, i8* @data_804807b, align 1
+  %6 = load i32, i32* bitcast (i8* @data_8048090 to i32*), align 16
+  %7 = icmp eq i32 %5, %6
+  br i1 %7, label %inst_804806f.inst_8048085_crit_edge, label %inst_8048074
 }
 
-; Function Attrs: naked nobuiltin noinline
-define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #9 !remill.function.type !1243 {
-  call void asm sideeffect "pushl $0;pushl $$0x8048060;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** @1, void ()** @2)
+; Function Attrs: naked nobuiltin noinline nounwind
+define dllexport i32 @main(i32 %param0, i8** %param1, i8** %param2) #3 !remill.function.type !1243 {
+  call void asm sideeffect "pushl $0;pushl $$0x8048060;jmpl *$1;", "*m,*m,~{dirflag},~{fpsr},~{flags}"(%struct.Memory* (%struct.State*, i32, %struct.Memory*)** nonnull @1, void ()** nonnull @2) #7
   ret i32 undef
 }
 
 ; Function Attrs: noinline
-declare !remill.function.type !1244 void @__mcsema_attach_call() #10
+declare !remill.function.type !1244 void @__mcsema_attach_call() #4
 
-define internal %struct.Memory* @main_wrapper(%struct.State* %0, i32 %1, %struct.Memory* %2) {
-  call void @__mcsema_early_init()
-  %4 = tail call %struct.Memory* @sub_8048060_main(%struct.State* @__mcsema_reg_state, i32 %1, %struct.Memory* %2)
-  ret %struct.Memory* %4
+; Function Attrs: noreturn nounwind
+define internal noalias nonnull %struct.Memory* @main_wrapper(%struct.State* nocapture readnone %0, i32 %1, %struct.Memory* %2) #5 {
+  call fastcc void @__mcsema_early_init()
+  tail call fastcc void @sub_8048060_main(%struct.Memory* %2)
+  unreachable
 }
 
-define internal void @__mcsema_early_init() {
-  %1 = load volatile i1, i1* @0
+; Function Attrs: nofree norecurse nounwind
+define internal fastcc void @__mcsema_early_init() unnamed_addr #6 {
+  %1 = load volatile i1, i1* @0, align 1
   br i1 %1, label %2, label %3
 
 2:                                                ; preds = %0
   ret void
 
 3:                                                ; preds = %0
-  store volatile i1 true, i1* @0
+  store volatile i1 true, i1* @0, align 1
   ret void
 }
 
-attributes #0 = { "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #1 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #2 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #3 = { nounwind readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="none" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #4 = { noduplicate noinline nounwind optnone readnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #5 = { noduplicate noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #6 = { alwaysinline inlinehint noduplicate noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #7 = { noreturn }
-attributes #8 = { noinline "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
-attributes #9 = { naked nobuiltin noinline }
-attributes #10 = { noinline }
-attributes #11 = { nounwind }
+attributes #0 = { noduplicate noinline nounwind optnone "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #1 = { noreturn }
+attributes #2 = { noinline noreturn nounwind "correctly-rounded-divide-sqrt-fp-math"="false" "disable-tail-calls"="false" "frame-pointer"="all" "less-precise-fpmad"="false" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "no-signed-zeros-fp-math"="false" "no-trapping-math"="false" "stack-protector-buffer-size"="8" "unsafe-fp-math"="false" "use-soft-float"="false" }
+attributes #3 = { naked nobuiltin noinline nounwind }
+attributes #4 = { noinline }
+attributes #5 = { noreturn nounwind }
+attributes #6 = { nofree norecurse nounwind }
+attributes #7 = { nounwind }
 
 !llvm.ident = !{!0, !0, !0}
 !llvm.module.flags = !{!1, !2, !3}
