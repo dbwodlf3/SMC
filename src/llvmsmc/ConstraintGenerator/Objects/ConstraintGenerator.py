@@ -95,6 +95,7 @@ class ConstraintGenerator:
     def initConstraint(self):
         # Extra Constraints Init
         self.addConstraint(DataConstraint)
+        self.addConstraint(AddConstraint)
 
         # Module Constraints Init
         self.addModuleConstraint(AliasConstraint)

@@ -128,8 +128,10 @@ class CallDetector(CriticalDetector):
 				# call @__remill_function_call(____, %variable, ____)
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
-
-				if variable and 'data!' in variable.tokens:
-					cls.detector.criticalInstructions.append([instruction,
-						variable.name, 2.3])
+				filter_function = lambda x: re.match(r'.*RBP', x)
+				if variable:
+					if ('data!' in variable.tokens or
+						len(list(filter(filter_function, variable.tokens))) > 0):
+						cls.detector.criticalInstructions.append([instruction,
+							variable.name, 2.3])
 		return 0

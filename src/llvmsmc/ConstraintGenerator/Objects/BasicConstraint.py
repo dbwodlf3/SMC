@@ -233,6 +233,21 @@ class StoreConstraint(Constraint):
                         cls.SYMBOLS.add(value)
 
 # ==============================================================================
+# Extra Constraints
+
+class AddConstraint(Constraint):
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls, instruction: llvm.ValueRef):
+        if instruction.opcode == 'add':
+            result = instruction.name
+            reference = next(instruction.operands).name
+            # and can add limitation.. but not now.
+            if result and reference:
+                cls.CONSTRAINTS.append([2, reference, result])
+                cls.SYMBOLS.add(reference)
+                cls.SYMBOLS.add(result)
+
 class DataConstraint(Constraint):
     CONSTRAINTS = []
     @classmethod
