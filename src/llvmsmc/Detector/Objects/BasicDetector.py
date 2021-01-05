@@ -36,7 +36,7 @@ class StoreDetector(CriticalDetector):
 				# @data_[0-9]*
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
-				if variable and 'critical!' in variable.tokens:
+				if variable and '!code!' in variable.tokens:
 					# limit alias
 					if re.match(r'.*data_[0-9]*', dest_name):
 						cls.detector.criticalInstructions.append([instruction,
@@ -54,7 +54,7 @@ class StoreDetector(CriticalDetector):
 			# 	variable = cls.detector.variables.get(dest_name)
 			# 	if variable == None:
 			# 		continue
-			# 	elif 'critical!' in variable.tokens:
+			# 	elif '!code!' in variable.tokens:
 			# 		# limit areas
 			# 		if re.match(r'.*main!.*',str(instruction)):
 			# 			print(instruction)
@@ -65,7 +65,7 @@ class StoreDetector(CriticalDetector):
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
 
-				if variable and 'critical!' in variable.tokens:
+				if variable and '!code!' in variable.tokens:
 					if re.match(r'.*data_[0-9]*', dest_name):
 						# print(instruction)
 						cls.detector.criticalInstructions.append([instruction,
@@ -75,7 +75,7 @@ class StoreDetector(CriticalDetector):
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
 
-				if variable and 'critical!' in variable.tokens:
+				if variable and '!code!' in variable.tokens:
 					if re.match(r'.*data_[0-9]*', dest_name):
 						# print(instruction)
 						cls.detector.criticalInstructions.append([instruction,
@@ -134,4 +134,15 @@ class CallDetector(CriticalDetector):
 						len(list(filter(filter_function, variable.tokens))) > 0):
 						cls.detector.criticalInstructions.append([instruction,
 							variable.name, 2.3])
+			elif answer.pattern == 4:
+				# Pattern 4
+				# call @__remill_function_call(____, ptrtoint ( @data_[0-9]* ), ____)
+				dest_name = answer.destName.decode('utf-8')
+				variable = cls.detector.variables.get(dest_name)
+				if variable:
+					if re.match(r'.*data', dest_name):			
+						area = int(dest_name[11:], 16)
+						if not checkCodeArea(area, cls.detector.BINARY_FILE):
+							cls.detector.criticalInstructions.append([instruction,
+								variable.name, 2.4])
 		return 0

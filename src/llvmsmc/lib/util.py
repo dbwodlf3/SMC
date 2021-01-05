@@ -95,7 +95,7 @@ def getCodeSegment(binary_file):
             elffile = ELFFile(f)
             
             for segment in elffile.iter_segments():
-                if(segment['p_type'] == 'PT_LOAD' and segment['p_flags'] & 0b100):
+                if(segment['p_flags'] & 0b1):
                     start = segment['p_vaddr']
                     end = start + segment['p_memsz']
                     result.append((start, end))
@@ -103,6 +103,17 @@ def getCodeSegment(binary_file):
         return result
     else :
         return result
+
+def checkCodeArea(memory_address, binary_file):
+    codes = getCodeSegment(binary_file)
+    for code in codes:
+        start = code[0]
+        end = code[1]
+
+        if memory_address >= start and memory_address <= end:
+            return True
+    
+    return False
 
 constantExpressions = [
     'getelementptr',

@@ -93,7 +93,7 @@ Answer CallDetector(LLVMValueRef val) {
   
   if(called_function == nullptr) {
     Value *function_pointer = call->getOperand(0); 
-    ConstantExpr* constant_expr = dyn_cast<ConstantExpr>(function_pointer);
+    ConstantExpr *constant_expr = dyn_cast<ConstantExpr>(function_pointer);
 
     if(constant_expr == nullptr) {
       // Pattern 1
@@ -120,15 +120,32 @@ Answer CallDetector(LLVMValueRef val) {
     }
   } 
   else if(called_function->getName().compare("__remill_function_call") == 0) {
-    // Pattern 3
-    // call @__remill_function_call(____, %variable, ____)
     if ( call->arg_size() > 1) {
       Value* dest = call->getOperand(1);
+      ConstantExpr *constant_expr = dyn_cast<ConstantExpr>(dest);
+      
+      if(constant_expr == nullptr){
+        // Pattern 3
+        // call @__remill_function_call(____, %variable, ____)=
+        A.pattern = 3;
+        A.destName = dest->getName().data();
 
-      A.pattern = 3;
-      A.destName = dest->getName().data();
+        return A;
+      }
+      else
+      {
+        if(constant_expr->getOpcode() == Instruction::PtrToInt) {
+          // Pattern 4
+          // call @__remill_function_call(____, ptrtoint ( @data_[0-9]* ), ____)
+          Value *operand = constant_expr->getOperand(0);
+          
+          A.pattern = 4;
+          A.destName = operand->getName().data();
+          
+          return A;
+        }
+      }
 
-      return A;
     };
   }
 

@@ -14,8 +14,10 @@ class Detector:
 	# instruction for checking smc
 	writeInstruction = ['store', 'call']
 
-	def __init__(self, llvmFile : str, variableFile: str):
+	def __init__(self, llvmFile : str, variableFile: str, binaryFile = None):
 		# for init
+		self.BINARY_FILE = binaryFile
+		self.LL_FILE = llvmFile
 		self.MODULE_REF = readModule(llvmFile)
 		self.MODULE_IR = ir.Module()
 		self.variables = {}

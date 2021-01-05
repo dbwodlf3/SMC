@@ -10,7 +10,7 @@ class TokenInitConstraint(Constraint):
     @classmethod
     def applyConstraint(cls):
         # critical
-        cls.CONSTRAINTS.append([0, 'critical!'])
+        cls.CONSTRAINTS.append([0, '!code!'])
         # data!
         cls.CONSTRAINTS.append([0, 'data!'])
         # tokens
@@ -262,7 +262,7 @@ class AliasConstraint(ModuleConstraint):
     """
     Lifted code by mcsema express constant memory address like "@data_[0-9]*"
     So, if that alias like @data_[0-9] and if that [0-9]* are between code
-    area then it will have 'critical!' token.
+    area then it will have '!code!' token.
     """
     CONSTRAINTS = []
     @classmethod
