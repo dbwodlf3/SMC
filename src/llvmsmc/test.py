@@ -46,20 +46,24 @@ def constraintGeneratorTestClang():
     os.makedirs(result_save_dir, exist_ok=True)
 
     ll_test_file_dir = os.path.join(project_dir, 'test', 'clang')
+    binary_test_file_dir = os.path.join(project_dir, 'test', 'binary_clang')
 
     ll_test_files = [file for file in os.listdir(ll_test_file_dir)]
+    binary_test_files = [file for file in os.listdir(binary_test_file_dir)]
 
     ll_test_files.sort()
+    binary_test_files.sort()
 
     process_list = []
 
-    for test_file in ll_test_files:
+    for test_file, binary_file in zip(ll_test_files, binary_test_files):
         test_file_abs = os.path.join(ll_test_file_dir, test_file)
+        binary_file_abs = os.path.join(binary_test_file_dir, binary_file)
         save_file_abs = os.path.join(
             result_save_dir, test_file.replace('.ll','.json'))
         
         p = Process(target=constraintGeneratorRun,
-            args=(test_file_abs, None, save_file_abs, ))
+            args=(test_file_abs, binary_file_abs, save_file_abs, ))
         process_list.append(p)
         p.start()
     
@@ -180,8 +184,6 @@ def detectorTest():
     cs_files.sort()
     binary_test_files.sort()
 
-    i = 0
-
     for llvm_ir_file, cs_file, binary_file in zip(llvm_ir_files, cs_files, binary_test_files):
         llvm_ir_file_abs = os.path.join(llvm_ir_dir, llvm_ir_file)
         cs_file_abs = os.path.join(cs_file_dir, cs_file)
@@ -203,26 +205,31 @@ def detectorTest():
 
 def detectorTestClang():
     result_save_dir = os.path.join(project_dir, 'dest', 'de_clang')
-    os.makedirs(result_save_dir, exist_ok=True)
     llvm_ir_dir = os.path.join(project_dir, 'test', 'clang')
     cs_file_dir = os.path.join(project_dir, 'dest', 'cs_clang')
+    binary_test_file_dir = os.path.join(project_dir, 'test', 'binary_clang')
+
     llvm_ir_files = [file for file in os.listdir(llvm_ir_dir)]
     cs_files = [file for file in os.listdir(cs_file_dir)]
+    binary_test_files = [file for file in os.listdir(binary_test_file_dir)]
+
     process_list = []
+
+    os.makedirs(result_save_dir, exist_ok=True)
 
     llvm_ir_files.sort()
     cs_files.sort()
+    binary_test_files.sort()
 
-    i = 0
-
-    for llvm_ir_file, cs_file in zip(llvm_ir_files, cs_files):
-        print(llvm_ir_file, cs_file)
+    for llvm_ir_file, cs_file, binary_file in zip(llvm_ir_files, cs_files, binary_test_files):
         llvm_ir_file_abs = os.path.join(llvm_ir_dir, llvm_ir_file)
         cs_file_abs = os.path.join(cs_file_dir, cs_file)
         save_file_abs = os.path.join(
             result_save_dir, llvm_ir_file.replace('.ll', '.de.json'))
+        binary_file_abs = os.path.join(binary_test_file_dir, binary_file)
+        
         p = Process(target=detectorRun, args=(llvm_ir_file_abs,
-            cs_file_abs, save_file_abs ))
+            cs_file_abs, save_file_abs, binary_file_abs ))
         
         # if(cs_file != 'smc1.c.cs.json'):
         #     continue

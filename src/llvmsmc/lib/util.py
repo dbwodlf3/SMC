@@ -105,6 +105,7 @@ def getCodeSegment(binary_file):
         return result
 
 def checkCodeArea(memory_address, binary_file):
+    
     codes = getCodeSegment(binary_file)
     for code in codes:
         start = code[0]
