@@ -39,10 +39,10 @@ class CallConstraint(Constraint):
     `Instruction Syntax`: \<result> = call \<ty> \<fnty> \<fnptrval>
         (\<function args>) \n
     `Constraint Result`: [[arg1]] ⊆ [[param1]], [[arg2]] ⊆ [[param2]], ...
-        and, [[RETURN_VALUE]] ⊆ [[result]] \n
+        and, [[fnptrval!ret]] ⊆ [[result]] \n
     It is some different other constraints. Let's is that fnptrval's formal args 
         are param, fnptrval's actual args are arg and fnptrval's
-        return token 'RETURN_VALUE'.
+        return token 'fnptrval!ret'.
     """
     @classmethod
     def applyConstraint(cls, instruction: llvm.ValueRef):
