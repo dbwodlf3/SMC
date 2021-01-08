@@ -12,7 +12,7 @@ class TokenInitConstraint(Constraint):
         # critical
         cls.CONSTRAINTS.append([0, '!code!'])
         # data!
-        cls.CONSTRAINTS.append([0, 'data!'])
+        cls.CONSTRAINTS.append([0, '!data!'])
         # tokens
         for symbol in cls.SYMBOLS:
             cls.CONSTRAINTS.append([0, symbol])

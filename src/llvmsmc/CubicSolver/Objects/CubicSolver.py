@@ -55,7 +55,7 @@ class CubicSolver:
 		elif rule_type == 5:
 			self.addToken('!code!', rule[1])
 		elif rule_type == 6:
-			self.addToken('data!', rule[1])
+			self.addToken('!data!', rule[1])
 	#
 	def addEdge(self, source: str, dest: str):
 		source_idx = self.keyMap[source]

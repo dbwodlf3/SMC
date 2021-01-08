@@ -107,13 +107,17 @@ class CallDetector(CriticalDetector):
 		for instruction in cls.instructions:
 			answer = Detectors.CallDetector(instruction)
 			if answer.pattern == 1:
+				# Pattern 1
+				# call void (...) %variable
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
-				if variable and 'data!' in variable.tokens:
+				if variable and '!data!' in variable.tokens:
 					cls.detector.criticalInstructions.append([instruction,
 						variable, 2.1])
 
 			elif answer.pattern == 2:
+				# Pattern 2
+          		# call void (...) bitcast (@global_variable)
 				dest_name = answer.destName.decode('utf-8')
 				variable = cls.detector.variables.get(dest_name)
 				if variable:
@@ -127,7 +131,7 @@ class CallDetector(CriticalDetector):
 				variable = cls.detector.variables.get(dest_name)
 				filter_function = lambda x: re.match(r'.*RBP', x)
 				if variable:
-					if ('data!' in variable.tokens or
+					if ('!data!' in variable.tokens or
 						len(list(filter(filter_function, variable.tokens))) > 0):
 						cls.detector.criticalInstructions.append([instruction,
 							variable, 2.3])
