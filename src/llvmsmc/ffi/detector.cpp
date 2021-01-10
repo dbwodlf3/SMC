@@ -155,3 +155,14 @@ Answer CallDetector(LLVMValueRef val) {
   return A;
   }
 }
+
+// Answer MemcpyDetector(LLVMValueRef val) { 
+//   Answer A;
+//   Value *value = unwrap(val);
+//   CallInst *call = dyn_cast<CallInst>(value);
+
+//   A.type = 1;
+
+//   A.pattern = 5;
+
+// }

@@ -235,7 +235,23 @@ class StoreConstraint(Constraint):
 # ==============================================================================
 # Extra Constraints
 
+class FunctionCodeConstraint(FunctionConstraint):
+    """
+    !code! ∈ [[Function]]
+    """
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls, function: llvm.ValueRef):
+        function_name = function.name
+        cls.CONSTRAINTS.append([5, function_name])
+        cls.SYMBOLS.add(function_name)
+
+
 class AddConstraint(Constraint):
+    """ <result> = add <ty> <op1>, <op2>
+    Here, if op1 is based from "load %var"
+    Then result [[var]] ⊆ [[result]]
+    """
     CONSTRAINTS = []
     @classmethod
     def applyConstraint(cls, instruction: llvm.ValueRef):

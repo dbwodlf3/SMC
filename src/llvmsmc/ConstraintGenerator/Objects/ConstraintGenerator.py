@@ -102,6 +102,7 @@ class ConstraintGenerator:
 
         # Function Constraints Init
         self.addFunctionConstraint(RetConstraint)
+        self.addFunctionConstraint(FunctionCodeConstraint)
 
         # Instruction Constraints Init
         self.addConstraint(AllocaConstraint)
