@@ -42,7 +42,7 @@ class StoreDetector(CriticalDetector):
 						cls.detector.criticalInstructions.append([instruction,
 							variable, 1.1])
 			
-			elif answer.pattern == 2 and False:
+			elif answer.pattern == 2:
 				# 오탐이 너무 많다.
 				# 왜 오탐이 많을까? => 시간 순서가 없어서. 너무 포괄적이다.
 				# 후의 명령어가, 처음의 명령어에 영향을 주어서.
@@ -52,7 +52,7 @@ class StoreDetector(CriticalDetector):
 				variable = cls.detector.variables.get(dest_name)
 				if variable == None:
 					continue
-				elif '!code!' in variable.tokens and not '!data!' in variable.tokens:
+				elif ('!code!' in variable.tokens or True and not '!data!' in variable.tokens:
 					# limit areas
 					if re.match(r'.*main!.*',str(instruction)):
 						# print(instruction)
