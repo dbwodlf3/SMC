@@ -4,7 +4,8 @@ __pycache__
 src/**/*.ll
 src/**/*.json
 _test/
-dest/
+dest/cg*
+dest/cs*
 CMakeFiles/
 CMakeCache.txt
 Makefile

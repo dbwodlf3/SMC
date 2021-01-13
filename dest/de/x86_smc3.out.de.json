@@ -1,0 +1,72 @@
+{
+    "time": 0.2866837978363037,
+    "criticalTokens": [],
+    "detect": [
+        {
+            "Function": "sub_804807c_main",
+            "Block": "inst_804807c",
+            "Order": 6,
+            "LLVM Instruction": "store",
+            "Pattern": 1.4,
+            "CriticalOperand": "alias!data_8048135",
+            "Tokens": [
+                "!code!",
+                "alias!ECX_2248_55ccbaa3a050",
+                "alias!EDI_2296_55ccbaa3a050",
+                "alias!data_8048060",
+                "alias!data_804806c",
+                "alias!data_804810e",
+                "alias!data_804811d",
+                "alias!data_8048135",
+                "alias!data_804813a",
+                "global!__mcsema_reg_state",
+                "global!seg_8048060__text_fc",
+                "sub_804807c_main!0",
+                "sub_804807c_main!1",
+                "sub_804807c_main!10",
+                "sub_804807c_main!12",
+                "sub_804807c_main!14",
+                "sub_804807c_main!16",
+                "sub_804807c_main!18",
+                "sub_804807c_main!21",
+                "sub_804807c_main!23",
+                "sub_804807c_main!28",
+                "sub_804807c_main!3",
+                "sub_804807c_main!31",
+                "sub_804807c_main!34",
+                "sub_804807c_main!5",
+                "sub_804807c_main!6",
+                "sub_804807c_main!7",
+                "sub_804807c_main!8",
+                "sub_804807c_main!9"
+            ],
+            "Str": "  store i32 %\"sub_804807c_main!0\", i32* bitcast (i8* @\"alias!data_8048135\" to i32*), align 4"
+        },
+        {
+            "Function": "sub_804807c_main",
+            "Block": "inst_804807c",
+            "Order": 7,
+            "LLVM Instruction": "store",
+            "Pattern": 1.4,
+            "CriticalOperand": "alias!data_8048136",
+            "Tokens": [
+                "!code!",
+                "alias!data_8048136"
+            ],
+            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048136\" to i16*), align 2"
+        },
+        {
+            "Function": "sub_804807c_main",
+            "Block": "inst_804807c",
+            "Order": 8,
+            "LLVM Instruction": "store",
+            "Pattern": 1.4,
+            "CriticalOperand": "alias!data_8048138",
+            "Tokens": [
+                "!code!",
+                "alias!data_8048138"
+            ],
+            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048138\" to i16*), align 4"
+        }
+    ]
+}

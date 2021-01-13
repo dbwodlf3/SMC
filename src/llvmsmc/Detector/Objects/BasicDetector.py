@@ -1,3 +1,4 @@
+
 import re
 from typing import List
 from llvmlite.binding import ValueRef
@@ -5,6 +6,7 @@ from llvmlite.binding import ValueRef
 from lib.util import *
 from lib.ffi import *
 from Detector.Objects.CriticalDetector import CriticalDetector
+from Detector.Objects.Variable import ConstantIntVariable
 
 class StoreDetector(CriticalDetector):
 
@@ -43,27 +45,25 @@ class StoreDetector(CriticalDetector):
 							variable, 1.1])
 			
 			elif answer.pattern == 2:
-				# 오탐이 너무 많다.
-				# 왜 오탐이 많을까? => 시간 순서가 없어서. 너무 포괄적이다.
-				# 후의 명령어가, 처음의 명령어에 영향을 주어서.
-				# 너무 포괄적이다.
-				# %variable
-				dest_name = answer.destName.decode('utf-8')
-				variable = cls.detector.variables.get(dest_name)
-				if variable == None:
-					continue
-				elif ('!code!' in variable.tokens or True and not '!data!' in variable.tokens:
-					# limit areas
-					if re.match(r'.*main!.*',str(instruction)):
-						# print(instruction)
-						cls.detector.criticalInstructions.append([instruction,
-							variable, 1.2])	
+				pass
+			# 	dest_name = answer.destName.decode('utf-8')
+			# 	variable = cls.detector.variables.get(dest_name)
+			# 	if variable == None:
+			# 		continue
+			# 	elif ('!code!' in variable.tokens
+			# 		and not '!data!' in variable.tokens):
+			# 		# limit areas
+			# 		if re.match(r'.*main!.*',str(instruction)):
+			# 			# print(instruction)
+			# 			cls.detector.criticalInstructions.append([instruction,
+			# 				variable, 1.2])	
 			
 			elif answer.pattern == 3:
 				# ConstantInt
 				dest_name = answer.destName.decode('utf-8')
 				area = int(dest_name)
 				if checkCodeArea(area, cls.detector.BINARY_FILE):
+					variable = ConstantIntVariable(area)
 					cls.detector.criticalInstructions.append([instruction,
 						variable, 1.3])
 

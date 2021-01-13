@@ -1,0 +1,19 @@
+{
+    "time": 0.2541515827178955,
+    "criticalTokens": [],
+    "detect": [
+        {
+            "Function": "sub_8048060_main",
+            "Block": "inst_8048074",
+            "Order": 3,
+            "LLVM Instruction": "store",
+            "Pattern": 1.1,
+            "CriticalOperand": "alias!data_804807b",
+            "Tokens": [
+                "!code!",
+                "alias!data_804807b"
+            ],
+            "Str": "  store i8 1, i8* @\"alias!data_804807b\", align 1"
+        }
+    ]
+}

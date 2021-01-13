@@ -1,0 +1,18 @@
+{
+    "time": 0.012426614761352539,
+    "criticalTokens": [],
+    "detect": [
+        {
+            "Function": "main",
+            "Block": "0",
+            "Order": 4,
+            "LLVM Instruction": "store",
+            "Pattern": 1.3,
+            "CriticalOperand": 4195612,
+            "Tokens": [
+                4195612
+            ],
+            "Str": "  store i64 -8029759185026510704, i64* inttoptr (i64 4195612 to i64*), align 8"
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "time": 0.35535383224487305,
+    "criticalTokens": [],
+    "detect": [
+        {
+            "Function": "sub_64a_main",
+            "Block": "inst_64a",
+            "Order": 14,
+            "LLVM Instruction": "store",
+            "Pattern": 1.4,
+            "CriticalOperand": "alias!data_673",
+            "Tokens": [
+                "!code!",
+                "alias!data_673"
+            ],
+            "Str": "  store i64 -8029759185026510704, i64* bitcast (i8* @\"alias!data_673\" to i64*), align 8"
+        }
+    ]
+}

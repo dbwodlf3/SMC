@@ -1,0 +1,18 @@
+{
+    "time": 0.27130818367004395,
+    "criticalTokens": [],
+    "detect": [
+        {
+            "Function": "sub_5fa_main",
+            "Block": "inst_5fa",
+            "Order": 9,
+            "LLVM Instruction": "store",
+            "Pattern": 1.3,
+            "CriticalOperand": 1637,
+            "Tokens": [
+                1637
+            ],
+            "Str": "  store i8 -112, i8* inttoptr (i64 1637 to i8*), align 1"
+        }
+    ]
+}
