@@ -1,5 +1,5 @@
 {
-    "time": 0.2582128047943115,
+    "time": 0.36235475540161133,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,6 +9,7 @@
             "LLVM Instruction": "call",
             "Pattern": 2.3,
             "CriticalOperand": "sub_4005a7_main!23",
+            "Str": "  %\"sub_4005a7_main!27\" = call %struct.Memory* @__remill_function_call(%struct.State* @\"global!__mcsema_reg_state\", i64 %\"sub_4005a7_main!23\", %struct.Memory* %\"sub_4005a7_main!19\")",
             "Tokens": [
                 "!code!",
                 "__libc_csu_fini",
@@ -293,8 +294,7 @@
                 "sub_400670___libc_csu_init!99",
                 "sub_4006e0___libc_csu_fini!0",
                 "sub_4006e0___libc_csu_fini!1"
-            ],
-            "Str": "  %\"sub_4005a7_main!27\" = call %struct.Memory* @__remill_function_call(%struct.State* @\"global!__mcsema_reg_state\", i64 %\"sub_4005a7_main!23\", %struct.Memory* %\"sub_4005a7_main!19\")"
+            ]
         }
     ]
 }

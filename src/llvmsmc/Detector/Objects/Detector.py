@@ -76,8 +76,8 @@ class Detector:
 						'LLVM Instruction':instruction.opcode,
 						'Pattern':criticalInstruction[2],
 						'CriticalOperand':criticalInstruction[1].name,
-						'Tokens':criticalInstruction[1].tokens,
-						'Str':f'''{criticalInstruction[0]}'''
+						'Str':f'''{criticalInstruction[0]}''',
+						'Tokens':criticalInstruction[1].tokens
 					}
 					self.result['detect'].append(detect)
 

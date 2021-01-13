@@ -1,5 +1,5 @@
 {
-    "time": 0.2541515827178955,
+    "time": 0.17791438102722168,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,11 +9,11 @@
             "LLVM Instruction": "store",
             "Pattern": 1.1,
             "CriticalOperand": "alias!data_804807b",
+            "Str": "  store i8 1, i8* @\"alias!data_804807b\", align 1",
             "Tokens": [
                 "!code!",
                 "alias!data_804807b"
-            ],
-            "Str": "  store i8 1, i8* @\"alias!data_804807b\", align 1"
+            ]
         }
     ]
 }

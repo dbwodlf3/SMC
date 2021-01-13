@@ -1,5 +1,5 @@
 {
-    "time": 0.3148922920227051,
+    "time": 0.300290584564209,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,10 +9,10 @@
             "LLVM Instruction": "store",
             "Pattern": 1.3,
             "CriticalOperand": 1663,
+            "Str": "  store i64 -8029759185026510704, i64* inttoptr (i64 1663 to i64*), align 8",
             "Tokens": [
                 1663
-            ],
-            "Str": "  store i64 -8029759185026510704, i64* inttoptr (i64 1663 to i64*), align 8"
+            ]
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "time": 0.2866837978363037,
+    "time": 0.2652928829193115,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,6 +9,7 @@
             "LLVM Instruction": "store",
             "Pattern": 1.4,
             "CriticalOperand": "alias!data_8048135",
+            "Str": "  store i32 %\"sub_804807c_main!0\", i32* bitcast (i8* @\"alias!data_8048135\" to i32*), align 4",
             "Tokens": [
                 "!code!",
                 "alias!ECX_2248_55ccbaa3a050",
@@ -39,8 +40,7 @@
                 "sub_804807c_main!7",
                 "sub_804807c_main!8",
                 "sub_804807c_main!9"
-            ],
-            "Str": "  store i32 %\"sub_804807c_main!0\", i32* bitcast (i8* @\"alias!data_8048135\" to i32*), align 4"
+            ]
         },
         {
             "Function": "sub_804807c_main",
@@ -49,11 +49,11 @@
             "LLVM Instruction": "store",
             "Pattern": 1.4,
             "CriticalOperand": "alias!data_8048136",
+            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048136\" to i16*), align 2",
             "Tokens": [
                 "!code!",
                 "alias!data_8048136"
-            ],
-            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048136\" to i16*), align 2"
+            ]
         },
         {
             "Function": "sub_804807c_main",
@@ -62,11 +62,11 @@
             "LLVM Instruction": "store",
             "Pattern": 1.4,
             "CriticalOperand": "alias!data_8048138",
+            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048138\" to i16*), align 4",
             "Tokens": [
                 "!code!",
                 "alias!data_8048138"
-            ],
-            "Str": "  store i16 0, i16* bitcast (i8* @\"alias!data_8048138\" to i16*), align 4"
+            ]
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "time": 0.010982513427734375,
+    "time": 0.011774301528930664,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,6 +9,7 @@
             "LLVM Instruction": "call",
             "Pattern": 2.1,
             "CriticalOperand": "main!7",
+            "Str": "  call void (...) %\"main!7\"()",
             "Tokens": [
                 "!data!",
                 "getMemoryPermission!0",
@@ -20,8 +21,7 @@
                 "main!4",
                 "main!6",
                 "main!7"
-            ],
-            "Str": "  call void (...) %\"main!7\"()"
+            ]
         }
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "time": 0.010008573532104492,
+    "time": 0.010420799255371094,
     "criticalTokens": [],
     "detect": [
         {
@@ -9,6 +9,7 @@
             "LLVM Instruction": "call",
             "Pattern": 2.2,
             "CriticalOperand": "global!code",
+            "Str": "  call void (...) bitcast ([8 x i8]* @\"global!code\" to void (...)*)()",
             "Tokens": [
                 "!data!",
                 "getMemoryPermission!0",
@@ -17,8 +18,7 @@
                 "getMemoryPermission!12",
                 "getMemoryPermission!3",
                 "global!code"
-            ],
-            "Str": "  call void (...) bitcast ([8 x i8]* @\"global!code\" to void (...)*)()"
+            ]
         }
     ]
 }
