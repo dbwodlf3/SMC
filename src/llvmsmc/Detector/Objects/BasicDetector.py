@@ -3,8 +3,10 @@ import re
 from typing import List
 from llvmlite.binding import ValueRef
 
+from lib import helper
 from lib.util import *
 from lib.ffi import *
+from StackAnalysis import StackAnalysis
 from Detector.Objects.CriticalDetector import CriticalDetector
 from Detector.Objects.Variable import ConstantIntVariable
 
@@ -29,6 +31,7 @@ class StoreDetector(CriticalDetector):
 	def run(cls):
 		# init
 		cls.findInstructions()
+		stack = StackAnalysis.stackAnalysis(cls.detector.MODULE_REF, cls.detector.BINARY_FILE)
 
 		# Detect
 		for instruction in cls.instructions:
@@ -45,7 +48,9 @@ class StoreDetector(CriticalDetector):
 							variable, 1.1])
 			
 			elif answer.pattern == 2:
-				pass
+				dest = helper.getStorePointer(instruction)
+
+			# elif answer.pattern == 2:
 			# 	dest_name = answer.destName.decode('utf-8')
 			# 	variable = cls.detector.variables.get(dest_name)
 			# 	if variable == None:
@@ -54,7 +59,7 @@ class StoreDetector(CriticalDetector):
 			# 		and not '!data!' in variable.tokens):
 			# 		# limit areas
 			# 		if re.match(r'.*main!.*',str(instruction)):
-			# 			# print(instruction)
+			# 			print(instruction)
 			# 			cls.detector.criticalInstructions.append([instruction,
 			# 				variable, 1.2])	
 			

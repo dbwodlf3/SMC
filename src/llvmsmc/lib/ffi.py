@@ -16,6 +16,11 @@ class Answer(ctypes.Structure):
         ('destName', ctypes.c_char_p)
     ]
 
+class Stack(ctypes.Structure):
+    _fields_ = [
+        ('offset', ctypes.c_int)
+    ]
+
 class AliasIter:
     def __init__(self, moduleRef):
         self._iter = _libc.aliasIter(moduleRef)
@@ -43,6 +48,10 @@ class CustomAPI(object):
     @classmethod
     def getAliasIter(cls, ModuleRef):
         pass
+    
+    @classmethod
+    def getConstantInt(cls, LLVMValueRef):
+        return _libc.getConstantInt(LLVMValueRef)
 
     @classmethod
     def dumpModule(cls, LLVMModuleRef):
@@ -71,7 +80,9 @@ class CustomAPI(object):
     @classmethod
     def wrapping(cls, LLVMValueRef):
         pass
-
+    @classmethod
+    def getStackOffset(cls, LLVMValueRef):
+        pass
 class Detectors(object):
     @classmethod
     def StoreDetector(cls, LLVMModuleRef) -> Answer:
@@ -121,6 +132,9 @@ _libc.isConstantExpr.restype = ctypes.c_bool
 
 _libc.isAlias.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isAlias.restype = ctypes.c_bool
+
+_libc.getConstantInt.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.getConstantInt.restype = ctypes.c_int
 
 # =============================================================================
 # Set Detectors FFI

@@ -224,6 +224,16 @@ void testPrint_cpp(){
   outs() << "print test";
 }
 
+int getConstantInt_cpp(LLVMValueRef valueRef) {
+  Value* value = unwrap(valueRef);
+  ConstantInt* constant_int = dyn_cast<ConstantInt>(value);
+  
+  if(constant_int)
+    return (int)constant_int->getSExtValue();
+  else
+    return 0;
+}
+
 extern "C" {
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {
     return giveName_cpp(moduleRef);
@@ -235,6 +245,10 @@ extern "C" {
 
   LLVMValueRef aliasIterNext(LLVMAliasIteratorRef AI){
     return aliasIterNext_cpp(AI);
+  }
+
+  int getConstantInt(LLVMValueRef valueRef) {
+    return getConstantInt_cpp(valueRef);
   }
 
   const char* getName(LLVMValueRef val) { 

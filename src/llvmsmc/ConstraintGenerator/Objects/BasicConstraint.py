@@ -5,6 +5,22 @@ from ConstraintGenerator.Objects.Constraint import *
 from lib.util import *
 from lib.ffi import *
 
+# ==============================================================================
+# Helper Functions
+
+def getStoreValue(storeInstruction: llvm.ValueRef):
+    for idx, operand in enumerate(storeInstruction.operands):
+        if(idx == 0):
+            return operand
+
+def getStorePointer(storeInstruction: llvm.ValueRef):
+    for idx, operand in enumerate(storeInstruction.operands):
+        if(idx == 1):
+            return operand
+
+# ==============================================================================
+# Constraints
+
 class TokenInitConstraint(Constraint):
     CONSTRAINTS = []
     @classmethod
@@ -246,7 +262,6 @@ class FunctionCodeConstraint(FunctionConstraint):
         cls.CONSTRAINTS.append([5, function_name])
         cls.SYMBOLS.add(function_name)
 
-
 class AddConstraint(Constraint):
     """ <result> = add <ty> <op1>, <op2>
     Here, if op1 is based from "load %var"
@@ -297,3 +312,29 @@ class AliasConstraint(ModuleConstraint):
                     if area >= start and area <= end:
                         cls.CONSTRAINTS.append([5, alias_name])
                         cls.SYMBOLS.add(alias_name)
+
+class StackConstraint(FunctionConstraint):
+    """
+    """
+    CONSTRAINTS = []
+    @classmethod
+    def applyConstraint(cls, function: llvm.ValueRef):
+        for block in function.blocks:
+            for instruction in block.instructions:
+                if instruction.opcode != 'inttoptr':
+                    continue
+                offset = CustomAPI.getStackOffset(instruction)
+                if offset == 0:
+                    continue
+                stack_addr_ptr = instruction
+                stack = f'''{function.name}!stack!{offset}'''
+
+                for instruction in block.instructions:
+                    if instruction.opcode != 'store':
+                        continue
+                    value = getStoreValue(instruction)
+                    store_pointer = getStorePointer(instruction)
+                    if store_pointer.name == stack_addr_ptr.name:
+                        pass
+
+                # find every store instruction.
