@@ -9,6 +9,9 @@ lib_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'ffi')
 util_so = os.path.join(lib_path, 'libutil.so')
 _libc = ctypes.CDLL(util_so)
 
+# =============================================================================
+# Structures
+
 class Answer(ctypes.Structure):
     _fields_ = [
         ('type', ctypes.c_int),
@@ -20,6 +23,15 @@ class Stack(ctypes.Structure):
     _fields_ = [
         ('offset', ctypes.c_int)
     ]
+
+class IntFail(ctypes.Structure):
+    _fields_ = [
+        ('value', ctypes.c_int),
+        ('fail', ctypes.c_bool),
+    ]
+
+# =============================================================================
+# Interfaces
 
 class AliasIter:
     def __init__(self, moduleRef):
@@ -80,9 +92,10 @@ class CustomAPI(object):
     @classmethod
     def wrapping(cls, LLVMValueRef):
         pass
+
     @classmethod
     def getStackOffset(cls, LLVMValueRef):
-        pass
+        return _libc.getStackOffset(LLVMValueRef)
 class Detectors(object):
     @classmethod
     def StoreDetector(cls, LLVMModuleRef) -> Answer:
@@ -134,7 +147,10 @@ _libc.isAlias.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.isAlias.restype = ctypes.c_bool
 
 _libc.getConstantInt.argtypes = [llvmlite.ffi.LLVMValueRef]
-_libc.getConstantInt.restype = ctypes.c_int
+_libc.getConstantInt.restype = IntFail
+
+_libc.getStackOffset.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.getStackOffset.restype = ctypes.c_int
 
 # =============================================================================
 # Set Detectors FFI

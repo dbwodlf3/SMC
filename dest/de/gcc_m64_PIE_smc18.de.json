@@ -1,7 +1,100 @@
 {
-    "time": 0.31209540367126465,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_PIE_smc18.out",
+    "codeArea": [
+        [
+            0,
+            2520
+        ]
+    ],
+    "time": 0.5464346408843994,
     "criticalTokens": [],
+    "stack": {
+        "sub_774_getMemoryPermission!stack!-24": [],
+        "sub_774_getMemoryPermission!stack!-4": [],
+        "sub_6fa_main!stack!-16": [],
+        "sub_6fa_main!stack!-8": [],
+        "sub_6fa_main!stack!-15": [
+            1,
+            "!code!"
+        ],
+        "sub_6fa_main!stack!-14": [
+            0,
+            "!code!"
+        ],
+        "sub_6fa_main!stack!-13": [
+            0,
+            "!code!"
+        ],
+        "sub_6fa_main!stack!-12": [
+            0,
+            "!code!"
+        ],
+        "sub_6fa_main!stack!-11": [],
+        "sub_6fa_main!stack!-10": [],
+        "sub_6fa_main!stack!-9": [
+            0,
+            "!code!"
+        ],
+        "sub_7d0___libc_csu_init!stack!-56": [
+            2049,
+            "!code!"
+        ],
+        "sub_588__init_proc!stack!-8": [
+            1434,
+            "!code!"
+        ]
+    },
     "detect": [
+        {
+            "Function": "sub_6fa_main",
+            "Block": "inst_6fa",
+            "Order": 26,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_6fa_main!stack!-15",
+            "Str": "  store i8 1, i8* %\"sub_6fa_main!14\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_6fa_main",
+            "Block": "inst_6fa",
+            "Order": 29,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_6fa_main!stack!-14",
+            "Str": "  store i8 0, i8* %\"sub_6fa_main!16\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_6fa_main",
+            "Block": "inst_6fa",
+            "Order": 32,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_6fa_main!stack!-13",
+            "Str": "  store i8 0, i8* %\"sub_6fa_main!18\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_6fa_main",
+            "Block": "inst_6fa",
+            "Order": 35,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_6fa_main!stack!-12",
+            "Str": "  store i8 0, i8* %\"sub_6fa_main!20\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_6fa_main",
+            "Block": "inst_6fa",
+            "Order": 44,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_6fa_main!stack!-9",
+            "Str": "  store i8 0, i8* %\"sub_6fa_main!26\", align 1",
+            "Tokens": "!code!"
+        },
         {
             "Function": "sub_6fa_main",
             "Block": "inst_6fa",

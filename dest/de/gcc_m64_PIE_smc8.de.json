@@ -1,5 +1,82 @@
 {
-    "time": 0.3739290237426758,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_PIE_smc8.out",
+    "codeArea": [
+        [
+            0,
+            3280
+        ]
+    ],
+    "time": 0.5292799472808838,
     "criticalTokens": [],
-    "detect": []
+    "stack": {
+        "sub_5b0__init_proc!stack!-8": [
+            1474,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-8": [],
+        "sub_73a_main!stack!-216": [
+            1888,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-196": [
+            0,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-184": [
+            1912,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-192": [],
+        "sub_73a_main!stack!-188": [],
+        "sub_a19_change_page_permissions_of_address!stack!-24": [],
+        "sub_a19_change_page_permissions_of_address!stack!-4": [],
+        "sub_a80___libc_csu_init!stack!-56": [
+            2737,
+            "!code!"
+        ],
+        "sub_9c8_get_permission!stack!-16": [],
+        "sub_9c8_get_permission!stack!-8": []
+    },
+    "detect": [
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 24,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-216",
+            "Str": "  store i64 1888, i64* %\"sub_73a_main!11\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 30,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-196",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!15\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 33,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-184",
+            "Str": "  store i64 1912, i64* %\"sub_73a_main!17\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_847",
+            "Order": 4,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-196",
+            "Str": "  store i32 %\"sub_73a_main!91\", i32* %\"sub_73a_main!15\", align 4",
+            "Tokens": "!code!"
+        }
+    ]
 }

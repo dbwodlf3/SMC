@@ -1,5 +1,41 @@
 {
-    "time": 0.46083784103393555,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_PIE_smc2.out",
+    "codeArea": [
+        [
+            0,
+            3432
+        ]
+    ],
+    "time": 0.6390542984008789,
     "criticalTokens": [],
-    "detect": []
+    "stack": {
+        "sub_990_main!stack!12": [
+            0,
+            "!code!"
+        ],
+        "sub_990_main!stack!8": [],
+        "sub_7ea_f!stack!52": [
+            0,
+            "!code!"
+        ],
+        "sub_7ea_f!stack!40": [],
+        "sub_7ea_f!stack!53": [],
+        "sub_7ea_f!stack!48": [],
+        "sub_7ea_f!stack!32": [],
+        "sub_7ea_f!stack!24": [],
+        "sub_7ea_f!stack!72": [],
+        "sub_7ea_f!stack!8": []
+    },
+    "detect": [
+        {
+            "Function": "sub_990_main",
+            "Block": "inst_990",
+            "Order": 33,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_990_main!stack!12",
+            "Str": "  store i32 0, i32* %\"sub_990_main!17\"",
+            "Tokens": "!code!"
+        }
+    ]
 }

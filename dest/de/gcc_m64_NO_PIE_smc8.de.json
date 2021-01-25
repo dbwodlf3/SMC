@@ -1,5 +1,26 @@
 {
-    "time": 0.43469977378845215,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_NO_PIE_smc8.out",
+    "codeArea": [
+        [
+            4194304,
+            4197192
+        ]
+    ],
+    "time": 0.5031726360321045,
     "criticalTokens": [],
+    "stack": {
+        "sub_400478__init_proc!stack!-8": [],
+        "sub_400850_get_permission!stack!-16": [],
+        "sub_400850_get_permission!stack!-8": [],
+        "sub_4005c7_main!stack!-8": [],
+        "sub_4005c7_main!stack!-216": [],
+        "sub_4005c7_main!stack!-196": [],
+        "sub_4005c7_main!stack!-184": [],
+        "sub_4005c7_main!stack!-192": [],
+        "sub_4005c7_main!stack!-188": [],
+        "sub_4008a1_change_page_permissions_of_address!stack!-24": [],
+        "sub_4008a1_change_page_permissions_of_address!stack!-4": [],
+        "sub_400900___libc_csu_init!stack!-56": []
+    },
     "detect": []
 }

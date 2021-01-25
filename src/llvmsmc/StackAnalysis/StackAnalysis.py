@@ -6,6 +6,7 @@ Module을 Input 으로 받고.
 import llvmlite.binding as llvm
 
 from lib.util import CustomAPI, checkCodeArea
+from lib.helper import getStoreValue, getStorePointer
 
 # ==============================================================================
 # Helper Functions
@@ -19,8 +20,18 @@ def getStoreValue(storeInstruction: llvm.ValueRef):
 """function_name!variable -> function_name!stack!8 -> !code! -> smc 검출!
 """
 
-def getOffset(valueRef: llvm.ValueRef):
-    pass
+def setToList(dict_data: dict):
+    result = {}
+    for key in dict_data:
+        result[key] = list(dict_data[key])
+    return result
+
+def getStackVariableSet(valueRef: llvm.ValueRef):
+    offset = CustomAPI.getStackOffset(valueRef)
+    if offset != 0 :
+        return f'''{valueRef.function.name}!stack!{offset}'''
+    else :
+        return False
 
 def stackAnalysis(moduleRef: llvm.ModuleRef, binaryFile = None):
     result = dict()
@@ -40,8 +51,13 @@ def stackAnalysis(moduleRef: llvm.ModuleRef, binaryFile = None):
                     result[ptr_set] = set()
                     for instruction in block.instructions:
                         if instruction.opcode == 'store':
+                            dest = getStorePointer(instruction)
                             value = getStoreValue(instruction)
                             area = CustomAPI.getConstantInt(value)
-                            if(checkCodeArea(area, binaryFile)):
-                                result[ptr_set].add('!code!')
+                            CustomAPI.getStackOffset(dest)
+                            if CustomAPI.getStackOffset(dest) == offset:
+                                if not area.fail:
+                                    if(checkCodeArea(area.value, binaryFile)):
+                                        result[ptr_set].add(area.value)
+                                        result[ptr_set].add('!code!')
     return result

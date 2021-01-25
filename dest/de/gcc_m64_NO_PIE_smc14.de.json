@@ -1,5 +1,18 @@
 {
-    "time": 0.32735729217529297,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_NO_PIE_smc14.out",
+    "codeArea": [
+        [
+            4194304,
+            4196216
+        ]
+    ],
+    "time": 0.3122544288635254,
     "criticalTokens": [],
+    "stack": {
+        "sub_4003d0__init_proc!stack!-8": [],
+        "sub_400590___libc_csu_init!stack!-56": [],
+        "sub_40052b_getMemoryPermission!stack!-24": [],
+        "sub_40052b_getMemoryPermission!stack!-4": []
+    },
     "detect": []
 }

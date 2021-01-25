@@ -13,6 +13,9 @@
 using namespace llvm;
 using namespace std;
 
+//==============================================================================
+// Helper
+
 /* An iterator around a module's globals, including the stop condition */
 struct AliasIterator {
     typedef llvm::Module::alias_iterator alias_iterator;
@@ -34,6 +37,9 @@ static LLVMAliasIteratorRef wrap(AliasIterator *GI){
 static AliasIterator* unwrap(LLVMAliasIteratorRef GI){
     return reinterpret_cast<AliasIterator*>(GI);
 }
+
+//==============================================================================
+// cpp Functions
 
 LLVMAliasIteratorRef aliasIter_cpp(LLVMModuleRef moduleRef) {
   Module *module = unwrap(moduleRef);
@@ -224,17 +230,17 @@ void testPrint_cpp(){
   outs() << "print test";
 }
 
-int getConstantInt_cpp(LLVMValueRef valueRef) {
-  Value* value = unwrap(valueRef);
-  ConstantInt* constant_int = dyn_cast<ConstantInt>(value);
-  
-  if(constant_int)
-    return (int)constant_int->getSExtValue();
-  else
-    return 0;
-}
-
+//==============================================================================
+// Extern C
 extern "C" {
+
+  //==============================================================================
+  // Helper Structure
+  struct IntFail {
+    int value;
+    bool fail;
+  };
+
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {
     return giveName_cpp(moduleRef);
   }
@@ -247,8 +253,22 @@ extern "C" {
     return aliasIterNext_cpp(AI);
   }
 
-  int getConstantInt(LLVMValueRef valueRef) {
-    return getConstantInt_cpp(valueRef);
+  IntFail getConstantInt(LLVMValueRef valueRef) {
+    IntFail result;
+    Value* value = unwrap(valueRef);
+    ConstantInt* constant_int = dyn_cast<ConstantInt>(value);
+    
+    if(constant_int){
+      result.value = (int)constant_int->getSExtValue();
+      result.fail = false;
+      
+      return result;
+    }
+    else {
+      result.fail = true;
+      return result;
+    }
+
   }
 
   const char* getName(LLVMValueRef val) { 

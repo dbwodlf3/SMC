@@ -1,6 +1,14 @@
 {
-    "time": 0.39100122451782227,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m32_NO_PIE_smc12.out",
+    "codeArea": [
+        [
+            134512640,
+            134514412
+        ]
+    ],
+    "time": 0.59328293800354,
     "criticalTokens": [],
+    "stack": {},
     "detect": [
         {
             "Function": "sub_8048466_main",

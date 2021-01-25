@@ -1,5 +1,223 @@
 {
-    "time": 0.33533716201782227,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_PIE_smc6.out",
+    "codeArea": [
+        [
+            0,
+            3088
+        ]
+    ],
+    "time": 0.4852273464202881,
     "criticalTokens": [],
-    "detect": []
+    "stack": {
+        "sub_5b0__init_proc!stack!-8": [
+            1474,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-8": [],
+        "sub_73a_main!stack!-184": [
+            1888,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-172": [
+            1,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-168": [
+            2042,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-160": [
+            2044,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-152": [
+            2138,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-176": [
+            0,
+            "!code!"
+        ],
+        "sub_73a_main!stack!-79": [],
+        "sub_9c0___libc_csu_init!stack!-56": [
+            2545,
+            "!code!"
+        ],
+        "sub_90a_get_permission!stack!-16": [],
+        "sub_90a_get_permission!stack!-8": [],
+        "sub_95b_change_page_permissions_of_address!stack!-24": [],
+        "sub_95b_change_page_permissions_of_address!stack!-4": []
+    },
+    "detect": [
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 24,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-184",
+            "Str": "  store i64 1888, i64* %\"sub_73a_main!11\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 30,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-172",
+            "Str": "  store i32 1, i32* %\"sub_73a_main!15\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 33,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-168",
+            "Str": "  store i64 2042, i64* %\"sub_73a_main!17\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 36,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-160",
+            "Str": "  store i64 2044, i64* %\"sub_73a_main!19\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 39,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-152",
+            "Str": "  store i64 2138, i64* %\"sub_73a_main!21\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_73a",
+            "Order": 42,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_8fc.preheader",
+            "Order": 1,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_85a",
+            "Order": 1,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_7a0",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!51\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_7d9",
+            "Order": 8,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!67\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_827",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!86\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_866",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!105\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_89a",
+            "Order": 2,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_8aa",
+            "Order": 8,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!120\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_8d3",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 %\"sub_73a_main!139\", i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_905",
+            "Order": 4,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-172",
+            "Str": "  store i32 %\"sub_73a_main!152\", i32* %\"sub_73a_main!15\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_73a_main",
+            "Block": "inst_905",
+            "Order": 5,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_73a_main!stack!-176",
+            "Str": "  store i32 0, i32* %\"sub_73a_main!23\", align 4",
+            "Tokens": "!code!"
+        }
+    ]
 }

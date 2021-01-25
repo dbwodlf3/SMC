@@ -9,6 +9,8 @@ from Detector.Objects.CriticalDetector import CriticalDetector
 from Detector.Objects.BasicDetector import *
 from lib.util import readModule, giveName, readJson, getOperands, \
 	stripCallInstruction
+	
+from StackAnalysis import StackAnalysis
 
 class Detector:
 	# instruction for checking smc
@@ -59,14 +61,19 @@ class Detector:
 		self.checkSMC(CallDetector)
 
 	def saveJson(self, filename:str, time: float = 0):
+		self.result['binaryFile'] = self.BINARY_FILE
+		self.result['codeArea'] = getCodeSegment(self.BINARY_FILE)
 		self.result['time'] = time
 		self.result['criticalTokens'] = self.criticalTokens
+		stack = StackAnalysis.stackAnalysis(self.MODULE_REF, self.BINARY_FILE)
+		self.result['stack'] = StackAnalysis.setToList(stack)
+		
 		# self.result['criticalVariables'] = self.criticalVariables
 		self.result['detect'] = []
 		for criticalInstruction in self.criticalInstructions:
 			count = 0
 			instruction = criticalInstruction[0]
-			for j in instruction.block.instructions:
+			for  j in instruction.block.instructions:
 				count += 1
 				if j==instruction:
 					detect = {

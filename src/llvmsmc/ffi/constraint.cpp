@@ -16,15 +16,20 @@ using namespace std;
 // Helper Functions
 
 bool isRBP(StringRef const valueName) { 
-  if(valueName.size() > 3) {
-    auto iter = valueName.begin();
-    if(*iter != 'R') return false;
-    iter++;
-    if(*iter != 'B') return false;
-    iter++;
-    if(*iter != 'P') return false;
-    return true;
+  if(valueName.size() > 9) {
+    if(strncmp(valueName.data(), "alias!RBP", 9) == 0)
+      return true;
   }
+
+  return false;
+}
+
+bool isRSP(StringRef const valueName) { 
+  if(valueName.size() > 9) {
+    if(strncmp(valueName.data(), "alias!RSP", 9) == 0)
+      return true;
+  }
+
   return false;
 }
 
@@ -39,18 +44,44 @@ struct Stack {
 
 int getStackOffset(LLVMValueRef val) {
   Value *value = unwrap(val);
+  
   IntToPtrInst *stack_addr_ptr = dyn_cast<IntToPtrInst>(value);
-Instruction *stack_addr = dyn_cast<Instruction>(stack_addr_ptr->getOperand(0));
-LoadInst *rbp_addr = dyn_cast<LoadInst>(stack_addr->getOperand(0));
-ConstantInt *offset = dyn_cast<ConstantInt>(stack_addr->getOperand(1));
+  if(!stack_addr_ptr) return 0;
+  Instruction *stack_addr = dyn_cast<Instruction>(stack_addr_ptr->getOperand(0));
+  if(!stack_addr) return 0;
+  LoadInst *rbp_addr = dyn_cast<LoadInst>(stack_addr->getOperand(0));
+  if(!rbp_addr) return 0;
+  ConstantInt *offset = dyn_cast<ConstantInt>(stack_addr->getOperand(1));
 
-if(!stack_addr_ptr) return 0;
-if(!stack_addr) return 0;
-if(!rbp_addr) return 0;
-if(!isRBP(rbp_addr->getPointerOperand()->getName())) return 0;
-if(!offset) return 0;
-
-return offset->getSExtValue();
+  if(isRSP(rbp_addr->getPointerOperand()->getName())) {
+    if(!offset) return 0;
+    return offset->getSExtValue()+8;
+  }
+  else if(isRBP(rbp_addr->getPointerOperand()->getName())) {
+    if(!offset) return 0;
+    return offset->getSExtValue();
+  }
 }
 
+int getStackStoreOffset(LLVMValueRef val) {
+  Value *value = unwrap(val);
+  
+  IntToPtrInst *stack_addr_ptr = dyn_cast<IntToPtrInst>(value);
+  if(!stack_addr_ptr) return 0;
+  Instruction *stack_addr = dyn_cast<Instruction>(stack_addr_ptr->getOperand(0));
+  if(!stack_addr) return 0;
+  LoadInst *rbp_addr = dyn_cast<LoadInst>(stack_addr->getOperand(0));
+  if(!rbp_addr) return 0;
+  ConstantInt *offset = dyn_cast<ConstantInt>(stack_addr->getOperand(1));
+
+  if(isRSP(rbp_addr->getPointerOperand()->getName())) {
+    if(!offset) return 0;
+    return offset->getSExtValue()+8;
+  }
+  else if(isRBP(rbp_addr->getPointerOperand()->getName())) {
+    if(!offset) return 0;
+    return offset->getSExtValue();
+  }
 }
+
+} // CLOSE extern "C"

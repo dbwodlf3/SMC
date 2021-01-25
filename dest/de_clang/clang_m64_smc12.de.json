@@ -1,6 +1,14 @@
 {
-    "time": 0.010420799255371094,
+    "binaryFile": "/home/swlab/smc/test/binary_clang/clang_m64_smc12.out",
+    "codeArea": [
+        [
+            4194304,
+            4196368
+        ]
+    ],
+    "time": 0.010749578475952148,
     "criticalTokens": [],
+    "stack": {},
     "detect": [
         {
             "Function": "main",

@@ -8,7 +8,7 @@ from lib.util import *
 from lib.ffi import *
 from StackAnalysis import StackAnalysis
 from Detector.Objects.CriticalDetector import CriticalDetector
-from Detector.Objects.Variable import ConstantIntVariable
+from Detector.Objects.Variable import Variable, ConstantIntVariable
 
 class StoreDetector(CriticalDetector):
 
@@ -32,7 +32,7 @@ class StoreDetector(CriticalDetector):
 		# init
 		cls.findInstructions()
 		stack = StackAnalysis.stackAnalysis(cls.detector.MODULE_REF, cls.detector.BINARY_FILE)
-
+		# print(stack)
 		# Detect
 		for instruction in cls.instructions:
 			answer = Detectors.StoreDetector(instruction)
@@ -49,8 +49,13 @@ class StoreDetector(CriticalDetector):
 			
 			elif answer.pattern == 2:
 				dest = helper.getStorePointer(instruction)
-
-			# elif answer.pattern == 2:
+				offset = StackAnalysis.getStackVariableSet(dest)
+				if offset != 0:
+					if '!code!' in stack[offset]:
+						variable = Variable(offset, '!code!')
+						cls.detector.criticalInstructions.append([instruction,
+							variable, 1.2])	
+  			# elif answer.pattern == 2:
 			# 	dest_name = answer.destName.decode('utf-8')
 			# 	variable = cls.detector.variables.get(dest_name)
 			# 	if variable == None:
@@ -130,6 +135,7 @@ class CallDetector(CriticalDetector):
 					# print(instruction)
 					cls.detector.criticalInstructions.append([instruction,
 						variable, 2.2])
+						
 			elif answer.pattern == 3:
 				# Pattern 3
 				# call @__remill_function_call(____, %variable, ____)

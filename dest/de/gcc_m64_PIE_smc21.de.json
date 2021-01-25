@@ -1,7 +1,41 @@
 {
-    "time": 0.300290584564209,
+    "binaryFile": "/home/swlab/smc/test/binary/gcc_m64_PIE_smc21.out",
+    "codeArea": [
+        [
+            0,
+            2272
+        ]
+    ],
+    "time": 0.40803956985473633,
     "criticalTokens": [],
+    "stack": {
+        "sub_4f0__init_proc!stack!-8": [
+            1282,
+            "!code!"
+        ],
+        "sub_68e_getMemoryPermission!stack!-24": [],
+        "sub_68e_getMemoryPermission!stack!-4": [],
+        "sub_64a_main!stack!-16": [],
+        "sub_64a_main!stack!-8": [
+            "!code!",
+            1663
+        ],
+        "sub_6f0___libc_csu_init!stack!-56": [
+            1825,
+            "!code!"
+        ]
+    },
     "detect": [
+        {
+            "Function": "sub_64a_main",
+            "Block": "inst_64a",
+            "Order": 46,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_64a_main!stack!-8",
+            "Str": "  store i64 1663, i64* %\"sub_64a_main!33\", align 8",
+            "Tokens": "!code!"
+        },
         {
             "Function": "sub_64a_main",
             "Block": "inst_64a",

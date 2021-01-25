@@ -1,6 +1,14 @@
 {
-    "time": 0.17791438102722168,
+    "binaryFile": "/home/swlab/smc/test/binary/x86_smc1.out",
+    "codeArea": [
+        [
+            134512736,
+            134512785
+        ]
+    ],
+    "time": 0.27707815170288086,
     "criticalTokens": [],
+    "stack": {},
     "detect": [
         {
             "Function": "sub_8048060_main",
