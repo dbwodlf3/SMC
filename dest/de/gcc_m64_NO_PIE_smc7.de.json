@@ -6,20 +6,38 @@
             4196680
         ]
     ],
-    "time": 0.5316653251647949,
+    "time": 0.629946231842041,
     "criticalTokens": [],
     "stack": {
-        "sub_400478__init_proc!stack!-8": [],
-        "sub_400687_change_page_permissions_of_address!stack!-24": [],
+        "sub_400478__init_proc!stack!-8": [
+            ""
+        ],
+        "sub_400687_change_page_permissions_of_address!stack!-24": [
+            "sub_400687_change_page_permissions_of_address!39",
+            "sub_400687_change_page_permissions_of_address!27"
+        ],
         "sub_400687_change_page_permissions_of_address!stack!-4": [],
         "sub_4005c7_main!stack!-32": [],
-        "sub_4005c7_main!stack!-20": [],
-        "sub_4005c7_main!stack!-16": [],
-        "sub_4005c7_main!stack!-8": [],
-        "sub_4005c7_main!stack!-24": [],
+        "sub_4005c7_main!stack!-20": [
+            "sub_4005c7_main!63"
+        ],
+        "sub_4005c7_main!stack!-16": [
+            ""
+        ],
+        "sub_4005c7_main!stack!-8": [
+            "",
+            "sub_4005c7_main!48"
+        ],
+        "sub_4005c7_main!stack!-24": [
+            "sub_4005c7_main!51"
+        ],
         "sub_400636_get_permission!stack!-16": [],
-        "sub_400636_get_permission!stack!-8": [],
-        "sub_4006f0___libc_csu_init!stack!-56": []
+        "sub_400636_get_permission!stack!-8": [
+            "sub_400636_get_permission!29"
+        ],
+        "sub_4006f0___libc_csu_init!stack!-56": [
+            ""
+        ]
     },
     "detect": []
 }

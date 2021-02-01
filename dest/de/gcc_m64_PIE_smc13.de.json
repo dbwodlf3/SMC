@@ -6,7 +6,7 @@
             2512
         ]
     ],
-    "time": 0.42389631271362305,
+    "time": 0.5146942138671875,
     "criticalTokens": [],
     "stack": {
         "sub_588__init_proc!stack!-8": [
@@ -17,9 +17,16 @@
             2033,
             "!code!"
         ],
-        "sub_6fa_main!stack!-16": [],
-        "sub_6fa_main!stack!-8": [],
-        "sub_75f_getMemoryPermission!stack!-24": [],
+        "sub_6fa_main!stack!-16": [
+            "sub_6fa_main!12"
+        ],
+        "sub_6fa_main!stack!-8": [
+            "sub_6fa_main!9"
+        ],
+        "sub_75f_getMemoryPermission!stack!-24": [
+            "sub_75f_getMemoryPermission!39",
+            "sub_75f_getMemoryPermission!27"
+        ],
         "sub_75f_getMemoryPermission!stack!-4": []
     },
     "detect": [

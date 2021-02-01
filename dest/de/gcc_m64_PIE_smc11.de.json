@@ -6,7 +6,7 @@
             2504
         ]
     ],
-    "time": 0.33968067169189453,
+    "time": 0.5426359176635742,
     "criticalTokens": [],
     "stack": {
         "sub_588__init_proc!stack!-8": [
@@ -17,7 +17,9 @@
             2033,
             "!code!"
         ],
-        "sub_6fa_main!stack!-8": [],
+        "sub_6fa_main!stack!-8": [
+            "sub_6fa_main!7"
+        ],
         "sub_6fa_main!stack!-24": [
             1819,
             "!code!"
@@ -26,30 +28,13 @@
             2116,
             "!code!"
         ],
-        "sub_75f_getMemoryPermission!stack!-24": [],
+        "sub_75f_getMemoryPermission!stack!-24": [
+            "sub_75f_getMemoryPermission!39",
+            "sub_75f_getMemoryPermission!27"
+        ],
         "sub_75f_getMemoryPermission!stack!-4": []
     },
     "detect": [
-        {
-            "Function": "sub_6fa_main",
-            "Block": "inst_6fa",
-            "Order": 24,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_6fa_main!stack!-24",
-            "Str": "  store i64 1819, i64* %\"sub_6fa_main!11\", align 8",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_6fa_main",
-            "Block": "inst_6fa",
-            "Order": 30,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_6fa_main!stack!-16",
-            "Str": "  store i64 2116, i64* %\"sub_6fa_main!15\", align 8",
-            "Tokens": "!code!"
-        },
         {
             "Function": "sub_6fa_main",
             "Block": "inst_6fa",

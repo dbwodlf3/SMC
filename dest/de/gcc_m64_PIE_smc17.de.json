@@ -6,7 +6,7 @@
             2024
         ]
     ],
-    "time": 0.3674156665802002,
+    "time": 0.42079925537109375,
     "criticalTokens": [],
     "stack": {
         "sub_4b8__init_proc!stack!-8": [
@@ -23,16 +23,6 @@
         ]
     },
     "detect": [
-        {
-            "Function": "sub_5fa_main",
-            "Block": "inst_5fa",
-            "Order": 8,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_5fa_main!stack!-8",
-            "Str": "  store i64 1637, i64* %\"sub_5fa_main!5\", align 8",
-            "Tokens": "!code!"
-        },
         {
             "Function": "sub_5fa_main",
             "Block": "inst_5fa",

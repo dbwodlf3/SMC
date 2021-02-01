@@ -95,7 +95,22 @@ class CustomAPI(object):
 
     @classmethod
     def getStackOffset(cls, LLVMValueRef):
+        return (cls._getStackOffset(LLVMValueRef) or 
+                cls.getStackOffset2(LLVMValueRef) or
+                cls.getStackOffset3(LLVMValueRef))
+
+    @classmethod
+    def _getStackOffset(cls, LLVMValueRef):
         return _libc.getStackOffset(LLVMValueRef)
+
+    @classmethod
+    def getStackOffset2(cls, LLVMValueRef):
+        return _libc.getStackOffset2(LLVMValueRef)
+
+    @classmethod
+    def getStackOffset3(cls, LLVMValueRef):
+        return _libc.getStackOffset3(LLVMValueRef)
+
 class Detectors(object):
     @classmethod
     def StoreDetector(cls, LLVMModuleRef) -> Answer:
@@ -151,6 +166,12 @@ _libc.getConstantInt.restype = IntFail
 
 _libc.getStackOffset.argtypes = [llvmlite.ffi.LLVMValueRef]
 _libc.getStackOffset.restype = ctypes.c_int
+
+_libc.getStackOffset2.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.getStackOffset2.restype = ctypes.c_int
+
+_libc.getStackOffset3.argtypes = [llvmlite.ffi.LLVMValueRef]
+_libc.getStackOffset3.restype = ctypes.c_int
 
 # =============================================================================
 # Set Detectors FFI

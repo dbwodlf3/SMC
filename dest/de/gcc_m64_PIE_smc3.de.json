@@ -6,7 +6,7 @@
             3176
         ]
     ],
-    "time": 0.6113524436950684,
+    "time": 0.8417551517486572,
     "criticalTokens": [],
     "stack": {
         "sub_5e8__init_proc!stack!-8": [
@@ -17,8 +17,13 @@
             2625,
             "!code!"
         ],
-        "sub_77a_main!stack!-8": [],
-        "sub_77a_main!stack!-32": [],
+        "sub_77a_main!stack!-8": [
+            "sub_77a_main!7"
+        ],
+        "sub_77a_main!stack!-32": [
+            22,
+            "!code!"
+        ],
         "sub_77a_main!stack!-28": [
             0,
             "!code!"
@@ -27,7 +32,10 @@
             25,
             "!code!"
         ],
-        "sub_77a_main!stack!-20": [],
+        "sub_77a_main!stack!-20": [
+            "!code!",
+            7
+        ],
         "sub_77a_main!stack!-16": [
             429,
             "!code!"
@@ -36,7 +44,11 @@
             6,
             "!code!"
         ],
-        "sub_77a_main!stack!-72": [],
+        "sub_77a_main!stack!-72": [
+            0,
+            "sub_77a_main!68",
+            "!code!"
+        ],
         "sub_77a_main!stack!-104": [
             1998,
             "!code!"
@@ -47,11 +59,20 @@
         ],
         "sub_77a_main!stack!-88": [
             0,
+            "sub_77a_main!192",
             "!code!"
         ],
         "sub_77a_main!stack!-64": [
+            "sub_77a_main!176",
+            "sub_77a_main!211",
+            "sub_77a_main!156",
+            "!code!",
+            "sub_77a_main!204",
+            "sub_77a_main!190",
+            "sub_77a_main!188",
+            "sub_77a_main!134",
             2397,
-            "!code!"
+            "sub_77a_main!119"
         ],
         "sub_77a_main!stack!-56": [
             2376,
@@ -59,80 +80,47 @@
         ],
         "sub_77a_main!stack!-84": [
             0,
+            "sub_77a_main!122",
             "!code!"
+        ],
+        "sub_77a_main!stack!-76": [
+            "sub_77a_main!storemerge1"
         ],
         "sub_77a_main!stack!-92": [
             0,
+            "sub_77a_main!87",
             "!code!"
         ],
-        "sub_77a_main!stack!-48": [],
-        "sub_77a_main!stack!-80": [],
-        "sub_77a_main!stack!-40": [],
-        "sub_77a_main!stack!-76": [],
+        "sub_77a_main!stack!-48": [
+            "sub_77a_main!149"
+        ],
+        "sub_77a_main!stack!-80": [
+            0,
+            "sub_77a_main!159",
+            "!code!"
+        ],
+        "sub_77a_main!stack!-40": [
+            "sub_77a_main!143"
+        ],
         "sub_95f_get_permission!stack!-16": [],
-        "sub_95f_get_permission!stack!-8": [],
-        "sub_9b0_change_page_permissions_of_address!stack!-24": [],
+        "sub_95f_get_permission!stack!-8": [
+            "sub_95f_get_permission!29"
+        ],
+        "sub_9b0_change_page_permissions_of_address!stack!-24": [
+            "sub_9b0_change_page_permissions_of_address!27",
+            "sub_9b0_change_page_permissions_of_address!39"
+        ],
         "sub_9b0_change_page_permissions_of_address!stack!-4": []
     },
     "detect": [
         {
             "Function": "sub_77a_main",
             "Block": "inst_77a",
-            "Order": 26,
+            "Order": 41,
             "LLVM Instruction": "store",
             "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-28",
-            "Str": "  store i32 0, i32* %\"sub_77a_main!13\", align 4",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
-            "Order": 29,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-24",
-            "Str": "  store i32 25, i32* %\"sub_77a_main!15\", align 4",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
-            "Order": 35,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-16",
-            "Str": "  store i32 429, i32* %\"sub_77a_main!19\", align 4",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
-            "Order": 38,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-12",
-            "Str": "  store i32 6, i32* %\"sub_77a_main!21\", align 4",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
-            "Order": 45,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-104",
-            "Str": "  store i64 1998, i64* %\"sub_77a_main!25\", align 8",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
-            "Order": 51,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-68",
-            "Str": "  store i32 3, i32* %\"sub_77a_main!29\", align 4",
+            "CriticalOperand": "sub_77a_main!stack!-72",
+            "Str": "  store i32 0, i32* %\"sub_77a_main!23\", align 4",
             "Tokens": "!code!"
         },
         {
@@ -158,21 +146,21 @@
         {
             "Function": "sub_77a_main",
             "Block": "inst_77a",
-            "Order": 60,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_77a_main!stack!-56",
-            "Str": "  store i64 2376, i64* %\"sub_77a_main!35\", align 8",
-            "Tokens": "!code!"
-        },
-        {
-            "Function": "sub_77a_main",
-            "Block": "inst_77a",
             "Order": 63,
             "LLVM Instruction": "store",
             "Pattern": 1.2,
             "CriticalOperand": "sub_77a_main!stack!-84",
             "Str": "  store i32 0, i32* %\"sub_77a_main!37\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_92c",
+            "Order": 8,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-72",
+            "Str": "  store i32 %\"sub_77a_main!68\", i32* %\"sub_77a_main!70\", align 4",
             "Tokens": "!code!"
         },
         {
@@ -198,6 +186,16 @@
         {
             "Function": "sub_77a_main",
             "Block": "inst_7fb",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!119\", i8* %\"sub_77a_main!120\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_7fb",
             "Order": 15,
             "LLVM Instruction": "store",
             "Pattern": 1.2,
@@ -213,6 +211,56 @@
             "Pattern": 1.2,
             "CriticalOperand": "sub_77a_main!stack!-64",
             "Str": "  store i64 %\"sub_77a_main!134\", i64* %\"sub_77a_main!33\", align 8",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_835",
+            "Order": 4,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-80",
+            "Str": "  store i32 0, i32* %\"sub_77a_main!142\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_84a",
+            "Order": 10,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!156\", i8* %\"sub_77a_main!157\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_84a",
+            "Order": 13,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-80",
+            "Str": "  store i32 %\"sub_77a_main!159\", i32* %\"sub_77a_main!142\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_873",
+            "Order": 9,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!176\", i8* %\"sub_77a_main!172\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_873",
+            "Order": 24,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!188\", i8* %\"sub_77a_main!179\", align 1",
             "Tokens": "!code!"
         },
         {
@@ -233,6 +281,26 @@
             "Pattern": 1.2,
             "CriticalOperand": "sub_77a_main!stack!-88",
             "Str": "  store i32 %\"sub_77a_main!192\", i32* %\"sub_77a_main!31\", align 4",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_8fe",
+            "Order": 12,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!204\", i8* %\"sub_77a_main!199\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_77a_main",
+            "Block": "inst_8d9",
+            "Order": 11,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_77a_main!stack!-64",
+            "Str": "  store i8 %\"sub_77a_main!211\", i8* %\"sub_77a_main!212\", align 1",
             "Tokens": "!code!"
         }
     ]

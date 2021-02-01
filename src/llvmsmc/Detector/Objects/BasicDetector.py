@@ -17,6 +17,7 @@ class StoreDetector(CriticalDetector):
 	@classmethod
 	def findInstructions(cls):
 		for function in cls.detector.MODULE_REF.functions:
+			
 			# limit detect functions
 			if re.match(r'.*_main', function.name) == None:
 				if 'main' != function.name:
@@ -52,9 +53,10 @@ class StoreDetector(CriticalDetector):
 				offset = StackAnalysis.getStackVariableSet(dest)
 				if offset != 0:
 					if '!code!' in stack[offset]:
-						variable = Variable(offset, '!code!')
-						cls.detector.criticalInstructions.append([instruction,
-							variable, 1.2])	
+						if( len(stack[offset]) > 2):
+							variable = Variable(offset, '!code!')
+							cls.detector.criticalInstructions.append([instruction,
+								variable, 1.2])	
   			# elif answer.pattern == 2:
 			# 	dest_name = answer.destName.decode('utf-8')
 			# 	variable = cls.detector.variables.get(dest_name)

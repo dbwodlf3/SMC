@@ -6,7 +6,7 @@
             3176
         ]
     ],
-    "time": 0.5552964210510254,
+    "time": 0.6810142993927002,
     "criticalTokens": [],
     "stack": {
         "sub_660__init_proc!stack!-8": [
@@ -14,49 +14,66 @@
             "!code!"
         ],
         "sub_956_get_permission!stack!-16": [],
-        "sub_956_get_permission!stack!-8": [],
-        "sub_9a7_change_page_permissions_of_address!stack!-24": [],
+        "sub_956_get_permission!stack!-8": [
+            "sub_956_get_permission!29"
+        ],
+        "sub_9a7_change_page_permissions_of_address!stack!-24": [
+            "sub_9a7_change_page_permissions_of_address!27",
+            "sub_9a7_change_page_permissions_of_address!39"
+        ],
         "sub_9a7_change_page_permissions_of_address!stack!-4": [],
-        "sub_80a_main!stack!-8": [],
+        "sub_80a_main!stack!-8": [
+            "sub_80a_main!7"
+        ],
         "sub_80a_main!stack!-104": [
             2093,
             "!code!"
         ],
         "sub_80a_main!stack!-80": [
+            2081,
+            "sub_80a_main!70",
             2317,
-            "!code!"
+            "!code!",
+            "sub_80a_main!92"
         ],
-        "sub_80a_main!stack!-64": [],
-        "sub_80a_main!stack!-56": [],
-        "sub_80a_main!stack!-48": [],
-        "sub_80a_main!stack!-40": [],
-        "sub_80a_main!stack!-32": [],
-        "sub_80a_main!stack!-24": [],
+        "sub_80a_main!stack!-64": [
+            "sub_80a_main!84",
+            "sub_80a_main!16"
+        ],
+        "sub_80a_main!stack!-56": [
+            "sub_80a_main!17"
+        ],
+        "sub_80a_main!stack!-48": [
+            "sub_80a_main!22"
+        ],
+        "sub_80a_main!stack!-40": [
+            "sub_80a_main!23"
+        ],
+        "sub_80a_main!stack!-32": [
+            "sub_80a_main!28"
+        ],
+        "sub_80a_main!stack!-24": [
+            "sub_80a_main!31"
+        ],
         "sub_80a_main!stack!-88": [
             0,
+            "sub_80a_main!73",
+            "sub_80a_main!storemerge",
             "!code!"
         ],
         "sub_80a_main!stack!-72": [
             2363,
             "!code!"
         ],
-        "sub_80a_main!stack!-84": [],
+        "sub_80a_main!stack!-84": [
+            "sub_80a_main!106"
+        ],
         "sub_a10___libc_csu_init!stack!-56": [
             2625,
             "!code!"
         ]
     },
     "detect": [
-        {
-            "Function": "sub_80a_main",
-            "Block": "inst_80a",
-            "Order": 24,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_80a_main!stack!-104",
-            "Str": "  store i64 2093, i64* %\"sub_80a_main!11\", align 8",
-            "Tokens": "!code!"
-        },
         {
             "Function": "sub_80a_main",
             "Block": "inst_80a",
@@ -90,6 +107,16 @@
         {
             "Function": "sub_80a_main",
             "Block": "inst_881",
+            "Order": 9,
+            "LLVM Instruction": "store",
+            "Pattern": 1.2,
+            "CriticalOperand": "sub_80a_main!stack!-80",
+            "Str": "  store i8 %\"sub_80a_main!70\", i8* %\"sub_80a_main!71\", align 1",
+            "Tokens": "!code!"
+        },
+        {
+            "Function": "sub_80a_main",
+            "Block": "inst_881",
             "Order": 12,
             "LLVM Instruction": "store",
             "Pattern": 1.2,
@@ -99,12 +126,12 @@
         },
         {
             "Function": "sub_80a_main",
-            "Block": "inst_8de",
-            "Order": 3,
+            "Block": "inst_8b8",
+            "Order": 9,
             "LLVM Instruction": "store",
             "Pattern": 1.2,
-            "CriticalOperand": "sub_80a_main!stack!-72",
-            "Str": "  store i64 2363, i64* %\"sub_80a_main!97\", align 8",
+            "CriticalOperand": "sub_80a_main!stack!-80",
+            "Str": "  store i8 %\"sub_80a_main!92\", i8* %\"sub_80a_main!93\", align 1",
             "Tokens": "!code!"
         },
         {

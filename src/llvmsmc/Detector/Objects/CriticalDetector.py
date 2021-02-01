@@ -3,7 +3,7 @@ if TYPE_CHECKING:
 	from Detector.Objects.Detector import Detector
 
 class CriticalDetector:
-	detector: 'Detector'
+	detector: 'Detector' = None
 	@classmethod
 	def init(cls, detector: 'Detector'):
 		cls.detector = detector

@@ -6,7 +6,7 @@
             3304
         ]
     ],
-    "time": 0.5302660465240479,
+    "time": 0.631831169128418,
     "criticalTokens": [],
     "stack": {
         "sub_6b0__init_proc!stack!-8": [
@@ -16,18 +16,32 @@
         "sub_95d_foo!stack!-16": [],
         "sub_95d_foo!stack!-4": [
             0,
+            "sub_95d_foo!37",
             "!code!"
         ],
         "sub_995_get_permission!stack!-16": [],
-        "sub_995_get_permission!stack!-8": [],
+        "sub_995_get_permission!stack!-8": [
+            "sub_995_get_permission!29"
+        ],
         "sub_a50___libc_csu_init!stack!-56": [
             2689,
             "!code!"
         ],
-        "sub_87a_main!stack!-16": [],
-        "sub_87a_main!stack!-8": [],
-        "sub_87a_main!stack!-12": [],
-        "sub_9e6_change_page_permissions_of_address!stack!-24": [],
+        "sub_87a_main!stack!-16": [
+            "sub_87a_main!storemerge1"
+        ],
+        "sub_87a_main!stack!-8": [
+            "sub_87a_main!103",
+            "sub_87a_main!37",
+            "sub_87a_main!122"
+        ],
+        "sub_87a_main!stack!-12": [
+            "sub_87a_main!storemerge"
+        ],
+        "sub_9e6_change_page_permissions_of_address!stack!-24": [
+            "sub_9e6_change_page_permissions_of_address!39",
+            "sub_9e6_change_page_permissions_of_address!27"
+        ],
         "sub_9e6_change_page_permissions_of_address!stack!-4": []
     },
     "detect": []

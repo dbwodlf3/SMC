@@ -6,17 +6,26 @@
             4196376
         ]
     ],
-    "time": 0.47993969917297363,
+    "time": 0.46474361419677734,
     "criticalTokens": [],
     "stack": {
-        "sub_400428__init_proc!stack!-8": [],
+        "sub_400428__init_proc!stack!-8": [
+            ""
+        ],
         "sub_400557_main!stack!-32": [],
-        "sub_400557_main!stack!-8": [],
+        "sub_400557_main!stack!-8": [
+            "sub_400557_main!9"
+        ],
         "sub_400557_main!stack!-24": [],
         "sub_400557_main!stack!-16": [],
-        "sub_4005ca_getMemoryPermission!stack!-24": [],
+        "sub_4005ca_getMemoryPermission!stack!-24": [
+            "sub_4005ca_getMemoryPermission!39",
+            "sub_4005ca_getMemoryPermission!27"
+        ],
         "sub_4005ca_getMemoryPermission!stack!-4": [],
-        "sub_400630___libc_csu_init!stack!-56": []
+        "sub_400630___libc_csu_init!stack!-56": [
+            ""
+        ]
     },
     "detect": [
         {

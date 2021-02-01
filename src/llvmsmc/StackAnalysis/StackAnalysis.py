@@ -40,24 +40,36 @@ def stackAnalysis(moduleRef: llvm.ModuleRef, binaryFile = None):
                     function_name!stack!offset!16 = {}
                 }
     """
+    # Store Memory Address to Stack
     for function in moduleRef.functions:
         for block in function.blocks:
             for inst in block.instructions:
+                offset = None
+
                 if inst.opcode == 'inttoptr':
                     offset = CustomAPI.getStackOffset(inst)
-                    if offset == 0:
-                        continue
-                    ptr_set = f'''{function.name}!stack!{offset}'''
+                elif inst.opcode == 'store':
+                    offset = CustomAPI.getStackOffset(getStorePointer(inst))
+
+                if offset == None or offset == 0:
+                    continue
+                ptr_set = f'''{function.name}!stack!{offset}'''
+                if(not result.get(ptr_set)):
                     result[ptr_set] = set()
-                    for instruction in block.instructions:
-                        if instruction.opcode == 'store':
-                            dest = getStorePointer(instruction)
-                            value = getStoreValue(instruction)
-                            area = CustomAPI.getConstantInt(value)
-                            CustomAPI.getStackOffset(dest)
-                            if CustomAPI.getStackOffset(dest) == offset:
-                                if not area.fail:
-                                    if(checkCodeArea(area.value, binaryFile)):
-                                        result[ptr_set].add(area.value)
-                                        result[ptr_set].add('!code!')
+
+                # Load Memory Address from Stack and Store there.
+                for instruction in block.instructions:
+                    if instruction.opcode == 'store':
+                        dest = getStorePointer(instruction)
+                        value = getStoreValue(instruction)
+                        area = CustomAPI.getConstantInt(value)
+                        CustomAPI.getStackOffset(dest)
+                        if CustomAPI.getStackOffset(dest) == offset:
+                            if not area.fail:
+                                if(checkCodeArea(area.value, binaryFile)):
+                                    
+                                    result[ptr_set].add(area.value)
+                                    result[ptr_set].add('!code!')
+                            else:
+                                result[ptr_set].add(value.name)
     return result

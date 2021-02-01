@@ -6,23 +6,53 @@
             4197000
         ]
     ],
-    "time": 0.4332089424133301,
+    "time": 0.7369546890258789,
     "criticalTokens": [],
     "stack": {
-        "sub_400478__init_proc!stack!-8": [],
-        "sub_4007dd_change_page_permissions_of_address!stack!-24": [],
+        "sub_400478__init_proc!stack!-8": [
+            ""
+        ],
+        "sub_4007dd_change_page_permissions_of_address!stack!-24": [
+            "sub_4007dd_change_page_permissions_of_address!27",
+            "sub_4007dd_change_page_permissions_of_address!39"
+        ],
         "sub_4007dd_change_page_permissions_of_address!stack!-4": [],
-        "sub_4005c7_main!stack!-8": [],
-        "sub_4005c7_main!stack!-184": [],
-        "sub_4005c7_main!stack!-172": [],
-        "sub_4005c7_main!stack!-168": [],
-        "sub_4005c7_main!stack!-160": [],
-        "sub_4005c7_main!stack!-152": [],
-        "sub_4005c7_main!stack!-176": [],
+        "sub_4005c7_main!stack!-8": [
+            "sub_4005c7_main!7"
+        ],
+        "sub_4005c7_main!stack!-184": [
+            ""
+        ],
+        "sub_4005c7_main!stack!-172": [
+            "sub_4005c7_main!152"
+        ],
+        "sub_4005c7_main!stack!-168": [
+            ""
+        ],
+        "sub_4005c7_main!stack!-160": [
+            "",
+            "sub_4005c7_main!134"
+        ],
+        "sub_4005c7_main!stack!-152": [
+            "",
+            "sub_4005c7_main!81"
+        ],
+        "sub_4005c7_main!stack!-176": [
+            "sub_4005c7_main!67",
+            "sub_4005c7_main!86",
+            "sub_4005c7_main!105",
+            "sub_4005c7_main!139",
+            "sub_4005c7_main!120",
+            "sub_4005c7_main!51"
+        ],
         "sub_4005c7_main!stack!-79": [],
         "sub_40078c_get_permission!stack!-16": [],
-        "sub_40078c_get_permission!stack!-8": [],
-        "sub_400840___libc_csu_init!stack!-56": []
+        "sub_40078c_get_permission!stack!-8": [
+            "sub_40078c_get_permission!29"
+        ],
+        "sub_400840___libc_csu_init!stack!-56": [
+            ""
+        ]
     },
     "detect": []
 }

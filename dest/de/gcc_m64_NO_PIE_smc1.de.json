@@ -6,24 +6,50 @@
             4196896
         ]
     ],
-    "time": 0.4416658878326416,
+    "time": 0.6365079879760742,
     "criticalTokens": [],
     "stack": {
-        "sub_400508__init_proc!stack!-8": [],
-        "sub_400677_main!stack!-8": [],
-        "sub_400677_main!stack!-24": [],
-        "sub_400677_main!stack!-56": [],
+        "sub_400508__init_proc!stack!-8": [
+            ""
+        ],
+        "sub_400677_main!stack!-8": [
+            "sub_400677_main!7"
+        ],
+        "sub_400677_main!stack!-24": [
+            "",
+            "sub_400677_main!97"
+        ],
+        "sub_400677_main!stack!-56": [
+            ""
+        ],
         "sub_400677_main!stack!-28": [],
-        "sub_400677_main!stack!-16": [],
-        "sub_400677_main!stack!-32": [],
-        "sub_400677_main!stack!-33": [],
-        "sub_400677_main!stack!-12": [],
-        "sub_400677_main!stack!-9": [],
+        "sub_400677_main!stack!-16": [
+            "sub_400677_main!21"
+        ],
+        "sub_400677_main!stack!-32": [
+            "sub_400677_main!89"
+        ],
+        "sub_400677_main!stack!-33": [
+            "sub_400677_main!96"
+        ],
+        "sub_400677_main!stack!-12": [
+            "sub_400677_main!90"
+        ],
+        "sub_400677_main!stack!-9": [
+            "sub_400677_main!94"
+        ],
         "sub_400720_get_permission!stack!-16": [],
-        "sub_400720_get_permission!stack!-8": [],
-        "sub_400771_change_page_permissions_of_address!stack!-24": [],
+        "sub_400720_get_permission!stack!-8": [
+            "sub_400720_get_permission!29"
+        ],
+        "sub_400771_change_page_permissions_of_address!stack!-24": [
+            "sub_400771_change_page_permissions_of_address!27",
+            "sub_400771_change_page_permissions_of_address!39"
+        ],
         "sub_400771_change_page_permissions_of_address!stack!-4": [],
-        "sub_4007d0___libc_csu_init!stack!-56": []
+        "sub_4007d0___libc_csu_init!stack!-56": [
+            ""
+        ]
     },
     "detect": []
 }

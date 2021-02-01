@@ -6,27 +6,64 @@
             4197088
         ]
     ],
-    "time": 0.5426757335662842,
+    "time": 0.6115005016326904,
     "criticalTokens": [],
     "stack": {
-        "sub_400528__init_proc!stack!-8": [],
-        "sub_400697_main!stack!-8": [],
-        "sub_400697_main!stack!-104": [],
-        "sub_400697_main!stack!-80": [],
-        "sub_400697_main!stack!-64": [],
-        "sub_400697_main!stack!-56": [],
-        "sub_400697_main!stack!-48": [],
-        "sub_400697_main!stack!-40": [],
-        "sub_400697_main!stack!-32": [],
-        "sub_400697_main!stack!-24": [],
-        "sub_400697_main!stack!-88": [],
-        "sub_400697_main!stack!-72": [],
-        "sub_400697_main!stack!-84": [],
+        "sub_400528__init_proc!stack!-8": [
+            ""
+        ],
+        "sub_400697_main!stack!-8": [
+            "sub_400697_main!7"
+        ],
+        "sub_400697_main!stack!-104": [
+            ""
+        ],
+        "sub_400697_main!stack!-80": [
+            "",
+            "sub_400697_main!70",
+            "sub_400697_main!92"
+        ],
+        "sub_400697_main!stack!-64": [
+            "sub_400697_main!84",
+            "sub_400697_main!16"
+        ],
+        "sub_400697_main!stack!-56": [
+            "sub_400697_main!17"
+        ],
+        "sub_400697_main!stack!-48": [
+            "sub_400697_main!22"
+        ],
+        "sub_400697_main!stack!-40": [
+            "sub_400697_main!23"
+        ],
+        "sub_400697_main!stack!-32": [
+            "sub_400697_main!28"
+        ],
+        "sub_400697_main!stack!-24": [
+            "sub_400697_main!31"
+        ],
+        "sub_400697_main!stack!-88": [
+            "sub_400697_main!storemerge",
+            "sub_400697_main!73"
+        ],
+        "sub_400697_main!stack!-72": [
+            ""
+        ],
+        "sub_400697_main!stack!-84": [
+            "sub_400697_main!106"
+        ],
         "sub_4007d6_get_permission!stack!-16": [],
-        "sub_4007d6_get_permission!stack!-8": [],
-        "sub_400827_change_page_permissions_of_address!stack!-24": [],
+        "sub_4007d6_get_permission!stack!-8": [
+            "sub_4007d6_get_permission!29"
+        ],
+        "sub_400827_change_page_permissions_of_address!stack!-24": [
+            "sub_400827_change_page_permissions_of_address!27",
+            "sub_400827_change_page_permissions_of_address!39"
+        ],
         "sub_400827_change_page_permissions_of_address!stack!-4": [],
-        "sub_400890___libc_csu_init!stack!-56": []
+        "sub_400890___libc_csu_init!stack!-56": [
+            ""
+        ]
     },
     "detect": []
 }

@@ -6,7 +6,7 @@
             3432
         ]
     ],
-    "time": 0.6390542984008789,
+    "time": 0.6309218406677246,
     "criticalTokens": [],
     "stack": {
         "sub_990_main!stack!12": [
@@ -16,26 +16,28 @@
         "sub_990_main!stack!8": [],
         "sub_7ea_f!stack!52": [
             0,
-            "!code!"
+            "sub_7ea_f!265",
+            "!code!",
+            "sub_7ea_f!40",
+            "sub_7ea_f!36"
+        ],
+        "sub_7ea_f!stack!48": [
+            "sub_7ea_f!93",
+            "sub_7ea_f!179",
+            "sub_7ea_f!173"
         ],
         "sub_7ea_f!stack!40": [],
-        "sub_7ea_f!stack!53": [],
-        "sub_7ea_f!stack!48": [],
-        "sub_7ea_f!stack!32": [],
-        "sub_7ea_f!stack!24": [],
+        "sub_7ea_f!stack!53": [
+            "sub_7ea_f!107"
+        ],
+        "sub_7ea_f!stack!32": [
+            "sub_7ea_f!198"
+        ],
+        "sub_7ea_f!stack!24": [
+            "sub_7ea_f!204"
+        ],
         "sub_7ea_f!stack!72": [],
         "sub_7ea_f!stack!8": []
     },
-    "detect": [
-        {
-            "Function": "sub_990_main",
-            "Block": "inst_990",
-            "Order": 33,
-            "LLVM Instruction": "store",
-            "Pattern": 1.2,
-            "CriticalOperand": "sub_990_main!stack!12",
-            "Str": "  store i32 0, i32* %\"sub_990_main!17\"",
-            "Tokens": "!code!"
-        }
-    ]
+    "detect": []
 }

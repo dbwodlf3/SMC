@@ -6,20 +6,44 @@
             4197208
         ]
     ],
-    "time": 0.5032744407653809,
+    "time": 0.6379561424255371,
     "criticalTokens": [],
     "stack": {
-        "sub_4004b0__init_proc!stack!-8": [],
-        "sub_400617_main!stack!-8": [],
-        "sub_400617_main!stack!-196": [],
-        "sub_400617_main!stack!-216": [],
-        "sub_400617_main!stack!-200": [],
-        "sub_400617_main!stack!-107": [],
-        "sub_40089d_change_page_permissions_of_address!stack!-24": [],
+        "sub_4004b0__init_proc!stack!-8": [
+            ""
+        ],
+        "sub_400617_main!stack!-8": [
+            "sub_400617_main!7"
+        ],
+        "sub_400617_main!stack!-196": [
+            "sub_400617_main!156"
+        ],
+        "sub_400617_main!stack!-216": [
+            ""
+        ],
+        "sub_400617_main!stack!-200": [
+            "sub_400617_main!58",
+            "sub_400617_main!102",
+            "sub_400617_main!storemerge",
+            "sub_400617_main!122",
+            "sub_400617_main!142",
+            "sub_400617_main!77"
+        ],
+        "sub_400617_main!stack!-107": [
+            "sub_400617_main!91"
+        ],
+        "sub_40089d_change_page_permissions_of_address!stack!-24": [
+            "sub_40089d_change_page_permissions_of_address!39",
+            "sub_40089d_change_page_permissions_of_address!27"
+        ],
         "sub_40089d_change_page_permissions_of_address!stack!-4": [],
-        "sub_400900___libc_csu_init!stack!-56": [],
+        "sub_400900___libc_csu_init!stack!-56": [
+            ""
+        ],
         "sub_40084c_get_permission!stack!-16": [],
-        "sub_40084c_get_permission!stack!-8": []
+        "sub_40084c_get_permission!stack!-8": [
+            "sub_40084c_get_permission!29"
+        ]
     },
     "detect": []
 }
