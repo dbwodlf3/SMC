@@ -7,8 +7,7 @@ from typing import List
 from Detector.Objects.Variable import Variable
 from Detector.Objects.CriticalDetector import CriticalDetector
 from Detector.Objects.BasicDetector import *
-from lib.util import readModule, giveName, readJson, getOperands, \
-	stripCallInstruction
+from lib.util import readModule, giveName, readJson, getOperands
 	
 from StackAnalysis import StackAnalysis
 
@@ -16,7 +15,7 @@ class Detector:
 	# instruction for checking smc
 	writeInstruction = ['store', 'call']
 
-	def __init__(self, llvmFile : str, variableFile: str, binaryFile = None):
+	def __init__(self,  llvmFile : str, variableFile: str, binaryFile = None):
 		# for init
 		self.BINARY_FILE = binaryFile
 		self.LL_FILE = llvmFile

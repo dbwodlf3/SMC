@@ -13,6 +13,8 @@ _libc = ctypes.CDLL(util_so)
 # Structures
 
 class Answer(ctypes.Structure):
+    """This structure class is for detector.
+    """
     _fields_ = [
         ('type', ctypes.c_int),
         ('pattern', ctypes.c_int),
@@ -20,11 +22,15 @@ class Answer(ctypes.Structure):
     ]
 
 class Stack(ctypes.Structure):
+    """This structure class is for stack analysis.
+    """
     _fields_ = [
         ('offset', ctypes.c_int)
     ]
 
 class IntFail(ctypes.Structure):
+    """This structure class is for ConstantInt
+    """
     _fields_ = [
         ('value', ctypes.c_int),
         ('fail', ctypes.c_bool),
@@ -34,6 +40,8 @@ class IntFail(ctypes.Structure):
 # Interfaces
 
 class AliasIter:
+    """This class is iterator for alias.
+    """
     def __init__(self, moduleRef):
         self._iter = _libc.aliasIter(moduleRef)
 
@@ -48,12 +56,28 @@ class AliasIter:
         return self
 
 class CustomAPI(object):
+    """Static class for FFI Interface.
+    """
+
     @classmethod
     def giveName(cls, LLVMModuleRef):
+        """Give name to LLVM IR.
+
+        Parameters:
+            LLVMModuleRef (llvmlite.ffi.ModuleRef)
+        
+        Returns:
+            llvmlite.ffi.LLVMModuleRef
+        """
         return _libc.giveName(LLVMModuleRef)
 
     @classmethod
     def getName(cls, LLVMValueRef):
+        """Get name from wraped llvm ir value.
+
+        Parameters:
+            LLVMValueRef (llvmlite.ffi.LLVMValueRef)
+        """
         name = _libc.getName(LLVMValueRef)
         return name.decode('utf-8')
 
@@ -63,10 +87,27 @@ class CustomAPI(object):
     
     @classmethod
     def getConstantInt(cls, LLVMValueRef):
+        """Get if LLVMValueRef is ConstantInt then get structure including 
+        integer value.
+
+        Parameters:
+            LLVMValueRef (llvmlite.ffi.LLVMValueRef)
+
+        Returns:
+            IntFail
+        """
         return _libc.getConstantInt(LLVMValueRef)
 
     @classmethod
     def dumpModule(cls, LLVMModuleRef):
+        """print module into stdout.
+
+        Parameters:
+            LLVMModuleRef (llvmlite.ffi.LLVMModuleRef)
+
+        Returns:
+            void
+        """
         return _libc.dumpModule(LLVMModuleRef)
 
     @classmethod
@@ -95,20 +136,33 @@ class CustomAPI(object):
 
     @classmethod
     def getStackOffset(cls, LLVMValueRef):
+        """Return offset if LLVMValueRef is stack variable. or return 0.
+
+        Parameters:
+            LLVMValueRef (llvmlite.ffi.LLVMValueRef)
+        Returns:
+            int
+        """
         return (cls._getStackOffset(LLVMValueRef) or 
                 cls.getStackOffset2(LLVMValueRef) or
                 cls.getStackOffset3(LLVMValueRef))
 
     @classmethod
     def _getStackOffset(cls, LLVMValueRef):
+        """Inner function for getStackOffset
+        """
         return _libc.getStackOffset(LLVMValueRef)
 
     @classmethod
     def getStackOffset2(cls, LLVMValueRef):
+        """Inner function for getStackOffset
+        """
         return _libc.getStackOffset2(LLVMValueRef)
 
     @classmethod
     def getStackOffset3(cls, LLVMValueRef):
+        """Inner function for getStackOffset
+        """
         return _libc.getStackOffset3(LLVMValueRef)
 
 class Detectors(object):

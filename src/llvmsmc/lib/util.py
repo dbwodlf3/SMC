@@ -7,9 +7,13 @@ from lib.ffi import *
 from elftools.elf.elffile import ELFFile
 
 def readModule(filePath) -> llvm.ModuleRef:
-    """Return LLVM IR Module Object.
-    Args:
-        filePath (string): ll or bc file.
+    """This function for getting llvm Module Referecne from ll or bc file.
+
+    Parameters:
+        filePath (str): llvm ir file.
+
+    Returns:
+        llvmlite.binding.ModuleRef
     """
     #
     try:
@@ -30,10 +34,26 @@ def readModule(filePath) -> llvm.ModuleRef:
             return print("CAN'T READ FILE!!")
 
 def readJson(filename: str):
-	with open(filename) as json_file:
-		return json.load(json_file)
+    """This function return dict object from json file.
+
+    Parameters:
+        filename (str): json file path.
+    
+    ReturnsL:
+        dict object base on json file.
+    """
+    with open(filename) as json_file:
+        return json.load(json_file)
 
 def giveName(module: llvm.ModuleRef) -> llvm.ModuleRef:
+    """This function give name to IR instructions on llvm module.
+    
+    Parameters:
+        module (llvmlite.binding.ModuleRef): Module Reference.
+    
+    Returns:
+        llvmlite.binding.ModuleRef
+    """
     return libc.giveName(module)
 
 def getAlias(module: llvm.ModuleRef):
@@ -50,16 +70,71 @@ class AliasIterator:
         raise StopIteration
     
 
-# VERY STRANGE WAY
-# but... it works. then. and okay. haha...
 def getFunctionByName(functionName:str, module:llvm.ModuleRef):
+    """This function for get function Reference by function name.
+
+    Parameters:
+        functionName (str): function name.
+        module (llvmlite.binding.ModuleRef): Module Reference.
+
+    Returns:
+        llvmlite.binding.ValueRef
+    """
     for function in module.functions:
         if functionName == function.name:
             return function
     return None
     # raise Exception(f'''Can't find Function! {functionName}''')
 
+
+def getCodeSegment(binary_file):
+    """Get executable segments area from binary file.
+
+    Parameters:
+        binary_file (str): binary file including path.
+    
+    Returns:
+        [(int, int)]
+    """
+    result = []
+    if binary_file :
+        with open(binary_file, 'rb') as f:
+            elffile = ELFFile(f)
+            
+            for segment in elffile.iter_segments():
+                if(segment['p_flags'] & 0b1):
+                    start = segment['p_vaddr']
+                    end = start + segment['p_memsz']
+                    result.append((start, end))
+        return result
+    else :
+        return result
+
+def checkCodeArea(memory_address, binary_file):
+    """Function for check memory address is in executable area.
+    if memory_address is in executable then return True else False.
+
+    Parameters:
+        memory_address (int): memory address.
+        binary_file (str): binary file for get sections.
+    
+    Returns:
+        bool: True if in codearea, False otherwise.
+    """
+    codes = getCodeSegment(binary_file)
+    for code in codes:
+        start = code[0]
+        end = code[1]
+
+        if memory_address >= start and memory_address <= end:
+            return True
+    
+    return False
+
+
 def stripCallInstruction(instructionString: str):
+    """Legacy Code.
+    """
     reg_obj = re.match(r'.*call [^@]*@[^(]*', instructionString)
     if reg_obj :
         start = reg_obj.span()[1]
@@ -67,6 +142,8 @@ def stripCallInstruction(instructionString: str):
     raise Exception(f''' Can't Strip call Instruction! {instructionString}''')
 
 def getOperands(operand:llvm.ValueRef, localNamespace:str = ''):
+    """Legacy Code.
+    """
     operand_str = str(operand).replace('"','')
     global_namespace = 'global!'
     if localNamespace:
@@ -84,37 +161,11 @@ def getOperands(operand:llvm.ValueRef, localNamespace:str = ''):
     return global_var_operands + local_var_operands
 
 def checkCallAsm(instruction: llvm.ValueRef):
+    """Legacy Code. It is for check "call asm" instructions.
+    """
     if instruction.name:
         return False
     return True
-
-def getCodeSegment(binary_file):
-    result = []
-    if binary_file :
-        with open(binary_file, 'rb') as f:
-            elffile = ELFFile(f)
-            
-            for segment in elffile.iter_segments():
-                if(segment['p_flags'] & 0b1):
-                    start = segment['p_vaddr']
-                    end = start + segment['p_memsz']
-                    result.append((start, end))
-
-        return result
-    else :
-        return result
-
-def checkCodeArea(memory_address, binary_file):
-    
-    codes = getCodeSegment(binary_file)
-    for code in codes:
-        start = code[0]
-        end = code[1]
-
-        if memory_address >= start and memory_address <= end:
-            return True
-    
-    return False
 
 constantExpressions = [
     'getelementptr',

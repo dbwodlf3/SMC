@@ -236,23 +236,32 @@ extern "C" {
 
   //==============================================================================
   // Helper Structure
+
+  // This structure for return constant integer.
   struct IntFail {
     int value;
     bool fail;
   };
 
+  // give name every ir.
+  // it is used for analysis
   LLVMModuleRef giveName(LLVMModuleRef moduleRef) {
     return giveName_cpp(moduleRef);
   }
 
+  // return wrapped alias iterator reference from module. 
   LLVMAliasIteratorRef aliasIter(LLVMModuleRef moduleRef) {
     return aliasIter_cpp(moduleRef);
   }
 
+  // return wrapped alias iterator next reference from wrapped iterator
+  // reference.
   LLVMValueRef aliasIterNext(LLVMAliasIteratorRef AI){
     return aliasIterNext_cpp(AI);
   }
 
+  // return integer and boolean value from valueRef.
+  // if valueRef is ConstantInt then boolean value is true.
   IntFail getConstantInt(LLVMValueRef valueRef) {
     IntFail result;
     Value* value = unwrap(valueRef);
@@ -271,10 +280,12 @@ extern "C" {
 
   }
 
+  // Get IR name from valueRef
   const char* getName(LLVMValueRef val) { 
     return getName_cpp(val);
   }
 
+  // dump module into stdout.
   void dumpModule(LLVMModuleRef moduleRef){
     return dumpModule_cpp(moduleRef);
   }
@@ -283,18 +294,22 @@ extern "C" {
     return testPrint_cpp();
   }
 
+  // dump every named ir into stdout.
   void dumpNameValues(LLVMModuleRef moduleRef){
     return dumpNameValues_cpp(moduleRef);
   }
 
+  // if valueRef is Constant then return true. 
   bool isConstant(LLVMValueRef value) {
     return isConstant_cpp(value);
   }
 
+  // if valueRef is ConstantExpression then return true.
   bool isConstantExpr(LLVMValueRef value){
     return isConstantExpr_cpp(value);
   }
 
+  // if valueRef is Alias then return true.
   bool isAlias(LLVMValueRef value){
     if(dyn_cast<GlobalAlias>(unwrap(value))){
       return 1;

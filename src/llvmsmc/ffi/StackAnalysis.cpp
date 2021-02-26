@@ -41,6 +41,7 @@ struct Stack {
   int offset;
   char ** tokens;
 };
+
 // load <- add
 int getStackOffsetHelper(LLVMValueRef val) {
   Value *value = unwrap(val);
