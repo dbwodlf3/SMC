@@ -9,6 +9,9 @@ from ConstraintGenerator.Objects.Constraint import *
 from ConstraintGenerator.Objects.BasicConstraint import *
 
 class ConstraintGenerator:
+    """Constraint Generator Class.
+    This class makes json file for cubicsolver.
+    """
     DATA = {"ConstraintResult": []}
     
     def __init__(self, ll_file, binary_file):
@@ -23,13 +26,28 @@ class ConstraintGenerator:
         self.moduleConstraintRules: List[ModuleConstraint] = []
 
     def addConstraint(self, constraint: Constraint):
+        """Register Constraint Class. 
+        
+        Parameters:
+            constraint (ModuleConstraint): LLVM Instruction Level Constraint.
+        """
         constraint.MODULE = self.MODULE
         self.constraintRules.append(constraint)
 
     def addFunctionConstraint(self, constraint: FunctionConstraint):
+        """Register Function Constraint Class. 
+        
+        Parameters:
+            constraint (ModuleConstraint): Function Level Constraint.
+        """
         self.functionConstraintRules.append(constraint)
 
     def addModuleConstraint(self, constraint: ModuleConstraint):
+        """Register Module Constraint Class. 
+        
+        Parameters:
+            constraint (ModuleConstraint): Module Level Constraint.
+        """
         self.moduleConstraintRules.append(constraint)
 
     def run(self):
@@ -80,9 +98,17 @@ class ConstraintGenerator:
         return
 
     def dumpJson(self):
+        """Dump current json.
+        """
         return json.dumps(self.DATA)
 
     def saveJson(self, filename: str, time: float = 0):
+        """Save json as file.
+
+        Parameters:
+            filename (str): file name to be saved
+            time (float): taken time to make constraints
+        """
         self.DATA['time'] = time
         counts = 0
         for i in self.DATA['ConstraintResult']:

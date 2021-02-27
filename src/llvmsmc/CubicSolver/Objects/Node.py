@@ -1,4 +1,5 @@
 from bitarray import bitarray
+
 class Node:
 	TOKEN_COUNTS = 0
 	def __init__(self, key, idx):

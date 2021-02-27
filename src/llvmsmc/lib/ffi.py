@@ -111,28 +111,22 @@ class CustomAPI(object):
         return _libc.dumpModule(LLVMModuleRef)
 
     @classmethod
-    def testPrint(cls):
-        return _libc.testPrint()
-
-    @classmethod
-    def dumpNameValues(cls, LLVMModuleRef):
-        return _libc.dumpNameValues(LLVMModuleRef)
-
-    @classmethod
     def isConstant(cls, LLVMValueRef):
+        """If LLVMValueRef is Constant then return True else False.
+        """
         return _libc.isConstant(LLVMValueRef)
 
     @classmethod
     def isConstantExpr(cls, LLVMValueRef):
+        """If LLVMValueRef is ConstantExpr then return True else False.
+        """
         return _libc.isConstantExpr(LLVMValueRef)
 
     @classmethod
     def isAlias(cls, LLVMValueRef):
+        """If LLVMValueRef is Alias then return True else False.
+        """
         return _libc.isAlias(LLVMValueRef)
-    
-    @classmethod
-    def wrapping(cls, LLVMValueRef):
-        pass
 
     @classmethod
     def getStackOffset(cls, LLVMValueRef):
@@ -164,6 +158,18 @@ class CustomAPI(object):
         """Inner function for getStackOffset
         """
         return _libc.getStackOffset3(LLVMValueRef)
+
+    @classmethod
+    def testPrint(cls):
+        return _libc.testPrint()
+
+    @classmethod
+    def dumpNameValues(cls, LLVMModuleRef):
+        return _libc.dumpNameValues(LLVMModuleRef)
+
+    @classmethod
+    def wrapping(cls, LLVMValueRef):
+        pass
 
 class Detectors(object):
     @classmethod

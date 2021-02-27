@@ -86,7 +86,6 @@ def getFunctionByName(functionName:str, module:llvm.ModuleRef):
     return None
     # raise Exception(f'''Can't find Function! {functionName}''')
 
-
 def getCodeSegment(binary_file):
     """Get executable segments area from binary file.
 
