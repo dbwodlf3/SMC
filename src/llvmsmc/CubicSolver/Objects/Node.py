@@ -15,9 +15,11 @@ class Node:
 		# edge 들에 대해서는 or 연산.
 		self.edges = set()
 		# condition 에 대해서 체크하고 edge 를 추가합니다..
+	
 	@classmethod
 	def setTokenCount(cls, number):
 		cls.TOKEN_COUNTS = number
+	
 	def __str__(self):
 		return f'''Node key : {self.key}
 Node index : {self.idx}

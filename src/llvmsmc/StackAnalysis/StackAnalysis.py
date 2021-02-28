@@ -17,7 +17,7 @@ def getStoreValue(storeInstruction: llvm.ValueRef):
 # ==============================================================================
 # Analysis 
 
-"""function_name!variable -> function_name!stack!8 -> !code! -> smc 검출!
+"""function_name!variable -> function_name!stack!8 -> !code! -> smc
 """
 
 def setToList(dict_data: dict):
@@ -36,8 +36,8 @@ def getStackVariableSet(valueRef: llvm.ValueRef):
 def stackAnalysis(moduleRef: llvm.ModuleRef, binaryFile = None):
     result = dict()
     """result = { 
-                    function_name!stack!offset!8 = {'!code!'},
-                    function_name!stack!offset!16 = {}
+                    function_name!stack!offset!8 : {'!code!'},
+                    function_name!stack!offset!16 : {}
                 }
     """
     # Store Memory Address to Stack
