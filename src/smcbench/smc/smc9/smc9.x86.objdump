@@ -1,0 +1,44 @@
+
+smc9.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_start>:
+ 8048060:	b8 9c 80 04 08       	mov    $0x804809c,%eax
+ 8048065:	bb a8 80 04 08       	mov    $0x80480a8,%ebx
+ 804806a:	b9 ff ff ff ff       	mov    $0xffffffff,%ecx
+
+0804806f <xor1>:
+ 804806f:	8b 10                	mov    (%eax),%edx
+ 8048071:	31 ca                	xor    %ecx,%edx
+ 8048073:	89 10                	mov    %edx,(%eax)
+ 8048075:	83 c0 04             	add    $0x4,%eax
+ 8048078:	39 d8                	cmp    %ebx,%eax
+ 804807a:	7c f3                	jl     804806f <xor1>
+
+0804807c <decr>:
+ 804807c:	b8 9c 80 04 08       	mov    $0x804809c,%eax
+ 8048081:	bb a8 80 04 08       	mov    $0x80480a8,%ebx
+ 8048086:	b9 ff ff ff ff       	mov    $0xffffffff,%ecx
+
+0804808b <xor2>:
+ 804808b:	8b 10                	mov    (%eax),%edx
+ 804808d:	31 ca                	xor    %ecx,%edx
+ 804808f:	89 10                	mov    %edx,(%eax)
+ 8048091:	83 c0 04             	add    $0x4,%eax
+ 8048094:	39 d8                	cmp    %ebx,%eax
+ 8048096:	7c f3                	jl     804808b <xor2>
+ 8048098:	eb 02                	jmp    804809c <pg>
+
+0804809a <halt>:
+ 804809a:	eb fe                	jmp    804809a <halt>
+
+0804809c <pg>:
+ 804809c:	83 c6 0a             	add    $0xa,%esi
+ 804809f:	90                   	nop
+ 80480a0:	83 c7 0a             	add    $0xa,%edi
+ 80480a3:	90                   	nop
+ 80480a4:	eb f4                	jmp    804809a <halt>
+ 80480a6:	90                   	nop
+ 80480a7:	90                   	nop

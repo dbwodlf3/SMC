@@ -1,0 +1,36 @@
+
+smc8.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_start>:
+ 8048060:	b8 65 80 04 08       	mov    $0x8048065,%eax
+
+08048065 <body>:
+ 8048065:	8b 58 0c             	mov    0xc(%eax),%ebx
+ 8048068:	90                   	nop
+ 8048069:	8b 48 10             	mov    0x10(%eax),%ecx
+ 804806c:	90                   	nop
+ 804806d:	89 48 0c             	mov    %ecx,0xc(%eax)
+ 8048070:	90                   	nop
+ 8048071:	83 c6 0a             	add    $0xa,%esi
+ 8048074:	90                   	nop
+ 8048075:	83 c6 0a             	add    $0xa,%esi
+ 8048078:	90                   	nop
+ 8048079:	89 58 10             	mov    %ebx,0x10(%eax)
+ 804807c:	90                   	nop
+ 804807d:	8b 48 08             	mov    0x8(%eax),%ecx
+ 8048080:	90                   	nop
+ 8048081:	8b 58 14             	mov    0x14(%eax),%ebx
+ 8048084:	90                   	nop
+ 8048085:	89 48 14             	mov    %ecx,0x14(%eax)
+ 8048088:	90                   	nop
+ 8048089:	89 58 08             	mov    %ebx,0x8(%eax)
+ 804808c:	90                   	nop
+ 804808d:	83 c2 01             	add    $0x1,%edx
+ 8048090:	83 fa 02             	cmp    $0x2,%edx
+ 8048093:	75 d0                	jne    8048065 <body>
+ 8048095:	b8 01 00 00 00       	mov    $0x1,%eax
+ 804809a:	bb 00 00 00 00       	mov    $0x0,%ebx
+ 804809f:	cd 80                	int    $0x80

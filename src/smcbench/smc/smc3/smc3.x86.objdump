@@ -1,0 +1,130 @@
+
+smc3.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_vec1>:
+ 8048060:	16                   	push   %ss
+ 8048061:	00 00                	add    %al,(%eax)
+ 8048063:	00 00                	add    %al,(%eax)
+ 8048065:	00 00                	add    %al,(%eax)
+ 8048067:	00 19                	add    %bl,(%ecx)
+ 8048069:	00 00                	add    %al,(%eax)
+	...
+
+0804806c <_vec2>:
+ 804806c:	07                   	pop    %es
+ 804806d:	00 00                	add    %al,(%eax)
+ 804806f:	00 ad 01 00 00 06    	add    %ch,0x6000001(%ebp)
+ 8048075:	00 00                	add    %al,(%eax)
+	...
+
+08048078 <result>:
+ 8048078:	00 00                	add    %al,(%eax)
+	...
+
+0804807c <_start>:
+ 804807c:	b8 03 00 00 00       	mov    $0x3,%eax
+ 8048081:	b9 00 00 00 00       	mov    $0x0,%ecx
+ 8048086:	bf 35 81 04 08       	mov    $0x8048135,%edi
+ 804808b:	bb 1d 81 04 08       	mov    $0x804811d,%ebx
+ 8048090:	8b 13                	mov    (%ebx),%edx
+ 8048092:	89 17                	mov    %edx,(%edi)
+ 8048094:	66 c7 47 01 00 00    	movw   $0x0,0x1(%edi)
+ 804809a:	66 c7 47 03 00 00    	movw   $0x0,0x3(%edi)
+ 80480a0:	83 c7 05             	add    $0x5,%edi
+
+080480a3 <loop>:
+ 80480a3:	39 c8                	cmp    %ecx,%eax
+ 80480a5:	74 52                	je     80480f9 <post>
+ 80480a7:	bd 04 00 00 00       	mov    $0x4,%ebp
+ 80480ac:	0f af e9             	imul   %ecx,%ebp
+ 80480af:	8b b5 60 80 04 08    	mov    0x8048060(%ebp),%esi
+ 80480b5:	83 fe 00             	cmp    $0x0,%esi
+ 80480b8:	74 3a                	je     80480f4 <next>
+ 80480ba:	66 8b 53 05          	mov    0x5(%ebx),%dx
+ 80480be:	66 89 17             	mov    %dx,(%edi)
+ 80480c1:	89 ea                	mov    %ebp,%edx
+ 80480c3:	88 57 02             	mov    %dl,0x2(%edi)
+ 80480c6:	66 8b 53 08          	mov    0x8(%ebx),%dx
+ 80480ca:	66 89 57 03          	mov    %dx,0x3(%edi)
+ 80480ce:	8a 53 0a             	mov    0xa(%ebx),%dl
+ 80480d1:	88 57 05             	mov    %dl,0x5(%edi)
+ 80480d4:	89 f2                	mov    %esi,%edx
+ 80480d6:	88 57 06             	mov    %dl,0x6(%edi)
+ 80480d9:	c6 47 07 00          	movb   $0x0,0x7(%edi)
+ 80480dd:	66 c7 47 08 00 00    	movw   $0x0,0x8(%edi)
+ 80480e3:	8b 53 0f             	mov    0xf(%ebx),%edx
+ 80480e6:	89 57 0a             	mov    %edx,0xa(%edi)
+ 80480e9:	66 8b 53 13          	mov    0x13(%ebx),%dx
+ 80480ed:	66 89 57 0e          	mov    %dx,0xe(%edi)
+ 80480f1:	83 c7 10             	add    $0x10,%edi
+
+080480f4 <next>:
+ 80480f4:	83 c1 01             	add    $0x1,%ecx
+ 80480f7:	eb aa                	jmp    80480a3 <loop>
+
+080480f9 <post>:
+ 80480f9:	66 8b 53 15          	mov    0x15(%ebx),%dx
+ 80480fd:	66 89 17             	mov    %dx,(%edi)
+ 8048100:	be 6c 80 04 08       	mov    $0x804806c,%esi
+ 8048105:	bc f9 80 04 08       	mov    $0x80480f9,%esp
+ 804810a:	83 c4 15             	add    $0x15,%esp
+ 804810d:	eb 26                	jmp    8048135 <gen>
+ 804810f:	a3 78 80 04 08       	mov    %eax,0x8048078
+ 8048114:	b8 01 00 00 00       	mov    $0x1,%eax
+ 8048119:	31 db                	xor    %ebx,%ebx
+ 804811b:	cd 80                	int    $0x80
+
+0804811d <tpl>:
+ 804811d:	b8 00 00 00 00       	mov    $0x0,%eax
+ 8048122:	83 c6 00             	add    $0x0,%esi
+ 8048125:	8b 2e                	mov    (%esi),%ebp
+ 8048127:	ba 00 00 00 00       	mov    $0x0,%edx
+ 804812c:	0f af d5             	imul   %ebp,%edx
+ 804812f:	90                   	nop
+ 8048130:	01 d0                	add    %edx,%eax
+ 8048132:	ff e4                	jmp    *%esp
+ 8048134:	90                   	nop
+
+08048135 <gen>:
+ 8048135:	90                   	nop
+ 8048136:	90                   	nop
+ 8048137:	90                   	nop
+ 8048138:	90                   	nop
+ 8048139:	90                   	nop
+ 804813a:	90                   	nop
+ 804813b:	90                   	nop
+ 804813c:	90                   	nop
+ 804813d:	90                   	nop
+ 804813e:	90                   	nop
+ 804813f:	90                   	nop
+ 8048140:	90                   	nop
+ 8048141:	90                   	nop
+ 8048142:	90                   	nop
+ 8048143:	90                   	nop
+ 8048144:	90                   	nop
+ 8048145:	90                   	nop
+ 8048146:	90                   	nop
+ 8048147:	90                   	nop
+ 8048148:	90                   	nop
+ 8048149:	90                   	nop
+ 804814a:	90                   	nop
+ 804814b:	90                   	nop
+ 804814c:	90                   	nop
+ 804814d:	90                   	nop
+ 804814e:	90                   	nop
+ 804814f:	90                   	nop
+ 8048150:	90                   	nop
+ 8048151:	90                   	nop
+ 8048152:	90                   	nop
+ 8048153:	90                   	nop
+ 8048154:	90                   	nop
+ 8048155:	90                   	nop
+ 8048156:	90                   	nop
+ 8048157:	90                   	nop
+ 8048158:	90                   	nop
+ 8048159:	90                   	nop
+ 804815a:	90                   	nop
+ 804815b:	90                   	nop

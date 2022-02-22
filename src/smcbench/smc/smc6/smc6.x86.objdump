@@ -1,0 +1,24 @@
+
+smc6.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_start>:
+ 8048060:	eb 06                	jmp    8048068 <alter>
+ 8048062:	66 a3 68 80 04 08    	mov    %ax,0x8048068
+
+08048068 <alter>:
+ 8048068:	66 a1 60 80 04 08    	mov    0x8048060,%ax
+ 804806e:	b3 90                	mov    $0x90,%bl
+ 8048070:	88 1d 60 80 04 08    	mov    %bl,0x8048060
+ 8048076:	88 1d 61 80 04 08    	mov    %bl,0x8048061
+ 804807c:	88 1d 88 80 04 08    	mov    %bl,0x8048088
+ 8048082:	88 1d 89 80 04 08    	mov    %bl,0x8048089
+
+08048088 <re_start>:
+ 8048088:	eb 02                	jmp    804808c <halt>
+ 804808a:	eb d4                	jmp    8048060 <_start>
+
+0804808c <halt>:
+ 804808c:	90                   	nop

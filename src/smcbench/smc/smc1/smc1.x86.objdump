@@ -1,0 +1,27 @@
+
+smc1.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_init>:
+ 8048060:	bd 90 80 04 08       	mov    $0x8048090,%ebp
+ 8048065:	b9 01 00 00 00       	mov    $0x1,%ecx
+ 804806a:	ba 01 00 00 00       	mov    $0x1,%edx
+
+0804806f <loop>:
+ 804806f:	3b 4d 00             	cmp    0x0(%ebp),%ecx
+ 8048072:	74 11                	je     8048085 <halt>
+ 8048074:	83 c1 01             	add    $0x1,%ecx
+ 8048077:	88 d3                	mov    %dl,%bl
+
+08048079 <key>:
+ 8048079:	83 c2 00             	add    $0x0,%edx
+ 804807c:	88 d8                	mov    %bl,%al
+ 804807e:	a2 7b 80 04 08       	mov    %al,0x804807b
+ 8048083:	eb ea                	jmp    804806f <loop>
+
+08048085 <halt>:
+ 8048085:	b8 01 00 00 00       	mov    $0x1,%eax
+ 804808a:	31 db                	xor    %ebx,%ebx
+ 804808c:	cd 80                	int    $0x80

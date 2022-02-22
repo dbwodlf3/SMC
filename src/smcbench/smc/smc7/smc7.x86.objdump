@@ -1,0 +1,74 @@
+
+smc7.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_start>:
+ 8048060:	90                   	nop
+ 8048061:	b8 7f 80 04 08       	mov    $0x804807f,%eax
+ 8048066:	bb 93 80 04 08       	mov    $0x8048093,%ebx
+ 804806b:	b9 93 80 04 08       	mov    $0x8048093,%ecx
+ 8048070:	be 02 00 00 00       	mov    $0x2,%esi
+ 8048075:	bf 04 00 00 00       	mov    $0x4,%edi
+ 804807a:	bd 00 00 00 00       	mov    $0x0,%ebp
+
+0804807f <loop>:
+ 804807f:	8b 10                	mov    (%eax),%edx
+ 8048081:	89 13                	mov    %edx,(%ebx)
+ 8048083:	01 f0                	add    %esi,%eax
+ 8048085:	01 f3                	add    %esi,%ebx
+ 8048087:	39 c8                	cmp    %ecx,%eax
+ 8048089:	75 f4                	jne    804807f <loop>
+ 804808b:	89 d9                	mov    %ebx,%ecx
+ 804808d:	01 f5                	add    %esi,%ebp
+ 804808f:	39 fd                	cmp    %edi,%ebp
+ 8048091:	74 2a                	je     80480bd <halt>
+
+08048093 <new>:
+ 8048093:	90                   	nop
+ 8048094:	90                   	nop
+ 8048095:	90                   	nop
+ 8048096:	90                   	nop
+ 8048097:	90                   	nop
+ 8048098:	90                   	nop
+ 8048099:	90                   	nop
+ 804809a:	90                   	nop
+ 804809b:	90                   	nop
+ 804809c:	90                   	nop
+ 804809d:	90                   	nop
+ 804809e:	90                   	nop
+ 804809f:	90                   	nop
+ 80480a0:	90                   	nop
+ 80480a1:	90                   	nop
+ 80480a2:	90                   	nop
+ 80480a3:	90                   	nop
+ 80480a4:	90                   	nop
+ 80480a5:	90                   	nop
+ 80480a6:	90                   	nop
+ 80480a7:	90                   	nop
+ 80480a8:	90                   	nop
+ 80480a9:	90                   	nop
+ 80480aa:	90                   	nop
+ 80480ab:	90                   	nop
+ 80480ac:	90                   	nop
+ 80480ad:	90                   	nop
+ 80480ae:	90                   	nop
+ 80480af:	90                   	nop
+ 80480b0:	90                   	nop
+ 80480b1:	90                   	nop
+ 80480b2:	90                   	nop
+ 80480b3:	90                   	nop
+ 80480b4:	90                   	nop
+ 80480b5:	90                   	nop
+ 80480b6:	90                   	nop
+ 80480b7:	90                   	nop
+ 80480b8:	90                   	nop
+ 80480b9:	90                   	nop
+ 80480ba:	90                   	nop
+ 80480bb:	90                   	nop
+ 80480bc:	90                   	nop
+
+080480bd <halt>:
+ 80480bd:	b8 01 00 00 00       	mov    $0x1,%eax
+ 80480c2:	cd 80                	int    $0x80

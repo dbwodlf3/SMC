@@ -1,0 +1,27 @@
+
+smc2.x86.out:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+08048060 <_start>:
+ 8048060:	b8 6b 80 04 08       	mov    $0x804806b,%eax
+ 8048065:	ff d0                	call   *%eax
+ 8048067:	89 fb                	mov    %edi,%ebx
+ 8048069:	eb 1b                	jmp    8048086 <halt>
+
+0804806b <f>:
+ 804806b:	bf 2a 00 00 00       	mov    $0x2a,%edi
+ 8048070:	66 8b 04 24          	mov    (%esp),%ax
+ 8048074:	66 8b 1d 8d 80 04 08 	mov    0x804808d,%bx
+ 804807b:	66 39 d9             	cmp    %bx,%cx
+ 804807e:	75 06                	jne    8048086 <halt>
+ 8048080:	bf 6f 00 00 00       	mov    $0x6f,%edi
+ 8048085:	c3                   	ret    
+
+08048086 <halt>:
+ 8048086:	b8 01 00 00 00       	mov    $0x1,%eax
+ 804808b:	cd 80                	int    $0x80
+
+0804808d <addr>:
+ 804808d:	89 fb                	mov    %edi,%ebx
