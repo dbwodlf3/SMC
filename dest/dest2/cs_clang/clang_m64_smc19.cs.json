@@ -1,0 +1,124 @@
+{
+    "variables": {
+        "critical!": [
+            "critical!"
+        ],
+        "getMemoryPermission!0": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!1": [
+            "getMemoryPermission!1"
+        ],
+        "getMemoryPermission!10": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!11": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!12": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!12",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!13": [
+            "getMemoryPermission!13",
+            "getMemoryPermission!3"
+        ],
+        "getMemoryPermission!14": [
+            "getMemoryPermission!14"
+        ],
+        "getMemoryPermission!17": [
+            "getMemoryPermission!1",
+            "getMemoryPermission!17"
+        ],
+        "getMemoryPermission!2": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!3": [
+            "getMemoryPermission!3"
+        ],
+        "getMemoryPermission!4": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!4",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!6": [
+            "getMemoryPermission!3",
+            "getMemoryPermission!6"
+        ],
+        "getMemoryPermission!9": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "getMemoryPermission!ret": [
+            "getMemoryPermission!1",
+            "getMemoryPermission!17"
+        ],
+        "global!": [
+            "global!"
+        ],
+        "global!code": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code"
+        ],
+        "main!0": [
+            "main!0"
+        ],
+        "mprotect!0": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!12",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "global!code",
+            "mprotect!0"
+        ],
+        "mprotect!1": [
+            "getMemoryPermission!14",
+            "mprotect!1"
+        ],
+        "printf!0": [
+            "global!",
+            "printf!0"
+        ]
+    },
+    "time": 0.0011663436889648438,
+    "counts": 21
+}

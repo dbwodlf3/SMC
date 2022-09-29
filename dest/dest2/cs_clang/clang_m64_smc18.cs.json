@@ -1,0 +1,243 @@
+{
+    "variables": {
+        "critical!": [
+            "critical!"
+        ],
+        "getMemoryPermission!0": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!1": [
+            "getMemoryPermission!1"
+        ],
+        "getMemoryPermission!10": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!11": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!12": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!12",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!13": [
+            "getMemoryPermission!13",
+            "getMemoryPermission!3"
+        ],
+        "getMemoryPermission!14": [
+            "getMemoryPermission!14"
+        ],
+        "getMemoryPermission!17": [
+            "getMemoryPermission!1",
+            "getMemoryPermission!17"
+        ],
+        "getMemoryPermission!2": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!3": [
+            "getMemoryPermission!3"
+        ],
+        "getMemoryPermission!4": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!4",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!6": [
+            "getMemoryPermission!3",
+            "getMemoryPermission!6"
+        ],
+        "getMemoryPermission!9": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "getMemoryPermission!ret": [
+            "getMemoryPermission!1",
+            "getMemoryPermission!17"
+        ],
+        "global!": [
+            "global!"
+        ],
+        "main!0": [
+            "main!0"
+        ],
+        "main!1": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "main!10": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10"
+        ],
+        "main!12": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!12"
+        ],
+        "main!13": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!12",
+            "main!13"
+        ],
+        "main!2": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!2"
+        ],
+        "main!3": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!3"
+        ],
+        "main!4": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!4"
+        ],
+        "main!5": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!5"
+        ],
+        "main!6": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!6"
+        ],
+        "main!7": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!7"
+        ],
+        "main!8": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!8"
+        ],
+        "main!9": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "main!9"
+        ],
+        "mprotect!0": [
+            "getMemoryPermission!0",
+            "getMemoryPermission!10",
+            "getMemoryPermission!11",
+            "getMemoryPermission!12",
+            "getMemoryPermission!2",
+            "getMemoryPermission!9",
+            "main!1",
+            "main!10",
+            "mprotect!0"
+        ],
+        "mprotect!1": [
+            "getMemoryPermission!14",
+            "mprotect!1"
+        ],
+        "printf!0": [
+            "global!",
+            "printf!0"
+        ]
+    },
+    "time": 0.0018725395202636719,
+    "counts": 32
+}
