@@ -1,0 +1,184 @@
+{
+    "variables": {
+        "__mcsema_early_init!0": [
+            "__mcsema_early_init!0",
+            "global!0"
+        ],
+        "__remill_async_hyper_call!0": [
+            "__remill_async_hyper_call!0",
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "__remill_async_hyper_call!1": [
+            "__remill_async_hyper_call!1",
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "__remill_async_hyper_call!2": [
+            "__remill_async_hyper_call!2",
+            "main_wrapper!2",
+            "sub_8048060_main!memory"
+        ],
+        "alias!EBP_2328_55ce27b7b840": [
+            "alias!EBP_2328_55ce27b7b840",
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "alias!ECX_2248_55ce27b74050": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "alias!EIP_2472_55ce27b74050": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!EIP_2472_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "alias!data_804806f": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "alias!data_804807b": [
+            "alias!data_804807b",
+            "critical!"
+        ],
+        "alias!data_8048090": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "critical!": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "global!0": [
+            "global!0"
+        ],
+        "global!__mcsema_reg_state": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "global!seg_8048060__text_2e": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "main_wrapper!1": [
+            "main_wrapper!1"
+        ],
+        "main_wrapper!2": [
+            "main_wrapper!2"
+        ],
+        "main_wrapper!3": [],
+        "main_wrapper!ret": [],
+        "sub_8048060_main!0": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "sub_8048060_main!1": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!1",
+            "sub_8048060_main!5"
+        ],
+        "sub_8048060_main!5": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5"
+        ],
+        "sub_8048060_main!memory": [
+            "main_wrapper!2",
+            "sub_8048060_main!memory"
+        ],
+        "sub_8048060_main!pc": [
+            "main_wrapper!1",
+            "sub_8048060_main!pc"
+        ],
+        "sub_8048060_main!state": [
+            "alias!ECX_2248_55ce27b74050",
+            "alias!data_804806f",
+            "alias!data_8048090",
+            "critical!",
+            "global!__mcsema_reg_state",
+            "global!seg_8048060__text_2e",
+            "sub_8048060_main!0",
+            "sub_8048060_main!5",
+            "sub_8048060_main!state"
+        ]
+    },
+    "time": 0.001379251480102539,
+    "counts": 24
+}
