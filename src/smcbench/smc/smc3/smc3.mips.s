@@ -46,7 +46,7 @@ post:
 
         sw $2, result
         j main
-아니.. 참나..
+	
 tpl:    
         li $2, 0           # template code
         lw $13, 0($4)
